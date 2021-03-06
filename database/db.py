@@ -3,7 +3,6 @@ import aiosqlite
 from aiosqlite import cursor
 from aiosqlite.core import connect
 DB_PATH = "./database/database.db"
-from collections import defaultdict
 import os
 
 async def db_connect():                 #Method to establish connection with the database, has to be called in each and every method accessing the Database
@@ -42,4 +41,4 @@ async def main():                       #Testing out the above methods (working 
     print(test)
     
 asyncio.run(main())                    #Used to call the main function in async mode
-#print(os.getcwd())
+# #print(os.getcwd())
