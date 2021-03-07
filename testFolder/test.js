@@ -1,6 +1,6 @@
-const {spawn} = require('child_process');
+const {spawn} = require('child_process');               //todo: comment this
 
-const childPython = spawn("python",["test.py"])
+const childPython = spawn("python",["sendNotification.py"])
 
 childPython.stdout.on('data',(data) => {
     console.log(`stdout: ${data}`);
