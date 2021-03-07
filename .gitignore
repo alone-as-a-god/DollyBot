@@ -1,0 +1,15 @@
+#IDE
+/.vscode
+/.idea
+
+*.iml
+
+#General files
+*.mp3
+
+#Python
+/discordBot/.env
+
+#Node
+
+#React
