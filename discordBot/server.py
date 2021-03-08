@@ -1,7 +1,11 @@
 import socket
+import os
+import sys
+sys.path.append("../database")
+import db
+from myDict import prefix_dict as prefix_dictionary
 
-
-def notificationListener():                         #method gets called upon bot startup (bot.onready), accepts socket connections and prints received messages
+async def notificationListener():                         #method gets called upon bot startup (bot.onready), accepts socket connections and prints received messages
     s = socket.socket()                             #Creates new socket
     ip = "127.0.0.1"
     port = 12345
@@ -13,4 +17,5 @@ def notificationListener():                         #method gets called upon bot
         print("Connection from",addr)
         rcvdData = c.recv(1024).decode()            #receives data sent, and prints it as a string
         print ("received:",rcvdData)
+        await db.update_prefix_dictionary(prefix_dictionary)
         c.close()                                   #since only one message is sent at a time, the socket gets closed again, to make sure other connections are possible
