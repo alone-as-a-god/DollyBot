@@ -17,5 +17,7 @@ async def notificationListener():                         #method gets called up
         print("Connection from",addr)
         rcvdData = c.recv(1024).decode()            #receives data sent, and prints it as a string
         print ("received:",rcvdData)
-        await db.update_prefix_dictionary(prefix_dictionary)
+        if(rcvdData == "updatePrefix"):
+            await db.update_prefix_dictionary(prefix_dictionary)
+            print("after: " +str(prefix_dictionary))
         c.close()                                   #since only one message is sent at a time, the socket gets closed again, to make sure other connections are possible
