@@ -2,7 +2,8 @@ import asyncio
 import aiosqlite
 from aiosqlite import cursor
 from aiosqlite.core import connect
-DB_PATH = "./database/database.db"
+
+DB_PATH = "../database/database.db"
 import os
 
 async def db_connect():                 #Method to establish connection with the database, has to be called in each and every method accessing the Database
@@ -33,12 +34,27 @@ async def get_prefix(guildID):              #Returns the prefix of the specified
     fetched = await cursor.fetchone()
     await connection.close()
     return fetched[0]                   #[0] is necessary, otherwise would return as tuple instead of just the prefixes string value
+
+async def update_prefix_dictionary(dictionary):
+    
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        SELECT *
+        FROM prefixes
+        '''
+    await cursor.execute(sql)
+    list = await cursor.fetchall()
+    for row in list:
+        id = row[0]
+        prefix = row[1]
+        dictionary[id] = prefix
+    
+    await connection.close()
     
     
-async def main():                       #Testing out the above methods (working as of now)
-    await update_prefix("1","?")
-    test = await get_prefix("1");
-    print(test)
+# async def main():                       #Testing out the above methods (working as of now)
+#     update_prefix_dictionary()
     
-asyncio.run(main())                    #Used to call the main function in async mode
+#asyncio.run(main())                    #Used to call the main function in async mode
 # #print(os.getcwd())
