@@ -11,8 +11,6 @@ from myDict import prefix_dict as prefix_dictionary
 import asyncio
 
 
-prefix_dictionary2 = {}
-
 def get_prefix(bot, message):
     key = str(message.guild.id)
     return prefix_dictionary[key]
