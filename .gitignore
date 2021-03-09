@@ -10,6 +10,9 @@
 #Python
 /discordBot/.env
 
-#Node
+#Database
+/database/__pycache__
 
-#React
+#Node
+/backend/.env
+/backend/node_modules
