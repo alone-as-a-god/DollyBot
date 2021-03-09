@@ -5,7 +5,14 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden",
+    fontSize: "1em",
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".7em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".5em",
+    },
   },
   title: {
     textAlign: "center",
@@ -13,24 +20,15 @@ export const useStyles = makeStyles((theme) => ({
     "& > *": {
       display: "block",
     },
-    fontSize: "5em",
+    fontSize: "4em",
     textTransform: "uppercase",
     fontVariant: "small-caps",
-  },
-  icon: {
-    position: "absolute",
-    bottom: "0",
-    left: "-200px",
-    fontSize: "500px",
-    height: "500px",
-    color: theme.palette.secondary.main,
-    opacity: "0.35",
+    margin: "3.5em 0",
   },
   line: {
     overflow: "hidden",
     width: "100&",
     position: "relative",
-
     height: "100px",
   },
 }));

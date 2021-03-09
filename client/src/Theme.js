@@ -5,12 +5,13 @@ export default createMuiTheme({
   palette: {
     primary: {
       main: "#474A80",
-      contrastText: "#EDD8C7",
+      contrastText: "#F9F7FF",
       light: "#7B7A9E",
+      dark: "#32345A",
       secondaryText: "#fffffff0",
     },
     secondary: {
-      main: "#EDD8C7",
+      main: "#F9F7FF",
     },
   },
   typography: {
@@ -39,5 +40,13 @@ export default createMuiTheme({
       fontVariant: "small-caps",
     },
   },
-  breakpoints: {},
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1440,
+      xl: 1920,
+    },
+  },
 });

@@ -21,10 +21,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 ::selection {
-  background: #32345a;
-  color: #edd8c7;
+  background: #27283f;
+  color: #f9f7ff;
 }
 ::-moz-selection {
-  background: #32345a; /* Gecko Browsers */
-  color: #edd8c7;
+  background: #27283f; /* Gecko Browsers */
+  color: #f9f7ff;
+}
+
+#hand {
+  animation: handAnimation 1s linear infinite alternate-reverse;
+  transform-origin: 100% 100%;
+  transform-box: fill-box;
+}
+
+@keyframes handAnimation {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+@media only screen and (min-width: 2300px) {
+  body {
+    font-size: 1.25em;
+  }
+}
+@media only screen and (min-width: 3000px) {
+  body {
+    font-size: 1.5em;
+  }
 }
