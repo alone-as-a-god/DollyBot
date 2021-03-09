@@ -8,10 +8,10 @@ const Hero = () => {
   let lines = useRef([]);
   let iconRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(iconRef, 1.3, {
-      opacity: "0",
-      delay: 1.5,
-    });
+    // TweenMax.from(iconRef, 1.3, {
+    //   opacity: "0",
+    //   delay: 1.5,
+    // });
     // TweenMax.staggerFrom(
     //   lines.current,
     //   1,
