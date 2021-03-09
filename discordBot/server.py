@@ -5,7 +5,7 @@ sys.path.append("../database")
 import db
 from myDict import prefix_dict as prefix_dictionary
 
-async def notificationListener():                         #method gets called upon bot startup (bot.onready), accepts socket connections and prints received messages
+async def notification_Listener():                         #method gets called upon bot startup (bot.onready), accepts socket connections and prints received messages
     s = socket.socket()                             #Creates new socket
     ip = "127.0.0.1"
     port = 12345

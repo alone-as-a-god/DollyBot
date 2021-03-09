@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix=os.getenv("BOT_PREFIX"))
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(name="the best Music"))
-    thread = Thread(target=asyncio.run, args=(server.notificationListener(),))       #Starts a new thread with the socketserver, to listen for new messages (target asyncio so it runs in async mode lol)
+    thread = Thread(target=asyncio.run, args=(server.notification_Listener(),))       #Starts a new thread with the socketserver, to listen for new messages (target asyncio so it runs in async mode lol)
     thread.start()
     print('Logged in')
     
@@ -30,10 +30,10 @@ async def on_ready():
 async def pingCommand(ctx):
     await ctx.send("Jolene")
 
-@bot.command(name="testDictionary", aliases=["td"])
-async def testDictionaryCommand(ctx=None):
-    print("before: "+str(prefix_dictionary))
-    await db.update_prefix_dictionary(prefix_dictionary)
-    print("after: "+str(prefix_dictionary))
+# @bot.command(name="testDictionary", aliases=["td"])
+# async def test_Dictionary_Command(ctx=None):
+#     print("before: "+str(prefix_dictionary))
+#     await db.update_prefix_dictionary(prefix_dictionary)
+#     print("after: "+str(prefix_dictionary))
 
 bot.run(os.getenv("BOT_TOKEN")) 
