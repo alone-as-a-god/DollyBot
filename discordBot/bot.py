@@ -11,12 +11,14 @@ from myDict import prefix_dict as prefix_dictionary
 import asyncio
 
 
+extensions = ["music"]
+
 def get_prefix(bot, message):
     key = str(message.guild.id)
     return prefix_dictionary[key]
 
-
 bot = commands.Bot(command_prefix=os.getenv("BOT_PREFIX"))
+
 
 
 @bot.event
@@ -35,5 +37,8 @@ async def pingCommand(ctx):
 #     print("before: "+str(prefix_dictionary))
 #     await db.update_prefix_dictionary(prefix_dictionary)
 #     print("after: "+str(prefix_dictionary))
+if __name__ == "__main__":
+    for extension in extensions:
+        bot.load_extension(extension)
 
 bot.run(os.getenv("BOT_TOKEN")) 
