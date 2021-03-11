@@ -14,6 +14,7 @@ const Navbar = () => {
   let links = useRef(null);
   let line = useRef(null);
   let navbar = useRef(null);
+  let icon = useRef(null);
   useEffect(() => {
     return history.listen((location) => {
       setUrl(location.pathname);
@@ -43,6 +44,15 @@ const Navbar = () => {
       },
       "-=.3"
     );
+    tl.from(
+      icon,
+      0.5,
+      {
+        opacity: "0",
+        y: "10px",
+      },
+      "-=.3"
+    );
   }, []);
 
   const classes = useStyles();
@@ -65,7 +75,14 @@ const Navbar = () => {
             dolly
           </Typography>
         </Link>
-
+        <IconButton
+          className={classes.icon}
+          ref={(el) => {
+            icon = el;
+          }}
+        >
+          <RiMenu3Fill></RiMenu3Fill>
+        </IconButton>
         <div
           className={classes.linkContainer}
           ref={(el) => {
@@ -81,9 +98,6 @@ const Navbar = () => {
             invite
           </Button>
         </div>
-        <IconButton className={classes.icon}>
-          <RiMenu3Fill></RiMenu3Fill>
-        </IconButton>
       </nav>
       <div ref={(el) => (line = el)} className={classes.line}></div>
     </div>

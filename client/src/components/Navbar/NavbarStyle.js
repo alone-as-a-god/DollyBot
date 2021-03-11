@@ -11,6 +11,10 @@ export const useStyles = makeStyles((theme) => ({
     padding: "0 2em",
     overflow: "hidden",
     height: "80px",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".8em",
+      height: "70px",
+    },
   },
 
   linkContainer: {
@@ -29,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: theme.palette.secondary.main,
-    fontSize: "2em",
+    fontSize: "2.5em",
 
     [theme.breakpoints.up("md")]: {
       display: "none",

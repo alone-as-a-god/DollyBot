@@ -4,16 +4,18 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import theme from "./Theme";
-import { useState } from "react";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Commands from "./pages/Commands/Commands";
 
 function App() {
-  const [homeWasOpened, setHomeWasOpened] = useState(false); //needed so that animation only happens when first opened
   return (
     <div>
       <ThemeProvider theme={theme}>
         <Router>
           <Navbar />
-          <Route path="/" exact render={() => <Home wasOpened={homeWasOpened} setWasOpened={setHomeWasOpened}></Home>}></Route>
+          <Route path="/" exact render={() => <Home></Home>}></Route>
+          <Route path="/dashboard" exact render={() => <Dashboard />}></Route>
+          <Route path="/commands" exact render={() => <Commands />}></Route>
           <Footer />
         </Router>
       </ThemeProvider>

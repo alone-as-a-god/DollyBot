@@ -16,9 +16,15 @@ export const useStyles = makeStyles((theme) => ({
       width: "350px",
       height: "350px",
     },
+
     [theme.breakpoints.down("sm")]: {
-      width: "275px",
-      height: "275px",
+      width: "300px",
+      height: "300px",
+      fontSize: "0.875em",
+    },
+    ["@media (max-width: 700px)"]: {
+      width: "250px",
+      height: "250px",
     },
     ["@media (min-width: 2300px)"]: {
       width: "600px",
@@ -28,8 +34,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   text: {
     marginTop: "1em",
-    fontVariant: "small-caps",
     fontSize: "1.25em",
     textAlign: "center",
+    textTransform: "uppercase",
+    fontVariant: "small-caps",
   },
 }));

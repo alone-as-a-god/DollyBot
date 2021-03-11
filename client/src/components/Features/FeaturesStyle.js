@@ -13,13 +13,13 @@ export const useStyles = makeStyles((theme) => ({
     ["@media (max-width: 1600px)"]: {
       backgroundSize: "cover",
     },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".9em",
+    },
     [theme.breakpoints.down("xs")]: {
-      fontSize: ".8em",
       backgroundPosition: "top",
       background: `url(${MountainMobile})`,
       backgroundSize: "cover",
-    },
-    [theme.breakpoints.down("sm")]: {
       padding: "5rem 0",
       display: "flex",
       flexDirection: "column",
@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: ".8em 0",
     fontSize: "6em",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "5em",
+      fontSize: "4em",
       textAlign: "center",
     },
   },
@@ -43,6 +43,7 @@ export const useStyles = makeStyles((theme) => ({
       display: "flex",
       justifyContent: "center",
     },
+    width: "fit-content",
   },
   robotIcon: {
     width: "calc(500px + 10vw)",
@@ -53,9 +54,22 @@ export const useStyles = makeStyles((theme) => ({
       width: "calc(350px + 10vw)",
     },
     [theme.breakpoints.down("xs")]: {
-      width: "calc(300px + 10vw)",
+      width: "calc(280px + 10vw)",
       left: "50%",
       transform: "translateY(-90%)  translateX(-50%)",
+    },
+  },
+  grid: {
+    display: "inline-grid",
+    gridTemplateColumns: "1fr 1fr",
+    rowGap: "3em",
+    columnGap: "3em",
+    [theme.breakpoints.down("sm")]: {
+      rowGap: "2em",
+      columnGap: "2em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      gridTemplateColumns: "1fr",
     },
   },
 }));

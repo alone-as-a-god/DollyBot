@@ -12,14 +12,10 @@ export default createMuiTheme({
     },
     secondary: {
       main: "#F9F7FF",
+      dark: "#DBDAE6",
     },
   },
   typography: {
-    h3: {
-      fontFamily: "Montserrat",
-      textTransform: "uppercase",
-      fontWeight: "500",
-    },
     h1: {
       fontFamily: "Montserrat",
       fontWeight: "500",
@@ -28,7 +24,23 @@ export default createMuiTheme({
     h2: {
       fontFamily: "Montserrat",
       fontWeight: "500",
+      fontSize: "4em",
     },
+    h3: {
+      fontFamily: "Montserrat",
+      fontWeight: "500",
+      fontSize: "3em",
+    },
+    h4: {
+      fontFamily: "Montserrat",
+      textTransform: "uppercase",
+      fontWeight: "500",
+      fontSize: "2.5em",
+    },
+    h5: {
+      fontSize: "2em",
+    },
+
     button: {
       fontSize: "1.125em",
     },
@@ -36,8 +48,6 @@ export default createMuiTheme({
       fontFamily: "Montserrat",
       fontWeight: "500",
       fontSize: "1em",
-      textTransform: "uppercase",
-      fontVariant: "small-caps",
     },
   },
   breakpoints: {

@@ -13,6 +13,9 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: ".5em",
     },
+    ["@media (max-width: 375px)"]: {
+      fontSize: ".4em",
+    },
   },
   title: {
     textAlign: "center",

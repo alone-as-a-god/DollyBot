@@ -25,7 +25,7 @@ code {
   color: #f9f7ff;
 }
 ::-moz-selection {
-  background: #27283f; /* Gecko Browsers */
+  background: #27283f;
   color: #f9f7ff;
 }
 
