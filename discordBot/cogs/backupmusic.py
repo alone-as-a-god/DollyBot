@@ -4,11 +4,8 @@ import discord
 from discord.ext import commands
 import re 
 import sys
-import server 
-import asyncio
 sys.path.append("../database")
 import db
-global_player = None
 
 URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 
@@ -71,6 +68,7 @@ class Player(wavelink.Player):
         await self.play(self.queue.current_track)   
         
     async def advance(self):                                                    #Advances to the next track unless queue is empty
+        print("rip")
         if (track:= self.queue.get_next_track()) is not None:
             await self.play(track)
 
@@ -103,24 +101,19 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @wavelink.WavelinkMixin.listener()                                          #Checks if node is ready to play music
     async def on_node_ready(self, node):
         #await db.update_shortcut_dictionary()   
-        # thread = Thread(target=asyncio.run, args=(server.notification_Listener(),))       #Starts a new thread with the socketserver, to listen for new messages (target asyncio so it runs in async mode lol)
-        # thread.start()
         print(f"Wavelink node {node.identifier} ready.")
         
     @wavelink.WavelinkMixin.listener("on_track_stuck")  
     @wavelink.WavelinkMixin.listener("on_track_end")
     @wavelink.WavelinkMixin.listener("on_track_exception")
-    async def on_player_stop(self, node, payload):   #if either of the above cases occurs, check if the player is on repeat, if yes, repeat the track, otherwise advance to the next one. Necessary cause otherwise the player can literally kill itself and stop playing music forever
+    async def on_player_stop(self, node, payload):   
+        print("nice")#if either of the above cases occurs, check if the player is on repeat, if yes, repeat the track, otherwise advance to the next one. Necessary cause otherwise the player can literally kill itself and stop playing music forever
         await payload.player.advance()
     
-    def get_player(self, obj):             
-        global global_player                                     
+    def get_player(self, obj):                                                  
         if isinstance(obj, commands.Context):
-            global_player = self.wavelink.get_player(obj.guild.id, cls=Player, context=obj)
             return self.wavelink.get_player(obj.guild.id, cls=Player, context=obj)
-
         elif isinstance(obj, discord.Guild):
-            global_player = self.wavelink.get_player(obj.id, cls=Player)
             return self.wavelink.get_player(obj.id, cls=Player)
 
 
@@ -145,13 +138,12 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @commands.command(name="connect", aliases=["join"], brief="Connects the bot to a channel", description="Connects the bot to the specified channel. If no channel is specified, the bot will join the invokers channel. Usage: 'join [channel]' where channel is optional")
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
         player = self.get_player(ctx)
-        
         channel = await player.connect(ctx, channel)
         await ctx.send(f"Joined {channel.name}")
 
     @commands.command(name="play")
     async def play_command(self, ctx, *, query: str):
-        print(str(ctx))
+        
         player = self.get_player(ctx)
         if not player.is_connected:
             await player.connect(ctx)
@@ -164,9 +156,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         
         
         
-    async def add_tracks_from_db(self):
-        print("okay")
-        position = global_player.queue.position
+    async def add_tracks_from_db(self, ctx):
+        player = self.get_player(ctx)
+        position = player.queue.position
         print(position)
         track = await db.get_next_track(position)
         print(track[0])
@@ -182,14 +174,14 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             self.queue.add(track[0])
         else:
             track = track[0]
-            global_player.queue.add(track)
+            player.queue.add(track)
         print(f"Added {track.title} to Queue ON DATABASE DEBUG DELETE LATER LALILU") 
         await db.update_track(track.title, position)
         #await player.start_playback() 
     
     @commands.command(name="dbm")
-    async def dbm_command(self):
-        await self.add_tracks_from_db()
+    async def dbm_command(self, ctx):
+        await self.add_tracks_from_db(ctx)
         
     
    

@@ -3,6 +3,7 @@ import os
 import sys
 sys.path.append("../database")
 import db
+import music
 from myDict import prefix_dict as prefix_dictionary
 
 async def notification_Listener():                         #method gets called upon bot startup (bot.onready), accepts socket connections and prints received messages
@@ -17,7 +18,10 @@ async def notification_Listener():                         #method gets called u
         print("Connection from",addr)
         rcvdData = c.recv(1024).decode()            #receives data sent, and prints it as a string
         print ("received:",rcvdData)
-        if(rcvdData == "updatePrefix"):
+        if(rcvdData == "rara"):
             await db.update_prefix_dictionary(prefix_dictionary)
             print("after: " +str(prefix_dictionary))
+        elif(rcvdData == "test"):
+            print("received dbm lmaooo???")
+            #await music.add_tracks_from_db()
         c.close()                                   #since only one message is sent at a time, the socket gets closed again, to make sure other connections are possible
