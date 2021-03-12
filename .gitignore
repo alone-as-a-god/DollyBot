@@ -9,9 +9,9 @@
 
 #Python
 /discordBot/.env
+/**/__pycache__
 
 #Database
-/database/__pycache__
 
 #Node
 /backend/.env
