@@ -22,8 +22,6 @@ bot = commands.Bot(command_prefix=os.getenv("BOT_PREFIX"))
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(name="the best Music"))
-    thread = Thread(target=asyncio.run, args=(server.notificationListener(),))       #Starts a new thread with the socketserver, to listen for new messages (target asyncio so it runs in async mode lol)
-    thread.start()
     print('Logged in')
     
 @bot.command(name="ping", aliases=["p"])
