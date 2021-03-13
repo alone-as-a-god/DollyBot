@@ -16,7 +16,7 @@ const Dashboard = () => {
   }, []);
   return (
     <div
-      className={classes.container}
+      className={classes.root}
       ref={(element) => {
         dashboardRef = element;
       }}
@@ -24,12 +24,12 @@ const Dashboard = () => {
       <Typography variant="h1" className={classes.title}>
         Dashboard
       </Typography>
-      <Grid container spacing={5}>
-        <Grid item xs={12} md={5}>
-          <PrefixCard></PrefixCard>
-        </Grid>
+      <Grid container spacing={4}>
         <Grid item xs={12} md={7}>
           <QueueCard></QueueCard>
+        </Grid>
+        <Grid item xs={12} md={5}>
+          <PrefixCard></PrefixCard>
         </Grid>
       </Grid>
     </div>

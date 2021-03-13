@@ -1,13 +1,12 @@
 import { makeStyles } from "@material-ui/core";
-import Curve from "./curve.svg";
+import Curve from "./curve3.svg";
 export const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: "100vh",
-    paddingTop: "2rem",
     background: `url('${Curve}')`,
     backgroundPosition: "top right",
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
+    minHeight: "100vh",
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
     [theme.breakpoints.down("md")]: {
@@ -17,53 +16,36 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
-      background: "url()",
+      background: "url('')",
     },
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(2),
     },
   },
-  container: {},
-  accordion: {
-    background: theme.palette.primary.dark,
+  header: {
+    padding: "2rem 0",
+    fontSize: "clamp(4em, 12vw, 5.5em)",
     color: theme.palette.secondary.main,
-    borderColor: "red",
+  },
+  title: {
+    color: theme.palette.primary.extradark,
+    fontSize: "clamp(2.5em, 7vw, 3em)",
+  },
+  text: {
+    color: theme.palette.secondary.main,
+  },
+  container: {
+    width: "50%",
+    maxWidth: "1200px",
+    marginBottom: "2rem",
+    [theme.breakpoints.down("md")]: {},
     width: "60%",
-    [theme.breakpoints.down("md")]: {
-      width: "70%",
-    },
     [theme.breakpoints.down("sm")]: {
       width: "80%",
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%",
-    },
-  },
-  title: {
-    color: theme.palette.secondary.main,
-    marginBottom: "1rem",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "3em",
-    },
-  },
-  icon: {
-    color: theme.palette.secondary.main,
-    fontSize: "1.5em",
-  },
-
-  text: {
-    color: theme.palette.secondary.main,
-    marginBottom: "1rem",
-  },
-  alias: {
-    opacity: "70%",
-    marginLeft: "1em",
-  },
-  accordionTitle: {
-    "&>div": {
-      display: "flex",
-      alignItems: "center",
     },
   },
 }));

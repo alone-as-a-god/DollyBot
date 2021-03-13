@@ -20,27 +20,36 @@ const Footer = () => {
           <FiMail></FiMail>
         </IconButton>
       </div>
-      <div>
-        <Typography className={classes.header}>functions</Typography>
-        <Link className={classes.link}>
-          <Typography className={classes.linkText}>login</Typography>
-        </Link>
-        <Link className={classes.link}>
-          <Typography className={classes.linkText}>logout</Typography>
-        </Link>
-        <Link className={classes.link}>
-          <Typography className={classes.linkText}>add to server</Typography>
-        </Link>
+      <div className={classes.linksContainer}>
+        <div>
+          <Typography className={classes.header}>options</Typography>
+          <Link className={classes.link}>
+            <Typography className={classes.linkText}>login</Typography>
+          </Link>
+          <Link className={classes.link}>
+            <Typography className={classes.linkText}>logout</Typography>
+          </Link>
+          <Link className={classes.link}>
+            <Typography className={classes.linkText}>invite</Typography>
+          </Link>
+        </div>
+        <div>
+          <Typography className={classes.header}>pages</Typography>
+          <Link to="/" className={classes.link}>
+            <Typography className={classes.linkText}>home</Typography>
+          </Link>
+          <Link to="/dashboard" className={classes.link}>
+            <Typography className={classes.linkText}>dashboard</Typography>
+          </Link>
+          <Link to="/commands" className={classes.link}>
+            <Typography className={classes.linkText}>commands</Typography>
+          </Link>
+          <Link to="/about" className={classes.link}>
+            <Typography className={classes.linkText}>about</Typography>
+          </Link>
+        </div>
       </div>
-      <div>
-        <Typography className={classes.header}>pages</Typography>
-        <Link to="/" className={classes.link}>
-          <Typography className={classes.linkText}>home</Typography>
-        </Link>
-        <Link to="/dashboard" className={classes.link}>
-          <Typography className={classes.linkText}>dashboard</Typography>
-        </Link>
-      </div>
+
       <img src={Robot} className={classes.robot} />
     </div>
   );

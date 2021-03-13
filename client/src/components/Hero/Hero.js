@@ -1,5 +1,4 @@
 import { Typography } from "@material-ui/core";
-import React, { useEffect, useRef } from "react";
 import { useStyles } from "./HeroStyle";
 import { TweenMax } from "gsap";
 const Hero = ({ wasOpened }) => {

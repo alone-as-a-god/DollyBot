@@ -35,6 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     minWidth: "250px",
     flexWrap: "wrap",
     display: "flex",
+    flexWrap: "none",
     alignItems: "flex-end",
     [theme.breakpoints.down("xs")]: {
       flexDirection: "column",

@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    padding: "5px",
-    border: `1px solid ${theme.palette.secondary.main}`,
+    padding: "3px",
+    borderBottom: `2px solid ${theme.palette.primary.main}`,
     color: theme.palette.secondary.main,
     display: "flex",
     alignItems: "center",

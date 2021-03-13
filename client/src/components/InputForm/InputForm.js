@@ -10,7 +10,7 @@ const InputForm = ({ label, onSubmit, value, onChange }) => {
           className={classes.input}
           label={label}
           required
-          // fullWidth
+          fullWidth
           color="secondary"
           value={value}
           defaultValue={value}
