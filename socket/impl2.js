@@ -1,1 +1,0 @@
-const socket = require("./index");
