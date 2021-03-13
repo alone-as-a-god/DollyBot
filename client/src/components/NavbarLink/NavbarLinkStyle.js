@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
-    borderBottom: "2px solid transparent",
+    borderBottom: "3px solid transparent",
     float: "left",
     display: "flex",
     justifyContent: "center",
@@ -11,13 +11,11 @@ export const useStyles = makeStyles((theme) => ({
     padding: "0 1em",
     color: "inherit",
     textDecoration: "none",
-    textTransform: "uppercase",
-    fontFamily: "Montserrat",
+    textTransform: "capitalize",
     fontWeight: "400",
-    fontSize: "1.125em",
+    fontSize: "1.25em",
   },
   active: {
-    borderBottom: "2px solid" + theme.palette.secondary.main,
-    fontWeight: "500",
+    borderBottom: "3px solid" + theme.palette.secondary.main,
   },
 }));

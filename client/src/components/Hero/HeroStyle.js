@@ -6,21 +6,18 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     fontSize: "1em",
-
-    [theme.breakpoints.down("sm")]: {
-      fontSize: ".7em",
-    },
-    [theme.breakpoints.down("xs")]: {
-      fontSize: ".5em",
-    },
   },
   title: {
+    fontFamily: "Montserrat",
     textAlign: "center",
     color: theme.palette.primary.contrastText,
     "& > *": {
       display: "block",
     },
-    fontSize: "4em",
+    fontSize: "clamp(4em, 7vw, 5em)",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "clamp(1.75em, 7vw, 5em)",
+    },
     textTransform: "uppercase",
     fontVariant: "small-caps",
     margin: "3.5em 0",

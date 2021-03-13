@@ -8,9 +8,25 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
-    padding: "0 2em",
+    paddingLeft: theme.spacing(16),
+    paddingRight: theme.spacing(16),
     overflow: "hidden",
     height: "80px",
+    [theme.breakpoints.down("md")]: {
+      paddingLeft: theme.spacing(6),
+      paddingRight: theme.spacing(6),
+    },
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(4),
+    },
+
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".8em",
+      height: "70px",
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+    },
   },
 
   linkContainer: {
@@ -29,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: theme.palette.secondary.main,
-    fontSize: "2em",
+    fontSize: "2.5em",
 
     [theme.breakpoints.up("md")]: {
       display: "none",
@@ -52,5 +68,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   logoText: {
     color: theme.palette.secondary.main,
+    letterSpacing: "1px",
   },
 }));

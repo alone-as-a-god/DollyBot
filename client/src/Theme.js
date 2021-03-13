@@ -8,38 +8,52 @@ export default createMuiTheme({
       contrastText: "#F9F7FF",
       light: "#7B7A9E",
       dark: "#32345A",
+      extradark: "#27283F",
       secondaryText: "#fffffff0",
     },
     secondary: {
       main: "#F9F7FF",
+      dark: "#DBDAE6",
     },
   },
   typography: {
-    h3: {
-      fontFamily: "Montserrat",
-      textTransform: "uppercase",
-      fontWeight: "500",
-    },
     h1: {
-      fontFamily: "Montserrat",
+      fontFamily: "Poppins",
+      fontSize: "clamp(4em, 12vw, 5.5em)",
       fontWeight: "500",
-      fontSize: "5em",
     },
     h2: {
-      fontFamily: "Montserrat",
+      fontFamily: "Poppins",
       fontWeight: "500",
+      fontSize: "4em",
     },
+    h3: {
+      fontFamily: "Poppins",
+      fontWeight: "500",
+      fontSize: "3em",
+    },
+    h4: {
+      fontFamily: "Poppins",
+      textTransform: "uppercase",
+      fontWeight: "500",
+      fontSize: "2.5em",
+    },
+    h5: {
+      fontSize: "2em",
+    },
+
     button: {
       fontSize: "1.125em",
+      textTransform: "capitalize",
+      fontFamily: "Poppins",
     },
     body1: {
-      fontFamily: "Montserrat",
-      fontWeight: "500",
-      fontSize: "1em",
-      textTransform: "uppercase",
-      fontVariant: "small-caps",
+      fontFamily: "Open Sans",
+      fontWeight: "400",
+      fontSize: "1.25em",
     },
   },
+  spacing: (factor) => `${0.5 * factor}rem`,
   breakpoints: {
     values: {
       xs: 0,
