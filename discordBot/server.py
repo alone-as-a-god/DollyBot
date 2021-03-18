@@ -18,10 +18,11 @@ async def notification_Listener():                         #method gets called u
         print("Connection from",addr)
         rcvdData = c.recv(1024).decode()            #receives data sent, and prints it as a string
         print ("received:",rcvdData)
-        if(rcvdData == "rara"):
+        if(rcvdData == "updateDictionary"):
             await db.update_prefix_dictionary(prefix_dictionary)
             print("after: " +str(prefix_dictionary))
         elif(rcvdData == "test"):
+            #msc = music.Music()
             print("received dbm lmaooo???")
-            #await music.add_tracks_from_db()
+
         c.close()                                   #since only one message is sent at a time, the socket gets closed again, to make sure other connections are possible

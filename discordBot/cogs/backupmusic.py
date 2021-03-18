@@ -43,7 +43,9 @@ class Queue():
             return None   
         if self.position > len(self._queue) -1:
             self.position = 0
-            
+        
+        if(self.position == 0):
+            return None
         return self._queue[self.position]
     
 
@@ -68,7 +70,7 @@ class Player(wavelink.Player):
         await self.play(self.queue.current_track)   
         
     async def advance(self):                                                    #Advances to the next track unless queue is empty
-        print("rip")
+        print("rippolo")
         if (track:= self.queue.get_next_track()) is not None:
             await self.play(track)
 

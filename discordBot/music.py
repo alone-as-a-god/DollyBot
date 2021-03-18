@@ -4,53 +4,62 @@ import discord
 from discord.ext import commands
 import re 
 import sys
-import server 
-import asyncio
 sys.path.append("../database")
 import db
-global_player = None
 
+class AlreadyConnectedToChannel(commands.CommandError):
+    pass
+
+class NoVoiceChannel(commands.CommandError):
+    pass
+
+class QueueIsEmpty(commands.CommandError):
+    pass
+
+class NoTracksFound(commands.CommandError):
+    pass
+
+class PlayerIsAlreadyPaused(commands.CommandError):
+    pass
+
+class PlayerIsAlreadyPlaying(commands.CommandError):
+    pass
+
+class NoMoreTracks(commands.CommandError):
+    pass
+
+class NoValidRepeatMode(commands.CommandError):
+    pass
+
+#TODO: Clear the queue table when no tracks are left
+
+#Regex matches youtube URL
 URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 
-def setup(bot):
+
+def setup(bot):                         #Adds this file as cog to the main bot
     bot.add_cog(Music(bot))
 
-class Queue():
-    def __init__(self):
-        self._queue = []
+class Queue():                          #Class used by Player, handles everything that has to do with the "queue"
+    def __init__(self):                 #Could possibly be removed and merged with the Player class, not planned as of yet
         self.position = 0
     
     @property
     def is_empty(self):
-        return not self._queue
+        if db.get_next_track_sync(self.posistion-1) == None:
+            return True
+        else:
+            return False
     
     @property                               #@property describes a getter, in this case it is a getter for the current_track
-    def current_track(self):
-        if not self._queue:
-            raise QueueIsEmpty
-        
-        if self.position <= len(self._queue) - 1:       #len -1 because position can be 0
-            return self._queue[self.position]
+    def current_track(self): 
+        return db.get_next_track_sync(self.position-1)
 
-    def add(self, *args):
-        self._queue.extend(args)
-    
-    def get_track_by_id(self, id):
-        return self._queue[id]
-        
-    def get_next_track(self):
-        if not self._queue:
-            return None
-        self.position += 1   
-        if self.position < 0:
-            return None   
-        if self.position > len(self._queue) -1:
-            self.position = 0
-            
-        return self._queue[self.position]
-    
+    def add(self, *args):                   #Adds the specified track/s to the queue table
+        for track in args:
+            db.add_tracks_sync(track)
+            print(f"Added {track} to db")
 
-        
 
 class Player(wavelink.Player):                  
     def __init__(self, *args, **kwargs):                        #Constructor for the wavelink player
@@ -68,31 +77,38 @@ class Player(wavelink.Player):
         return channel
     
     async def start_playback(self):
-        await self.play(self.queue.current_track)   
+        if self.queue.position > 0:
+            position = self.queue.position - 1
+        else:
+            position = 0
+        track = await db.get_next_track(position)
+        if track is not None:
+            track = track[0]
+            if not re.match(URL_REGEX, track):
+                track = f"ytsearch:{track}"
+            track = await self.get_tracks(track)       
+        await self.play(track)   
         
-    async def advance(self):                                                    #Advances to the next track unless queue is empty
-        if (track:= self.queue.get_next_track()) is not None:
+    async def advance(self, track):                                                    #Advances to the next track unless queue is empty
+        if track is not None:
             await self.play(track)
 
         
     async def add_tracks(self, ctx, tracks):
-        if isinstance(tracks, wavelink.TrackPlaylist):
+        if isinstance(tracks, wavelink.TrackPlaylist):        
             self.queue.add(*tracks.tracks)
             await ctx.send("Added playlist to queue")
-        elif len(tracks) == 1:
-            self.queue.add(tracks[0])
-            await ctx.send(f"Added {tracks[0].title} to Queue")
+            if not self.is_playing: 
+                await self.play(tracks.tracks[0])
+                
         else:
             tracks = tracks[0]
             self.queue.add(tracks)
             await ctx.send(f"Added {tracks.title} to Queue")
-        if not self.is_playing and not self.queue.is_empty: 
-            await self.start_playback()
-        
+            if not self.is_playing: 
+                await self.play(tracks)
 
-   
-    
-    
+
 class Music(commands.Cog, wavelink.WavelinkMixin):
 
     def __init__(self, bot):
@@ -102,25 +118,30 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @wavelink.WavelinkMixin.listener()                                          #Checks if node is ready to play music
     async def on_node_ready(self, node):
-        #await db.update_shortcut_dictionary()   
-        # thread = Thread(target=asyncio.run, args=(server.notification_Listener(),))       #Starts a new thread with the socketserver, to listen for new messages (target asyncio so it runs in async mode lol)
-        # thread.start()
+        await db.clear_tracks()
         print(f"Wavelink node {node.identifier} ready.")
         
     @wavelink.WavelinkMixin.listener("on_track_stuck")  
     @wavelink.WavelinkMixin.listener("on_track_end")
     @wavelink.WavelinkMixin.listener("on_track_exception")
-    async def on_player_stop(self, node, payload):   #if either of the above cases occurs, check if the player is on repeat, if yes, repeat the track, otherwise advance to the next one. Necessary cause otherwise the player can literally kill itself and stop playing music forever
-        await payload.player.advance()
+    async def on_player_stop(self, node, payload):   
+        track = db.get_next_track_sync(payload.player.queue.position)
+        if track is not None:
+            track = track[0]
+            if not re.match(URL_REGEX, track):
+                track = f"ytsearch:{track}"
+            track = await self.wavelink.get_tracks(track)
+            await payload.player.advance(track[0])
+            payload.player.queue.position += 1
+        else:
+            await db.clear_tracks()
+            await db.clear_auto_increment("queue")
+            await payload.player.stop()
     
-    def get_player(self, obj):             
-        global global_player                                     
+    def get_player(self, obj):                                                  
         if isinstance(obj, commands.Context):
-            global_player = self.wavelink.get_player(obj.guild.id, cls=Player, context=obj)
             return self.wavelink.get_player(obj.guild.id, cls=Player, context=obj)
-
         elif isinstance(obj, discord.Guild):
-            global_player = self.wavelink.get_player(obj.id, cls=Player)
             return self.wavelink.get_player(obj.id, cls=Player)
 
 
@@ -145,51 +166,56 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @commands.command(name="connect", aliases=["join"], brief="Connects the bot to a channel", description="Connects the bot to the specified channel. If no channel is specified, the bot will join the invokers channel. Usage: 'join [channel]' where channel is optional")
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
         player = self.get_player(ctx)
-        
         channel = await player.connect(ctx, channel)
         await ctx.send(f"Joined {channel.name}")
 
     @commands.command(name="play")
     async def play_command(self, ctx, *, query: str):
-        print(str(ctx))
+        
         player = self.get_player(ctx)
         if not player.is_connected:
             await player.connect(ctx)
-            
+
         query = query.strip("<>")
         if not re.match(URL_REGEX, query):
-            query = f"ytsearch:{query}"
+            query = f"ytsearch:{query}"    
+        track = await self.wavelink.get_tracks(query)
+        await player.add_tracks(ctx, track)
         
-        await player.add_tracks(ctx, await self.wavelink.get_tracks(query))
-        
-        
-        
-    async def add_tracks_from_db(self):
-        print("okay")
-        position = global_player.queue.position
-        print(position)
-        track = await db.get_next_track(position)
-        print(track[0])
-        track = track[0]
-        if not re.match(URL_REGEX, track):
-            track = f"ytsearch:{track}"
-        track = await self.wavelink.get_tracks(track)
-        
-        #await player.add_tracks(ctx, track)
-        if isinstance(track, wavelink.TrackPlaylist):
-            self.queue.add(*track.tracks)
-        elif len(track) == 1:
-            self.queue.add(track[0])
-        else:
-            track = track[0]
-            global_player.queue.add(track)
-        print(f"Added {track.title} to Queue ON DATABASE DEBUG DELETE LATER LALILU") 
-        await db.update_track(track.title, position)
-        #await player.start_playback() 
+    @commands.command(name="stop")
+    async def stop_command(self, ctx):
+        player = self.get_player(ctx)
+        await db.clear_tracks()
+        await db.clear_auto_increment("queue")
+        await player.stop()
+        await ctx.send("Playback stopped")
     
-    @commands.command(name="dbm")
-    async def dbm_command(self):
-        await self.add_tracks_from_db()
+    @commands.command(name="skip")
+    async def skip_command(self, ctx):
+        player = self.get_player(ctx)
+        await player.stop()
+        await print("Skipping...")
         
+        
+        
+    @connect_command.error
+    async def connect_command_error(self, ctx, exc):
+        if isinstance(exc, AlreadyConnectedToChannel):
+            await ctx.send("Already connected to a voice channel.")
+        elif isinstance(exc, NoVoiceChannel):
+            await ctx.send("No Voice channel found")
     
-   
+    @play_command.error
+    async def play_command_error(self, ctx, exc):
+        if isinstance(exc, QueueIsEmpty):
+            await ctx.send("No songs to play as the queue is empty.")
+        elif isinstance(exc, NoVoiceChannel):
+            await ctx.send("No suitable voice channel was provided.")
+            
+    @skip_command.error
+    async def skip_command_error(self, ctx, exc):
+        if isinstance(exc, NoMoreTracks):
+            await ctx.send("No more tracks in queue.")
+        if isinstance(exc, QueueIsEmpty):
+            await ctx.send("Queue is empty.")
+            
