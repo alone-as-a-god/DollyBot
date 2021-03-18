@@ -6,7 +6,7 @@
 
 #General files
 *.mp3
-
+logs/
 #Python
 /discordBot/.env
 /**/__pycache__
