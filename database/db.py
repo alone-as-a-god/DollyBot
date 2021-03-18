@@ -2,9 +2,10 @@ import asyncio
 import aiosqlite
 from aiosqlite import cursor
 from aiosqlite.core import connect
-
-DB_PATH = "../database/database.db"
+import sqlite3 as sql3
 import os
+DB_PATH = "../database/database.db"
+
 
 async def db_connect():                 #Method to establish connection with the database, has to be called in each and every method accessing the Database
     connection = await aiosqlite.connect(DB_PATH)
@@ -52,9 +53,100 @@ async def update_prefix_dictionary(dictionary):
     
     await connection.close()
     
+async def add_tracks(track):
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        INSERT OR IGNORE
+        INTO queue
+        (identifier)
+        VALUES (?)
+        '''
     
-# async def main():                       #Testing out the above methods (working as of now)
-#     update_prefix_dictionary()
+    await cursor.execute(sql, (str(track),))
+    await connection.commit()
+    await connection.close()
     
-#asyncio.run(main())                    #Used to call the main function in async mode
-# #print(os.getcwd())
+def add_tracks_sync(track):
+    connection = sql3.connect(DB_PATH)
+    cursor = connection.cursor()
+    sql = '''
+        INSERT OR IGNORE
+        INTO queue
+        (identifier)
+        VALUES (?)
+        '''
+    
+    cursor.execute(sql, (str(track),))
+    connection.commit()
+    connection.close()
+    
+async def get_next_track(current_track_id):
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        SELECT identifier
+        FROM queue
+        WHERE id=?
+        '''
+    
+    await cursor.execute(sql, (str(current_track_id+1),))
+    track = await cursor.fetchone()
+    await connection.close()
+    return track
+
+def get_next_track_sync(current_track_id):
+    connection = sql3.connect(DB_PATH)
+    cursor = connection.cursor()
+    sql = '''
+        SELECT identifier
+        FROM queue
+        WHERE id=?
+        '''
+    
+    cursor.execute(sql, (str(current_track_id+1),))
+    track = cursor.fetchone()
+    connection.close()
+    return track
+
+async def update_track(track_name, track_id):
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        UPDATE queue 
+        SET identifier = ?
+        WHERE id = ?
+        '''
+    await cursor.execute(sql, (str(track_name), str(track_id)))
+    await connection.commit()
+    await connection.close()
+        
+async def clear_tracks():
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        DELETE FROM queue;
+        '''
+    await cursor.execute(sql)
+    await connection.commit()
+    await connection.close()
+    await clear_auto_increment("queue")
+
+async def clear_auto_increment(table):
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        DELETE FROM SQLITE_SEQUENCE WHERE name=?
+        '''
+    await cursor.execute(sql, (str(table),))
+    await connection.commit()
+    await connection.close()
+
+async def main():                       #Testing out the above methods (working as of now)
+    list = await get_next_track(5)
+    print([x[0] for x in list])
+        
+if __name__ == "__main__":
+    DB_PATH = "database/database.db"
+    asyncio.run(main())                    #Used to call the main function in async mode
+# print(os.getcwd())
