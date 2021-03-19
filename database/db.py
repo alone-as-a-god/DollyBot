@@ -15,7 +15,7 @@ async def update_prefix(guildID, newPrefix):    #Updates the prefix of the speci
     connection = await db_connect()             #calls method to establish connection to DB
     cursor = await connection.cursor()          #creates a cursor to execute Queries in the DB
     sql = '''                                   
-        UPDATE prefixes
+        UPDATE guild
         SET prefix = ?
         WHERE guildID = ?
         '''
@@ -28,7 +28,7 @@ async def get_prefix(guildID):              #Returns the prefix of the specified
     cursor = await connection.cursor()
     sql = '''
         SELECT prefix 
-        FROM prefixes
+        FROM guild
         WHERE guildID = ?
         '''
     await cursor.execute(sql, str(guildID),)
@@ -41,15 +41,16 @@ async def update_prefix_dictionary(dictionary):
     cursor = await connection.cursor()
     sql = '''
         SELECT *
-        FROM prefixes
+        FROM guild
         '''
     await cursor.execute(sql)
     list = await cursor.fetchall()
     for row in list:
-        id = row[0]
+        id = str(row[0])
         prefix = row[1]
         dictionary[id] = prefix
     
+    print(str(dictionary))
     await connection.close()
     
 async def get_last_track_id(guildID):

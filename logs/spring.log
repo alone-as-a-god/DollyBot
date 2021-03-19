@@ -543,3 +543,64 @@
 2021-03-19 16:42:34.643  INFO 14836 --- [XNIO-1 task-47] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52408
 2021-03-19 16:42:59.861  INFO 14836 --- [XNIO-1 task-48] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52435
 2021-03-19 16:42:59.863  INFO 14836 --- [XNIO-1 task-48] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52435
+2021-03-19 17:05:03.697  INFO 9112 --- [main] lavalink.server.Launcher                 : 
+
+[32m       .  [31m _                  _ _       _    [32m__ _ _
+[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
+[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
+[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
+[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
+[0m    =========================================[32m/_/_/_/[0m
+
+	Version:        8be3fec7084caa2659e92c28f1f43070fcb84dcd-SNAPSHOT
+	Build:          1209
+	Build time:     17.02.2021 23:24:14 UTC
+	Branch          master
+	Commit:         8be3fec
+	Commit time:    17.02.2021 23:18:16 UTC
+	JVM:            11
+	Lavaplayer      1.3.65
+
+2021-03-19 17:05:03.767  INFO 9112 --- [main] lavalink.server.Launcher                 : Starting Launcher on DESKTOP-QNVQHVR with PID 9112 (C:\Users\alone\Desktop\DollyBot\lavalink started by alone in C:\Users\alone\Desktop\DollyBot)
+2021-03-19 17:05:03.768  INFO 9112 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2021-03-19 17:05:03.832  WARN 9112 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2021-03-19 17:05:04.518  WARN 9112 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2021-03-19 17:05:04.536  INFO 9112 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2021-03-19 17:05:04.536  INFO 9112 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 739 ms
+2021-03-19 17:05:04.769  WARN 9112 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2021-03-19 17:05:04.973  INFO 9112 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2021-03-19 17:05:05.089  INFO 9112 --- [main] lavalink.server.config.KoeConfiguration  : OS: Windows 10, Arch: amd64
+2021-03-19 17:05:05.089  WARN 9112 --- [main] lavalink.server.config.KoeConfiguration  : This system and architecture appears to not support native audio sending! GC pauses may cause your bot to stutter during playback.
+2021-03-19 17:05:05.217  INFO 9112 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-19 17:05:05.413  INFO 9112 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
+2021-03-19 17:05:05.421  INFO 9112 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
+2021-03-19 17:05:05.457  INFO 9112 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
+2021-03-19 17:05:05.460  INFO 9112 --- [main] lavalink.server.Launcher                 : Started Launcher in 2.084 seconds (JVM running for 2.409)
+2021-03-19 17:05:05.461  INFO 9112 --- [main] lavalink.server.Launcher                 : You can safely ignore the big red warning about illegal reflection. See https://github.com/Frederikam/Lavalink/issues/295
+2021-03-19 17:05:34.601  INFO 9112 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-19 17:05:34.601  INFO 9112 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-19 17:05:34.607  INFO 9112 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2021-03-19 17:05:34.621  INFO 9112 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50349
+2021-03-19 17:05:34.667  INFO 9112 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50349
+2021-03-19 17:06:50.628  INFO 9112 --- [XNIO-1 task-2] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50414
+2021-03-19 17:06:50.631  INFO 9112 --- [XNIO-1 task-2] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50414
+2021-03-19 17:09:28.836  INFO 9112 --- [XNIO-1 task-3] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50524
+2021-03-19 17:09:28.838  INFO 9112 --- [XNIO-1 task-3] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50524
+2021-03-19 17:10:22.680  INFO 9112 --- [XNIO-1 I/O-8] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:50524 -- CloseStatus[code=1006, reason=]
+2021-03-19 17:10:22.680  INFO 9112 --- [XNIO-1 I/O-8] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2021-03-19 17:10:25.544  INFO 9112 --- [XNIO-1 task-4] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50575
+2021-03-19 17:10:25.546  INFO 9112 --- [XNIO-1 task-4] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50575
+2021-03-19 17:11:06.026  INFO 9112 --- [XNIO-1 task-5] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50616
+2021-03-19 17:11:06.029  INFO 9112 --- [XNIO-1 task-5] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50616
+2021-03-19 17:11:17.552  INFO 9112 --- [XNIO-1 task-6] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:princess over night"
+2021-03-19 17:11:17.748  INFO 9112 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "f7c24a94032a41d915c68e04297ead6b", "event": {"token": "ec5dddf5dc85081c", "guild_id": "817425099740938240", "endpoint": "eu-central4531.discord.media:443"}}
+2021-03-19 17:11:18.866  INFO 9112 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: princess over night
+2021-03-19 17:11:19.148  INFO 9112 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAkgIAMlNvZmlhIFRoZSBGaXJzdCBUaGVtZSBTb25nIC0gQXJpZWwgV2ludGVyIFtMeXJpY3NdAAZZZW9ubmkAAAAAAADDUAALOUs4YXZTMEthQWsAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj05SzhhdlMwS2FBawAHeW91dHViZQAAAAAAAAAA", "noReplace": false, "startTime": "0"}
+2021-03-19 17:12:10.878  INFO 9112 --- [XNIO-1 task-8] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:Sofia The First Theme Song - Ariel Winter [Lyrics]"
+2021-03-19 17:12:11.545  INFO 9112 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Sofia The First Theme Song - Ariel Winter [Lyrics]
+2021-03-19 17:12:11.555  INFO 9112 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAkgIAMlNvZmlhIFRoZSBGaXJzdCBUaGVtZSBTb25nIC0gQXJpZWwgV2ludGVyIFtMeXJpY3NdAAZZZW9ubmkAAAAAAADDUAALOUs4YXZTMEthQWsAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj05SzhhdlMwS2FBawAHeW91dHViZQAAAAAAAAAA", "noReplace": false, "startTime": "0"}
+2021-03-19 17:13:02.028  INFO 9112 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
+2021-03-19 17:13:37.507  INFO 9112 --- [XNIO-1 task-10] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=2JYJF9L5YW4"
+2021-03-19 17:13:37.874  INFO 9112 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track NPC rides his bike into the mayor
+2021-03-19 17:13:38.085  INFO 9112 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAhgIAIU5QQyByaWRlcyBoaXMgYmlrZSBpbnRvIHRoZSBtYXlvcgALTWVtZSBUeWNvb24AAAAAAAAfQAALMkpZSkY5TDVZVzQAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj0ySllKRjlMNVlXNAAHeW91dHViZQAAAAAAAAAA", "noReplace": false, "startTime": "0"}
+2021-03-19 17:13:46.528  INFO 9112 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
