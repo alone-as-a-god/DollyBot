@@ -7,6 +7,8 @@ import sys
 sys.path.append("../database")
 import db
 
+#TODO: Search for ALAAAARM and add the server id
+
 class AlreadyConnectedToChannel(commands.CommandError):
     pass
 
@@ -31,7 +33,6 @@ class NoMoreTracks(commands.CommandError):
 class NoValidRepeatMode(commands.CommandError):
     pass
 
-#TODO: Clear the queue table when no tracks are left
 
 #Regex matches youtube URL
 URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
@@ -40,31 +41,11 @@ URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^
 def setup(bot):                         #Adds this file as cog to the main bot
     bot.add_cog(Music(bot))
 
-class Queue():                          #Class used by Player, handles everything that has to do with the "queue"
-    def __init__(self):                 #Could possibly be removed and merged with the Player class, not planned as of yet
-        self.position = 0
-    
-    @property
-    def is_empty(self):
-        if db.get_next_track_sync(self.posistion-1) == None:
-            return True
-        else:
-            return False
-    
-    @property                               #@property describes a getter, in this case it is a getter for the current_track
-    def current_track(self): 
-        return db.get_next_track_sync(self.position-1)
-
-    def add(self, *args):                   #Adds the specified track/s to the queue table
-        for track in args:
-            db.add_tracks_sync(track)
-            print(f"Added {track} to db")
-
 
 class Player(wavelink.Player):                  
     def __init__(self, *args, **kwargs):                        #Constructor for the wavelink player
         super().__init__(*args, **kwargs)
-        self.queue = Queue()    
+        self.queue_position = 0
         
     async def connect(self, ctx, channel=None):                 #Tries and connects to target channel
         if self.is_connected:                                   
@@ -75,19 +56,7 @@ class Player(wavelink.Player):
         
         await super().connect(channel.id)               #otherwise connects super(the bot) to the channel
         return channel
-    
-    async def start_playback(self):
-        if self.queue.position > 0:
-            position = self.queue.position - 1
-        else:
-            position = 0
-        track = await db.get_next_track(position)
-        if track is not None:
-            track = track[0]
-            if not re.match(URL_REGEX, track):
-                track = f"ytsearch:{track}"
-            track = await self.get_tracks(track)       
-        await self.play(track)   
+
         
     async def advance(self, track):                                                    #Advances to the next track unless queue is empty
         if track is not None:
@@ -95,15 +64,20 @@ class Player(wavelink.Player):
 
         
     async def add_tracks(self, ctx, tracks):
+        print("id = " + str(ctx.guild.id))
         if isinstance(tracks, wavelink.TrackPlaylist):        
-            self.queue.add(*tracks.tracks)
+           
+            for track in tracks.tracks:
+                db.add_tracks_sync(ctx.guild.id, track)
+                print(f"Added {track} to db")
             await ctx.send("Added playlist to queue")
             if not self.is_playing: 
                 await self.play(tracks.tracks[0])
                 
         else:
             tracks = tracks[0]
-            self.queue.add(tracks)
+            db.add_tracks_sync(ctx.guild.id, tracks)
+            print(f"Added {tracks} to db")
             await ctx.send(f"Added {tracks.title} to Queue")
             if not self.is_playing: 
                 await self.play(tracks)
@@ -118,24 +92,24 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @wavelink.WavelinkMixin.listener()                                          #Checks if node is ready to play music
     async def on_node_ready(self, node):
-        await db.clear_tracks()
+        await db.clear_all_tracks()
         print(f"Wavelink node {node.identifier} ready.")
         
     @wavelink.WavelinkMixin.listener("on_track_stuck")  
     @wavelink.WavelinkMixin.listener("on_track_end")
     @wavelink.WavelinkMixin.listener("on_track_exception")
     async def on_player_stop(self, node, payload):   
-        track = db.get_next_track_sync(payload.player.queue.position)
+        track = db.get_next_track_sync(payload.player.guild_id, payload.player.queue_position)                                   #ALAAAARM
         if track is not None:
             track = track[0]
             if not re.match(URL_REGEX, track):
                 track = f"ytsearch:{track}"
             track = await self.wavelink.get_tracks(track)
             await payload.player.advance(track[0])
-            payload.player.queue.position += 1
+            payload.player.queue_position += 1
         else:
-            await db.clear_tracks()
-            await db.clear_auto_increment("queue")
+            await db.clear_tracks(payload.player.guild_id)                                                                     #ALAAAARM
+            #await db.clear_auto_increment("queue")
             await payload.player.stop()
     
     def get_player(self, obj):                                                  
@@ -171,8 +145,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="play")
     async def play_command(self, ctx, *, query: str):
-        
+        print("okayyy")
         player = self.get_player(ctx)
+        print(player)
         if not player.is_connected:
             await player.connect(ctx)
 
@@ -180,13 +155,15 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if not re.match(URL_REGEX, query):
             query = f"ytsearch:{query}"    
         track = await self.wavelink.get_tracks(query)
+        print("test")
         await player.add_tracks(ctx, track)
+       
         
     @commands.command(name="stop")
     async def stop_command(self, ctx):
         player = self.get_player(ctx)
-        await db.clear_tracks()
-        await db.clear_auto_increment("queue")
+        await db.clear_tracks(ctx.guild.id)
+        #await db.clear_auto_increment("queue")
         await player.stop()
         await ctx.send("Playback stopped")
     
