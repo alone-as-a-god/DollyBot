@@ -11,6 +11,18 @@ async def db_connect():                 #Method to establish connection with the
     connection = await aiosqlite.connect(DB_PATH)
     return connection
 
+async def add_guild(guildID, guildName):
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        INSERT INTO guild 
+        (guildID, prefix, name)
+        VALUES(?,?,?)
+        '''
+    await cursor.execute(sql, (str(guildID),str("!"), str(guildName)))
+    await connection.commit()
+    await connection.close()
+
 async def update_prefix(guildID, newPrefix):    #Updates the prefix of the specified guild with the given prefix
     connection = await db_connect()             #calls method to establish connection to DB
     cursor = await connection.cursor()          #creates a cursor to execute Queries in the DB
@@ -50,7 +62,6 @@ async def update_prefix_dictionary(dictionary):
         prefix = row[1]
         dictionary[id] = prefix
     
-    print(str(dictionary))
     await connection.close()
     
 async def get_last_track_id(guildID):
@@ -80,7 +91,6 @@ def get_last_track_id_sync(guildID):
     cursor.execute(sql, (str(guildID),))
     fetched = cursor.fetchone()
     connection.close()
-    print(fetched)
     if fetched[0] is None:
         return 0
     return fetched[0]
@@ -187,4 +197,3 @@ async def main():                       #Testing out the above methods (working 
 if __name__ == "__main__":
     DB_PATH = "database/database.db"
     asyncio.run(main())                    #Used to call the main function in async mode
-# print(os.getcwd())

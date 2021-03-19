@@ -20,6 +20,10 @@ def get_prefix(bot, message):
 
 bot = commands.Bot(command_prefix=get_prefix)
 
+@bot.event
+async def on_guild_join( guild):
+    print(f"Joined new Guild {guild.name}:{guild.id}")
+    await db.add_guild(guild.id, guild.name)
 
 
 @bot.event
@@ -28,17 +32,13 @@ async def on_ready():
     thread = Thread(target=asyncio.run, args=(server.notification_Listener(),))       #Starts a new thread with the socketserver, to listen for new messages (target asyncio so it runs in async mode lol)
     thread.start()
     await db.update_prefix_dictionary(prefix_dictionary)
-    print('Logged in')
+    print('Logged ins')
+    
     
 @bot.command(name="ping", aliases=["p"])
 async def pingCommand(ctx):
     await ctx.send("Jolene")
 
-# @bot.command(name="testDictionary", aliases=["td"])
-# async def test_Dictionary_Command(ctx=None):
-#     print("before: "+str(prefix_dictionary))
-#     await db.update_prefix_dictionary(prefix_dictionary)
-#     print("after: "+str(prefix_dictionary))
 if __name__ == "__main__":
     for extension in extensions:
         bot.load_extension(extension)

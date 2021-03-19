@@ -109,7 +109,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             payload.player.queue_position += 1
         else:
             await db.clear_tracks(payload.player.guild_id)                                                                     #ALAAAARM
-            #await db.clear_auto_increment("queue")
+        
             await payload.player.stop()
     
     def get_player(self, obj):                                                  
@@ -145,9 +145,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="play")
     async def play_command(self, ctx, *, query: str):
-        print("okayyy")
         player = self.get_player(ctx)
-        print(player)
         if not player.is_connected:
             await player.connect(ctx)
 
@@ -155,7 +153,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if not re.match(URL_REGEX, query):
             query = f"ytsearch:{query}"    
         track = await self.wavelink.get_tracks(query)
-        print("test")
         await player.add_tracks(ctx, track)
        
         
