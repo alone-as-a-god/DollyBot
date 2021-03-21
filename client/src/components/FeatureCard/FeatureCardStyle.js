@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    color: "#fffffff0",
+    color: theme.palette.secondary.main,
 
     ["@media (min-width: 2300px)"]: {
       width: "600px",

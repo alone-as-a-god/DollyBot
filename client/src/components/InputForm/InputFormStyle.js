@@ -33,7 +33,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   inputContainer: {
     minWidth: "250px",
-    flexWrap: "wrap",
     display: "flex",
     flexWrap: "none",
     alignItems: "flex-end",

@@ -1,11 +1,11 @@
 import { Button, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DashboardCard from "../DashboardCard/DashboardCard";
 import SongItem from "../SongItem/SongItem";
 import { ReactSortable } from "react-sortablejs";
-
 import { useStyles } from "./QueueCardStyle";
 import InputForm from "../InputForm/InputForm";
+
 const QueueCard = () => {
   const getSongs = () => {
     //TODO: implement get songs
@@ -40,7 +40,6 @@ const QueueCard = () => {
 
   const reorderSongs = () => {
     //TODO: post songs
-    console.log("reorder");
   };
 
   const onDelete = (id) => {
@@ -67,7 +66,6 @@ const QueueCard = () => {
       </Typography>
       <Typography className={classes.text}>Submit a songname or Youtube-URL that will be added to queue. </Typography>
       <InputForm label="Songname or URL" value={songName} onChange={setSongName} onSubmit={addSong}></InputForm>
-      <Typography className={classes.text}>Drag and drop songs to change song order</Typography>
       <ReactSortable onUpdate={reorderSongs} list={displayedSongs} setList={setDisplayedSongs} animation={200} delayOnTouchStart={true} delay={2}>
         {displayedSongs.slice(0, songLimit).map((song, index) => {
           return <SongItem onDelete={onDelete} key={song.id} song={song} index={index}></SongItem>;
