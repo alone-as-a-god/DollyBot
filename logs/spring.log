@@ -1,67 +1,79 @@
-2021-03-18 09:34:05.698  INFO 6408 --- [main] lavalink.server.Launcher                 : 
+2021-03-19 16:56:33.832  WARN 13504 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2021-03-19 16:56:33.851 ERROR 13504 --- [main] lavalink.server.Launcher                 : Application failed
 
-[32m       .  [31m _                  _ _       _    [32m__ _ _
-[32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
-[32m     ( ( )[31m| |/ _` \ \ / / _` | | | '_ \| |/ /[32m \ \ \ \
-[32m      \\/ [31m| | (_| |\ V / (_| | | | | | |   < [32m  ) ) ) )
-[32m       '  [31m|_|\__,_| \_/ \__,_|_|_|_| |_|_|\_\[32m / / / /
-[0m    =========================================[32m/_/_/_/[0m
+java.lang.UnsupportedClassVersionError: lavalink/server/info/AppInfo has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0
+	at java.lang.ClassLoader.defineClass1(Native Method) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:756) ~[na:1.8.0_261]
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:468) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:74) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:369) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:363) ~[na:1.8.0_261]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:362) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.LaunchedURLClassLoader.loadClass(LaunchedURLClassLoader.java:93) ~[Lavalink.jar:na]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351) ~[na:1.8.0_261]
+	at lavalink.server.Launcher.getVersionInfo(Launcher.kt:50) [classes!/:na]
+	at lavalink.server.Launcher.getVersionInfo$default(Launcher.kt:49) [classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:118) ~[classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:43) ~[classes!/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:76) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:53) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:342) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at lavalink.server.Launcher.main(Launcher.kt:127) [classes!/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_261]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_261]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_261]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:51) [Lavalink.jar:na]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:52) [Lavalink.jar:na]
 
-	Version:        3.3.2.3
-	Build:          1176
-	Build time:     28.12.2020 18:59:16 UTC
-	Branch          master
-	Commit:         68d398a
-	Commit time:    28.12.2020 18:56:23 UTC
-	JVM:            11
-	Lavaplayer      1.3.65
+2021-03-19 16:56:33.852 ERROR 13504 --- [main] o.s.boot.SpringApplication               : Application run failed
 
-2021-03-18 09:34:05.790  INFO 6408 --- [main] lavalink.server.Launcher                 : Starting Launcher on DESKTOP-QNVQHVR with PID 6408 (C:\Users\alone\Desktop\DollyBot\Lavalink.jar started by alone in C:\Users\alone\Desktop\DollyBot)
-2021-03-18 09:34:05.791  INFO 6408 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
-2021-03-18 09:34:05.861  WARN 6408 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2021-03-18 09:34:06.595  WARN 6408 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2021-03-18 09:34:06.612  INFO 6408 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
-2021-03-18 09:34:06.613  INFO 6408 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 787 ms
-2021-03-18 09:34:06.865  WARN 6408 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
-2021-03-18 09:34:07.074  INFO 6408 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
-2021-03-18 09:34:07.207  INFO 6408 --- [main] lavalink.server.config.KoeConfiguration  : OS: Windows 10, Arch: amd64
-2021-03-18 09:34:07.207  WARN 6408 --- [main] lavalink.server.config.KoeConfiguration  : This system and architecture appears to not support native audio sending! GC pauses may cause your bot to stutter during playback.
-2021-03-18 09:34:07.346  INFO 6408 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-03-18 09:34:07.536  INFO 6408 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
-2021-03-18 09:34:07.544  INFO 6408 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
-2021-03-18 09:34:07.585  INFO 6408 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
-2021-03-18 09:34:07.588  INFO 6408 --- [main] lavalink.server.Launcher                 : Started Launcher in 2.244 seconds (JVM running for 2.714)
-2021-03-18 09:34:07.589  INFO 6408 --- [main] lavalink.server.Launcher                 : You can safely ignore the big red warning about illegal reflection. See https://github.com/Frederikam/Lavalink/issues/295
-2021-03-18 09:34:44.942  INFO 6408 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-03-18 09:34:44.942  INFO 6408 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-03-18 09:34:44.947  INFO 6408 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
-2021-03-18 09:34:44.961  INFO 6408 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50827
-2021-03-18 09:34:45.007  INFO 6408 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50827
-2021-03-18 09:34:56.275  INFO 6408 --- [Thread-1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-03-18 09:34:56.276  INFO 6408 --- [Thread-1] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
-2021-03-18 09:34:56.278  INFO 6408 --- [Thread-1] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-03-18 09:34:56.283 ERROR 6408 --- [XNIO-1 I/O-15] org.xnio.listener                        : XNIO001007: A channel event listener threw an exception
+java.lang.UnsupportedClassVersionError: lavalink/server/info/AppInfo has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0
+	at java.lang.ClassLoader.defineClass1(Native Method) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:756) ~[na:1.8.0_261]
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:468) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:74) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:369) ~[na:1.8.0_261]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:363) ~[na:1.8.0_261]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_261]
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:362) ~[na:1.8.0_261]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.LaunchedURLClassLoader.loadClass(LaunchedURLClassLoader.java:93) ~[Lavalink.jar:na]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351) ~[na:1.8.0_261]
+	at lavalink.server.Launcher.getVersionInfo(Launcher.kt:50) [classes!/:na]
+	at lavalink.server.Launcher.getVersionInfo$default(Launcher.kt:49) [classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:118) ~[classes!/:na]
+	at lavalink.server.Launcher$main$1.onApplicationEvent(Launcher.kt:43) ~[classes!/:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127) ~[spring-context-5.1.9.RELEASE.jar!/:5.1.9.RELEASE]
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:76) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:53) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:342) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:305) ~[spring-boot-2.1.8.RELEASE.jar!/:2.1.8.RELEASE]
+	at lavalink.server.Launcher.main(Launcher.kt:127) [classes!/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_261]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_261]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_261]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_261]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [Lavalink.jar:na]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:51) [Lavalink.jar:na]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:52) [Lavalink.jar:na]
 
-java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
-	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:590) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:396) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:388) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1063) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:978) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:234) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:223) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:228) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.IoUtils.safeClose(IoUtils.java:134) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:107) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.WorkerThread.run(WorkerThread.java:494) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-
-2021-03-18 09:35:03.110  INFO 12040 --- [main] lavalink.server.Launcher                 : 
+2021-03-19 17:04:26.552  INFO 14984 --- [main] lavalink.server.Launcher                 : 
 
 [32m       .  [31m _                  _ _       _    [32m__ _ _
 [32m      /\\ [31m| | __ ___   ____ _| (_)_ __ | | __[32m\ \ \ \
@@ -76,574 +88,52 @@ java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminati
 	Branch          master
 	Commit:         8be3fec
 	Commit time:    17.02.2021 23:18:16 UTC
-	JVM:            11
+	JVM:            11.0.10
 	Lavaplayer      1.3.65
 
-2021-03-18 09:35:03.188  INFO 12040 --- [main] lavalink.server.Launcher                 : Starting Launcher on DESKTOP-QNVQHVR with PID 12040 (C:\Users\alone\Desktop\DollyBot\Lavalink_updated.jar started by alone in C:\Users\alone\Desktop\DollyBot)
-2021-03-18 09:35:03.189  INFO 12040 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
-2021-03-18 09:35:03.281  WARN 12040 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
-2021-03-18 09:35:03.962  WARN 12040 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2021-03-18 09:35:03.980  INFO 12040 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
-2021-03-18 09:35:03.981  INFO 12040 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 760 ms
-2021-03-18 09:35:04.248  WARN 12040 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
-2021-03-18 09:35:04.427  INFO 12040 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
-2021-03-18 09:35:04.548  INFO 12040 --- [main] lavalink.server.config.KoeConfiguration  : OS: Windows 10, Arch: amd64
-2021-03-18 09:35:04.549  WARN 12040 --- [main] lavalink.server.config.KoeConfiguration  : This system and architecture appears to not support native audio sending! GC pauses may cause your bot to stutter during playback.
-2021-03-18 09:35:04.682  INFO 12040 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-03-18 09:35:04.864  INFO 12040 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
-2021-03-18 09:35:04.872  INFO 12040 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
-2021-03-18 09:35:04.924  INFO 12040 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
-2021-03-18 09:35:04.928  INFO 12040 --- [main] lavalink.server.Launcher                 : Started Launcher in 2.144 seconds (JVM running for 2.502)
-2021-03-18 09:35:04.930  INFO 12040 --- [main] lavalink.server.Launcher                 : You can safely ignore the big red warning about illegal reflection. See https://github.com/Frederikam/Lavalink/issues/295
-2021-03-18 09:35:09.175  INFO 12040 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-03-18 09:35:09.175  INFO 12040 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-03-18 09:35:09.180  INFO 12040 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
-2021-03-18 09:35:09.196  INFO 12040 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50945
-2021-03-18 09:35:09.239  INFO 12040 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50945
-2021-03-18 09:35:42.439  INFO 12040 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=eIyoocnEtl8"
-2021-03-18 09:35:42.930  INFO 12040 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "0bd785ea7fce56382f7ff91199225f09", "event": {"token": "cc3ee526fe2efc59", "guild_id": "817425099740938240", "endpoint": "eu-central57.discord.media:443"}}
-2021-03-18 09:35:42.985  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track Plin Plin Plon
-2021-03-18 09:35:54.439  INFO 12040 --- [XNIO-1 task-4] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:50982
-2021-03-18 09:35:54.441  INFO 12040 --- [XNIO-1 task-4] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:50982
-2021-03-18 09:36:03.209  INFO 12040 --- [XNIO-1 task-5] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:Plin Plin Plon = tears"
-2021-03-18 09:36:03.424  INFO 12040 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "c67b02f52720ea46b3b5723b5fe59164", "event": {"token": "cc3ee526fe2efc59", "guild_id": "817425099740938240", "endpoint": "eu-central57.discord.media:443"}}
-2021-03-18 09:36:03.669  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Plin Plin Plon = tears
-2021-03-18 09:36:03.866  INFO 12040 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAfgIAFlBsaW4gUGxpbiBQbG9uID0gdGVhcnMADktvbnNvbGVQZWFzYW50AAAAAAAA7kgAC2p2cUpzOTFRSGpVAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9anZxSnM5MVFIalUAB3lvdXR1YmUAAAAAAAAAAA==", "noReplace": false, "startTime": "0"}
-2021-03-18 09:36:13.552  INFO 12040 --- [XNIO-1 task-7] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:despacito"
-2021-03-18 09:36:14.182  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: despacito
-2021-03-18 09:37:05.234  INFO 12040 --- [XNIO-1 task-9] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:Plin Plin Plon = tears"
-2021-03-18 09:37:05.706  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Plin Plin Plon = tears
-2021-03-18 09:37:05.714  INFO 12040 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAfgIAFlBsaW4gUGxpbiBQbG9uID0gdGVhcnMADktvbnNvbGVQZWFzYW50AAAAAAAA7kgAC2p2cUpzOTFRSGpVAAEAK2h0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9anZxSnM5MVFIalUAB3lvdXR1YmUAAAAAAAAAAA==", "noReplace": false, "startTime": "0"}
-2021-03-18 09:37:15.147  INFO 12040 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
-2021-03-18 09:37:15.148  INFO 12040 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
-2021-03-18 09:39:11.328  INFO 12040 --- [XNIO-1 I/O-2] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:50982 -- CloseStatus[code=1006, reason=]
-2021-03-18 09:39:11.328  INFO 12040 --- [XNIO-1 I/O-2] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 09:39:14.148  INFO 12040 --- [XNIO-1 task-11] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51145
-2021-03-18 09:39:14.150  INFO 12040 --- [XNIO-1 task-11] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51145
-2021-03-18 10:07:10.686  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:51145 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:07:10.687  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:07:13.639  INFO 12040 --- [XNIO-1 task-12] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51885
-2021-03-18 10:07:13.641  INFO 12040 --- [XNIO-1 task-12] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51885
-2021-03-18 10:07:25.969  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:51885 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:07:25.969  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:07:28.836  INFO 12040 --- [XNIO-1 task-13] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51909
-2021-03-18 10:07:28.838  INFO 12040 --- [XNIO-1 task-13] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51909
-2021-03-18 10:07:44.293  INFO 12040 --- [XNIO-1 I/O-9] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:51909 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:07:44.294  INFO 12040 --- [XNIO-1 I/O-9] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:07:47.093  INFO 12040 --- [XNIO-1 task-14] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:51929
-2021-03-18 10:07:47.095  INFO 12040 --- [XNIO-1 task-14] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:51929
-2021-03-18 10:17:42.241  INFO 12040 --- [XNIO-1 task-15] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=gm2YQ2PzQEM"
-2021-03-18 10:17:42.473  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "3c47941c70721661994ec4937d04b738", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:17:42.674  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track ??????????????????MV?Official?
-2021-03-18 10:18:16.599  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:51929 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:18:16.599  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:18:19.523  INFO 12040 --- [XNIO-1 task-17] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52424
-2021-03-18 10:18:19.525  INFO 12040 --- [XNIO-1 task-17] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52424
-2021-03-18 10:18:22.538  INFO 12040 --- [XNIO-1 task-18] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=gm2YQ2PzQEM"
-2021-03-18 10:18:22.757  INFO 12040 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "c11e6707780c7a4b56ffdac2629319e6", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:18:22.845  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track ??????????????????MV?Official?
-2021-03-18 10:19:29.936  INFO 12040 --- [XNIO-1 task-20] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52475
-2021-03-18 10:19:29.938  INFO 12040 --- [XNIO-1 task-20] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52475
-2021-03-18 10:19:33.717  INFO 12040 --- [XNIO-1 task-21] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:??????????????????MV?Official?"
-2021-03-18 10:19:33.930  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "13f3eeddfcfd3d2df66bc7179e6c816a", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:19:34.171  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ??????????????????MV?Official?
-2021-03-18 10:19:34.347  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAArAIARumOjOeUsOe0lOWtkOOAjuecoOOCjOOBrOWknOOBr+OCuOODo+OCueODn+ODs+iMtuOCkuOAj01W44CQT2ZmaWNpYWzjgJEADEthbWF0YSBKdW5rbwAAAAAAAvm4AAtnbTJZUTJQelFFTQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWdtMllRMlB6UUVNAAd5b3V0dWJlAAAAAAAAAAA=", "noReplace": false, "startTime": "0"}
-2021-03-18 10:22:50.105  INFO 12040 --- [XNIO-1 task-23] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:??????????????????MV?Official?"
-2021-03-18 10:22:50.692  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: ??????????????????MV?Official?
-2021-03-18 10:22:50.697  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAArAIARumOjOeUsOe0lOWtkOOAjuecoOOCjOOBrOWknOOBr+OCuOODo+OCueODn+ODs+iMtuOCkuOAj01W44CQT2ZmaWNpYWzjgJEADEthbWF0YSBKdW5rbwAAAAAAAvm4AAtnbTJZUTJQelFFTQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWdtMllRMlB6UUVNAAd5b3V0dWJlAAAAAAAAAAA=", "noReplace": false, "startTime": "0"}
-2021-03-18 10:25:53.961  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52475 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:25:53.961  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketContext         : Shutting down 1 playing players.
-2021-03-18 10:25:56.814  INFO 12040 --- [XNIO-1 task-25] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52701
-2021-03-18 10:25:56.817  INFO 12040 --- [XNIO-1 task-25] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52701
-2021-03-18 10:26:04.238  INFO 12040 --- [XNIO-1 task-26] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=gm2YQ2PzQEM"
-2021-03-18 10:26:04.751  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "de6f7a7ab1a83cbd717172deab790f0f", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:26:04.841  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track ??????????????????MV?Official?
-2021-03-18 10:26:55.045  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52701 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:26:55.046  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:26:57.915  INFO 12040 --- [XNIO-1 task-28] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52757
-2021-03-18 10:26:57.919  INFO 12040 --- [XNIO-1 task-28] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52757
-2021-03-18 10:27:03.656  INFO 12040 --- [XNIO-1 I/O-9] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52757 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:27:03.657  INFO 12040 --- [XNIO-1 I/O-9] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:27:06.478  INFO 12040 --- [XNIO-1 task-29] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52775
-2021-03-18 10:27:06.480  INFO 12040 --- [XNIO-1 task-29] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52775
-2021-03-18 10:28:08.726  INFO 12040 --- [XNIO-1 task-30] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=gm2YQ2PzQEM"
-2021-03-18 10:28:09.160  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track ??????????????????MV?Official?
-2021-03-18 10:28:09.227  INFO 12040 --- [XNIO-1 I/O-11] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "e2b3ca71f09d9bb56ecc32f38721bd39", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:28:28.675  INFO 12040 --- [XNIO-1 I/O-11] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52775 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:28:28.675  INFO 12040 --- [XNIO-1 I/O-11] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:28:31.669  INFO 12040 --- [XNIO-1 task-32] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52824
-2021-03-18 10:28:31.671  INFO 12040 --- [XNIO-1 task-32] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52824
-2021-03-18 10:28:32.485  INFO 12040 --- [XNIO-1 task-33] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=gm2YQ2PzQEM"
-2021-03-18 10:28:32.696  INFO 12040 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "7d34a22db5673e4deb028c3d5986e9b5", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:28:33.090  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded track ??????????????????MV?Official?
-2021-03-18 10:28:33.264  INFO 12040 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAArAIARumOjOeUsOe0lOWtkOOAjuecoOOCjOOBrOWknOOBr+OCuOODo+OCueODn+ODs+iMtuOCkuOAj01W44CQT2ZmaWNpYWzjgJEADEthbWF0YSBKdW5rbwAAAAAAAvm4AAtnbTJZUTJQelFFTQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWdtMllRMlB6UUVNAAd5b3V0dWJlAAAAAAAAAAA=", "noReplace": false, "startTime": "0"}
-2021-03-18 10:28:58.280  INFO 12040 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
-2021-03-18 10:29:04.970  INFO 12040 --- [XNIO-1 task-35] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=UD04JR4QsTc&list=PLtxsPzNIe6RsyeUDqijqmAy9Qo05_w8HI"
-2021-03-18 10:29:05.298 ERROR 12040 --- [lava-daemon-pool-info-loader-2-thread-1] c.s.d.l.p.DefaultAudioPlayerManager      : Error in loading item https://www.youtube.com/watch?v=UD04JR4QsTc&list=PLtxsPzNIe6RsyeUDqijqmAy9Qo05_w8HI
-
-com.sedmelluq.discord.lavaplayer.tools.FriendlyException: Something went wrong when looking up the track
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:45) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.dispatchItemLoadFailure(DefaultAudioPlayerManager.java:237) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:226) ~[lavaplayer-1.3.65.jar!/:na]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
-	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
-	Suppressed: com.sedmelluq.discord.lavaplayer.tools.exception.EnvironmentInformation: 
-  lavaplayer.version: 1.3.65
-  os.arch: amd64
-  os.name: Windows 10
-  os.version: 10.0
-  java.vendor: Oracle Corporation
-  java.version: 11
-  java.runtime.version: 11+28
-  java.vm.version: 11+28
-Caused by: java.lang.RuntimeException: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:59) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:235) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:220) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromUrlWithVideoId(DefaultYoutubeLinkRouter.java:93) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromMainDomain(DefaultYoutubeLinkRouter.java:61) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.route(DefaultYoutubeLinkRouter.java:39) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:188) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:127) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:437) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:419) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:218) ~[lavaplayer-1.3.65.jar!/:na]
-	... 4 common frames omitted
-Caused by: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:49) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:232) ~[lavaplayer-1.3.65.jar!/:na]
-	... 13 common frames omitted
-Caused by: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.io.HttpClientTools.assertSuccessWithContent(HttpClientTools.java:157) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.buildPlaylist(DefaultYoutubePlaylistLoader.java:102) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:47) ~[lavaplayer-1.3.65.jar!/:na]
-	... 14 common frames omitted
-
-2021-03-18 10:29:05.300 ERROR 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Load failed
-
-com.sedmelluq.discord.lavaplayer.tools.FriendlyException: Something went wrong when looking up the track
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:45) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.dispatchItemLoadFailure(DefaultAudioPlayerManager.java:237) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:226) ~[lavaplayer-1.3.65.jar!/:na]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
-	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
-	Suppressed: com.sedmelluq.discord.lavaplayer.tools.exception.EnvironmentInformation: 
-  lavaplayer.version: 1.3.65
-  os.arch: amd64
-  os.name: Windows 10
-  os.version: 10.0
-  java.vendor: Oracle Corporation
-  java.version: 11
-  java.runtime.version: 11+28
-  java.vm.version: 11+28
-Caused by: java.lang.RuntimeException: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:59) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:235) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:220) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromUrlWithVideoId(DefaultYoutubeLinkRouter.java:93) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromMainDomain(DefaultYoutubeLinkRouter.java:61) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.route(DefaultYoutubeLinkRouter.java:39) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:188) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:127) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:437) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:419) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:218) ~[lavaplayer-1.3.65.jar!/:na]
-	... 4 common frames omitted
-Caused by: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:49) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:232) ~[lavaplayer-1.3.65.jar!/:na]
-	... 13 common frames omitted
-Caused by: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.io.HttpClientTools.assertSuccessWithContent(HttpClientTools.java:157) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.buildPlaylist(DefaultYoutubePlaylistLoader.java:102) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:47) ~[lavaplayer-1.3.65.jar!/:na]
-	... 14 common frames omitted
-
-2021-03-18 10:29:05.302 ERROR 12040 --- [lava-daemon-pool-info-loader-2-thread-1] l.server.player.AudioLoaderRestHandler   : Track loading failed
-
-com.sedmelluq.discord.lavaplayer.tools.FriendlyException: Something went wrong when looking up the track
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:45) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.dispatchItemLoadFailure(DefaultAudioPlayerManager.java:237) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:226) ~[lavaplayer-1.3.65.jar!/:na]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
-	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
-	Suppressed: com.sedmelluq.discord.lavaplayer.tools.exception.EnvironmentInformation: 
-  lavaplayer.version: 1.3.65
-  os.arch: amd64
-  os.name: Windows 10
-  os.version: 10.0
-  java.vendor: Oracle Corporation
-  java.version: 11
-  java.runtime.version: 11+28
-  java.vm.version: 11+28
-Caused by: java.lang.RuntimeException: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:59) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:235) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:220) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromUrlWithVideoId(DefaultYoutubeLinkRouter.java:93) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromMainDomain(DefaultYoutubeLinkRouter.java:61) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.route(DefaultYoutubeLinkRouter.java:39) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:188) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:127) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:437) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:419) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:218) ~[lavaplayer-1.3.65.jar!/:na]
-	... 4 common frames omitted
-Caused by: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:49) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:232) ~[lavaplayer-1.3.65.jar!/:na]
-	... 13 common frames omitted
-Caused by: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.io.HttpClientTools.assertSuccessWithContent(HttpClientTools.java:157) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.buildPlaylist(DefaultYoutubePlaylistLoader.java:102) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:47) ~[lavaplayer-1.3.65.jar!/:na]
-	... 14 common frames omitted
-
-2021-03-18 10:31:17.218  INFO 12040 --- [XNIO-1 I/O-4] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52824 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:31:17.219  INFO 12040 --- [XNIO-1 I/O-4] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:31:20.006  INFO 12040 --- [XNIO-1 task-37] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52922
-2021-03-18 10:31:20.008  INFO 12040 --- [XNIO-1 task-37] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52922
-2021-03-18 10:31:24.138  INFO 12040 --- [XNIO-1 I/O-6] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52922 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:31:24.139  INFO 12040 --- [XNIO-1 I/O-6] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:31:38.801  INFO 12040 --- [XNIO-1 task-38] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52957
-2021-03-18 10:31:38.802  INFO 12040 --- [XNIO-1 task-38] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52957
-2021-03-18 10:31:45.723  INFO 12040 --- [XNIO-1 task-39] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/watch?v=UD04JR4QsTc&list=PLtxsPzNIe6RsyeUDqijqmAy9Qo05_w8HI"
-2021-03-18 10:31:45.972 ERROR 12040 --- [lava-daemon-pool-info-loader-2-thread-1] c.s.d.l.p.DefaultAudioPlayerManager      : Error in loading item https://www.youtube.com/watch?v=UD04JR4QsTc&list=PLtxsPzNIe6RsyeUDqijqmAy9Qo05_w8HI
-
-com.sedmelluq.discord.lavaplayer.tools.FriendlyException: Something went wrong when looking up the track
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:45) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.dispatchItemLoadFailure(DefaultAudioPlayerManager.java:237) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:226) ~[lavaplayer-1.3.65.jar!/:na]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
-	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
-	Suppressed: com.sedmelluq.discord.lavaplayer.tools.exception.EnvironmentInformation: 
-  lavaplayer.version: 1.3.65
-  os.arch: amd64
-  os.name: Windows 10
-  os.version: 10.0
-  java.vendor: Oracle Corporation
-  java.version: 11
-  java.runtime.version: 11+28
-  java.vm.version: 11+28
-Caused by: java.lang.RuntimeException: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:59) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:235) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:220) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromUrlWithVideoId(DefaultYoutubeLinkRouter.java:93) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromMainDomain(DefaultYoutubeLinkRouter.java:61) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.route(DefaultYoutubeLinkRouter.java:39) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:188) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:127) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:437) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:419) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:218) ~[lavaplayer-1.3.65.jar!/:na]
-	... 4 common frames omitted
-Caused by: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:49) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:232) ~[lavaplayer-1.3.65.jar!/:na]
-	... 13 common frames omitted
-Caused by: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.io.HttpClientTools.assertSuccessWithContent(HttpClientTools.java:157) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.buildPlaylist(DefaultYoutubePlaylistLoader.java:102) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:47) ~[lavaplayer-1.3.65.jar!/:na]
-	... 14 common frames omitted
-
-2021-03-18 10:31:45.974 ERROR 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Load failed
-
-com.sedmelluq.discord.lavaplayer.tools.FriendlyException: Something went wrong when looking up the track
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:45) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.dispatchItemLoadFailure(DefaultAudioPlayerManager.java:237) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:226) ~[lavaplayer-1.3.65.jar!/:na]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
-	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
-	Suppressed: com.sedmelluq.discord.lavaplayer.tools.exception.EnvironmentInformation: 
-  lavaplayer.version: 1.3.65
-  os.arch: amd64
-  os.name: Windows 10
-  os.version: 10.0
-  java.vendor: Oracle Corporation
-  java.version: 11
-  java.runtime.version: 11+28
-  java.vm.version: 11+28
-Caused by: java.lang.RuntimeException: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:59) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:235) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:220) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromUrlWithVideoId(DefaultYoutubeLinkRouter.java:93) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromMainDomain(DefaultYoutubeLinkRouter.java:61) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.route(DefaultYoutubeLinkRouter.java:39) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:188) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:127) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:437) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:419) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:218) ~[lavaplayer-1.3.65.jar!/:na]
-	... 4 common frames omitted
-Caused by: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:49) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:232) ~[lavaplayer-1.3.65.jar!/:na]
-	... 13 common frames omitted
-Caused by: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.io.HttpClientTools.assertSuccessWithContent(HttpClientTools.java:157) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.buildPlaylist(DefaultYoutubePlaylistLoader.java:102) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:47) ~[lavaplayer-1.3.65.jar!/:na]
-	... 14 common frames omitted
-
-2021-03-18 10:31:45.975 ERROR 12040 --- [lava-daemon-pool-info-loader-2-thread-1] l.server.player.AudioLoaderRestHandler   : Track loading failed
-
-com.sedmelluq.discord.lavaplayer.tools.FriendlyException: Something went wrong when looking up the track
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:45) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.dispatchItemLoadFailure(DefaultAudioPlayerManager.java:237) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:226) ~[lavaplayer-1.3.65.jar!/:na]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) ~[na:na]
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) ~[na:na]
-	at java.base/java.lang.Thread.run(Thread.java:834) ~[na:na]
-	Suppressed: com.sedmelluq.discord.lavaplayer.tools.exception.EnvironmentInformation: 
-  lavaplayer.version: 1.3.65
-  os.arch: amd64
-  os.name: Windows 10
-  os.version: 10.0
-  java.vendor: Oracle Corporation
-  java.version: 11
-  java.runtime.version: 11+28
-  java.vm.version: 11+28
-Caused by: java.lang.RuntimeException: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.ExceptionTools.wrapUnfriendlyExceptions(ExceptionTools.java:59) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:235) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:220) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromUrlWithVideoId(DefaultYoutubeLinkRouter.java:93) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.routeFromMainDomain(DefaultYoutubeLinkRouter.java:61) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubeLinkRouter.route(DefaultYoutubeLinkRouter.java:39) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItemOnce(YoutubeAudioSourceManager.java:188) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager.loadItem(YoutubeAudioSourceManager.java:127) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItemOnce(DefaultAudioPlayerManager.java:437) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.checkSourcesForItem(DefaultAudioPlayerManager.java:419) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager.lambda$createItemLoader$0(DefaultAudioPlayerManager.java:218) ~[lavaplayer-1.3.65.jar!/:na]
-	... 4 common frames omitted
-Caused by: java.lang.RuntimeException: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:49) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager$LoadingRoutes.playlist(YoutubeAudioSourceManager.java:232) ~[lavaplayer-1.3.65.jar!/:na]
-	... 13 common frames omitted
-Caused by: java.io.IOException: Invalid status code for playlist response: 404
-	at com.sedmelluq.discord.lavaplayer.tools.io.HttpClientTools.assertSuccessWithContent(HttpClientTools.java:157) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.buildPlaylist(DefaultYoutubePlaylistLoader.java:102) ~[lavaplayer-1.3.65.jar!/:na]
-	at com.sedmelluq.discord.lavaplayer.source.youtube.DefaultYoutubePlaylistLoader.load(DefaultYoutubePlaylistLoader.java:47) ~[lavaplayer-1.3.65.jar!/:na]
-	... 14 common frames omitted
-
-2021-03-18 10:31:46.236  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "865dd2fbb35a0901689e54a3fedc30e9", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:32:34.264  INFO 12040 --- [XNIO-1 task-41] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:52989
-2021-03-18 10:32:34.266  INFO 12040 --- [XNIO-1 task-41] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:52989
-2021-03-18 10:32:41.688  INFO 12040 --- [XNIO-1 task-42] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:32:41.902  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:32:42.536  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "fd381bd6dc739ac9b800246e17a35837", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:37:27.614  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:52989 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:37:27.615  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:37:30.418  INFO 12040 --- [XNIO-1 task-44] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53145
-2021-03-18 10:37:30.420  INFO 12040 --- [XNIO-1 task-44] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53145
-2021-03-18 10:37:39.491  INFO 12040 --- [XNIO-1 task-45] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:37:39.713  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:37:40.364  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "5016e2a17b7705ce37b3a15d371276b0", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:38:07.205  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53145 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:38:07.206  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:38:10.074  INFO 12040 --- [XNIO-1 task-47] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53187
-2021-03-18 10:38:10.076  INFO 12040 --- [XNIO-1 task-47] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53187
-2021-03-18 10:38:11.343  INFO 12040 --- [XNIO-1 task-48] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:38:11.541  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:38:12.190  INFO 12040 --- [XNIO-1 I/O-7] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "ac63c494036441d408c62735d640f9e7", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:38:25.062  INFO 12040 --- [XNIO-1 I/O-7] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53187 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:38:25.062  INFO 12040 --- [XNIO-1 I/O-7] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:38:27.933  INFO 12040 --- [XNIO-1 task-50] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53209
-2021-03-18 10:38:27.935  INFO 12040 --- [XNIO-1 task-50] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53209
-2021-03-18 10:38:30.705  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53209 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:38:30.705  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:38:33.543  INFO 12040 --- [XNIO-1 task-51] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53225
-2021-03-18 10:38:33.545  INFO 12040 --- [XNIO-1 task-51] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53225
-2021-03-18 10:38:37.197  INFO 12040 --- [XNIO-1 task-52] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:38:37.343  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:38:37.986  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "f29c745d775ed3c622848989b139cf4c", "event": {"token": "df3a9b853b4b7275", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:43:37.500  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53225 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:43:37.500  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:43:40.370  INFO 12040 --- [XNIO-1 task-54] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53492
-2021-03-18 10:43:40.376  INFO 12040 --- [XNIO-1 task-54] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53492
-2021-03-18 10:44:41.485  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53492 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:44:41.485  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:44:44.396  INFO 12040 --- [XNIO-1 task-55] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53541
-2021-03-18 10:44:44.398  INFO 12040 --- [XNIO-1 task-55] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53541
-2021-03-18 10:44:49.055  INFO 12040 --- [XNIO-1 I/O-9] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53541 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:44:49.056  INFO 12040 --- [XNIO-1 I/O-9] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:44:51.935  INFO 12040 --- [XNIO-1 task-56] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53554
-2021-03-18 10:44:51.937  INFO 12040 --- [XNIO-1 task-56] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53554
-2021-03-18 10:46:19.905  INFO 12040 --- [XNIO-1 I/O-14] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53554 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:46:19.906  INFO 12040 --- [XNIO-1 I/O-14] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:46:22.786  INFO 12040 --- [XNIO-1 task-57] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53635
-2021-03-18 10:46:22.788  INFO 12040 --- [XNIO-1 task-57] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53635
-2021-03-18 10:47:04.899  INFO 12040 --- [XNIO-1 I/O-7] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53635 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:47:04.900  INFO 12040 --- [XNIO-1 I/O-7] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:47:07.735  INFO 12040 --- [XNIO-1 task-58] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53668
-2021-03-18 10:47:07.736  INFO 12040 --- [XNIO-1 task-58] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53668
-2021-03-18 10:47:42.129  INFO 12040 --- [XNIO-1 task-59] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:47:42.389  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:47:43.045  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "bbfdab64a34f7bf95d5eb183c2363ce9", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:47:54.406  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53668 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:47:54.407  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:47:57.286  INFO 12040 --- [XNIO-1 task-61] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53713
-2021-03-18 10:47:57.288  INFO 12040 --- [XNIO-1 task-61] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53713
-2021-03-18 10:48:02.180  INFO 12040 --- [XNIO-1 task-62] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:48:02.383  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:48:03.020  INFO 12040 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "cb65d8d0f94ed473cfd6406af9460eda", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:48:12.660  INFO 12040 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53713 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:48:12.660  INFO 12040 --- [XNIO-1 I/O-5] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:48:15.566  INFO 12040 --- [XNIO-1 task-64] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53737
-2021-03-18 10:48:15.568  INFO 12040 --- [XNIO-1 task-64] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53737
-2021-03-18 10:48:18.373  INFO 12040 --- [XNIO-1 task-65] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:48:18.552  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:48:19.197  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "1e2c27f95dc9a3813e483631a1ab628b", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:49:08.092  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53737 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:49:08.093  INFO 12040 --- [XNIO-1 I/O-13] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:49:11.333  INFO 12040 --- [XNIO-1 task-67] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53789
-2021-03-18 10:49:11.335  INFO 12040 --- [XNIO-1 task-67] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53789
-2021-03-18 10:49:13.102  INFO 12040 --- [XNIO-1 task-68] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:49:13.314  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "840c78502561a7249ace9d4f3bff0f71", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:49:13.392  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:55:17.322  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53789 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:55:17.322  INFO 12040 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:55:20.234  INFO 12040 --- [XNIO-1 task-70] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:53984
-2021-03-18 10:55:20.236  INFO 12040 --- [XNIO-1 task-70] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:53984
-2021-03-18 10:55:23.925  INFO 12040 --- [XNIO-1 task-71] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:55:24.149  INFO 12040 --- [XNIO-1 I/O-12] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "7a04f943b1e63a7cd1c548a5339e0172", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:55:24.215  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:55:53.072  INFO 12040 --- [XNIO-1 I/O-12] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:53984 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:55:53.073  INFO 12040 --- [XNIO-1 I/O-12] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:55:55.892  INFO 12040 --- [XNIO-1 task-73] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54015
-2021-03-18 10:55:55.894  INFO 12040 --- [XNIO-1 task-73] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54015
-2021-03-18 10:55:57.065  INFO 12040 --- [XNIO-1 task-74] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:55:57.225  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:55:57.872  INFO 12040 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "012955536db9c48a861f9a3cacea7fab", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:56:54.284  INFO 12040 --- [XNIO-1 I/O-3] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54015 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:56:54.285  INFO 12040 --- [XNIO-1 I/O-3] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 10:56:57.129  INFO 12040 --- [XNIO-1 task-76] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54052
-2021-03-18 10:56:57.131  INFO 12040 --- [XNIO-1 task-76] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54052
-2021-03-18 10:57:00.052  INFO 12040 --- [XNIO-1 task-77] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "https://www.youtube.com/playlist?list=PLHDn6JQSpUa8ROtYYBHDo9crSQqBgaHXx"
-2021-03-18 10:57:00.222  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Something, but not nothing
-2021-03-18 10:57:00.895  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "e448c60bc5652bbe7687d03bc79b614e", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:57:01.078  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAiwIAJ0x1aXMgRm9uc2kgLSBEZXNwYWNpdG8gZnQuIERhZGR5IFlhbmtlZQAKTHVpcyBGb25zaQAAAAAABE2QAAtrSlFQN2tpdzVGawABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWtKUVA3a2l3NUZrAAd5b3V0dWJlAAAAAAAAAAA=", "noReplace": false, "startTime": "0"}
-2021-03-18 10:57:14.887  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
-2021-03-18 10:57:14.902  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
-2021-03-18 10:57:20.642  INFO 12040 --- [XNIO-1 task-79] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:assassination classroom op 3"
-2021-03-18 10:57:21.095  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: assassination classroom op 3
-2021-03-18 10:57:21.272  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAowIAP0Fzc2Fzc2luYXRpb24gQ2xhc3Nyb29tIFNlYXNvbiAyIOKAkyBPcGVuaW5nIFRoZW1lIOKAkyBRVUVTVElPTgAKRnVuaW1hdGlvbgAAAAAAAXcAAAtpdWcxMkRuTU5IUQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWl1ZzEyRG5NTkhRAAd5b3V0dWJlAAAAAAAAAAA=", "noReplace": false, "startTime": "0"}
-2021-03-18 10:58:10.369  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54052 -- CloseStatus[code=1006, reason=]
-2021-03-18 10:58:10.369  INFO 12040 --- [XNIO-1 I/O-16] lavalink.server.io.SocketContext         : Shutting down 1 playing players.
-2021-03-18 10:58:13.261  INFO 12040 --- [XNIO-1 task-81] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54107
-2021-03-18 10:58:13.263  INFO 12040 --- [XNIO-1 task-81] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54107
-2021-03-18 10:58:19.200  INFO 12040 --- [XNIO-1 task-82] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:assassination classrom op 3 question"
-2021-03-18 10:58:19.414  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "2a721037b64e6c47008460200d90f9c3", "event": {"token": "4639a9e18ecc616e", "guild_id": "817425099740938240", "endpoint": "eu-central5949.discord.media:443"}}
-2021-03-18 10:58:19.727  INFO 12040 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: assassination classrom op 3 question
-2021-03-18 10:58:19.927  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAowIAP0Fzc2Fzc2luYXRpb24gQ2xhc3Nyb29tIFNlYXNvbiAyIOKAkyBPcGVuaW5nIFRoZW1lIOKAkyBRVUVTVElPTgAKRnVuaW1hdGlvbgAAAAAAAXcAAAtpdWcxMkRuTU5IUQABACtodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWl1ZzEyRG5NTkhRAAd5b3V0dWJlAAAAAAAAAAA=", "noReplace": false, "startTime": "0"}
-2021-03-18 10:59:52.463  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
-2021-03-18 10:59:52.478  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
-2021-03-18 11:03:28.432  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54107 -- CloseStatus[code=1006, reason=]
-2021-03-18 11:03:28.432  INFO 12040 --- [XNIO-1 I/O-15] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 11:05:21.613  INFO 12040 --- [XNIO-1 task-84] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54385
-2021-03-18 11:05:21.615  INFO 12040 --- [XNIO-1 task-84] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54385
-2021-03-18 11:09:37.670  INFO 12040 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:54385 -- CloseStatus[code=1006, reason=]
-2021-03-18 11:09:37.670  INFO 12040 --- [XNIO-1 I/O-5] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
-2021-03-18 11:09:40.487  INFO 12040 --- [XNIO-1 task-85] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:54527
-2021-03-18 11:09:40.489  INFO 12040 --- [XNIO-1 task-85] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:54527
-2021-03-18 11:09:59.884  INFO 12040 --- [Thread-1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-03-18 11:09:59.885  INFO 12040 --- [Thread-1] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring disabled.
-2021-03-18 11:09:59.887  INFO 12040 --- [Thread-1] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-03-18 11:09:59.892 ERROR 12040 --- [XNIO-1 I/O-1] org.xnio.listener                        : XNIO001007: A channel event listener threw an exception
-
-java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
-	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:590) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:396) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:388) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1063) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:978) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:234) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:223) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:228) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.IoUtils.safeClose(IoUtils.java:134) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:107) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.WorkerThread.run(WorkerThread.java:494) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-
-2021-03-18 11:09:59.892 ERROR 12040 --- [XNIO-1 I/O-3] org.xnio.listener                        : XNIO001007: A channel event listener threw an exception
-
-java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
-	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:590) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:396) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:388) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1063) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:978) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:234) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:223) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:228) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.IoUtils.safeClose(IoUtils.java:134) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:107) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.WorkerThread.run(WorkerThread.java:494) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-
-2021-03-18 11:09:59.892 ERROR 12040 --- [XNIO-1 I/O-5] org.xnio.listener                        : XNIO001007: A channel event listener threw an exception
-
-java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
-	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:590) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:396) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:388) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1063) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:978) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:234) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:223) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:228) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.IoUtils.safeClose(IoUtils.java:134) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:107) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.WorkerThread.run(WorkerThread.java:494) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-
-2021-03-18 11:09:59.892 ERROR 12040 --- [XNIO-1 I/O-4] org.xnio.listener                        : XNIO001007: A channel event listener threw an exception
-
-java.util.concurrent.RejectedExecutionException: XNIO007007: Thread is terminating
-	at org.xnio.nio.WorkerThread.execute(WorkerThread.java:590) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:396) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.websockets.jsr.UndertowSession$3.handleEvent(UndertowSession.java:388) ~[undertow-websockets-jsr-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:1063) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at io.undertow.server.protocol.framed.AbstractFramedChannel$FrameCloseListener.handleEvent(AbstractFramedChannel.java:978) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.ChannelListeners.invokeChannelListener(ChannelListeners.java:92) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.terminated(WriteReadyHandler.java:70) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.writeTerminated(NioSocketConduit.java:234) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.terminateWrites(NioSocketConduit.java:223) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.truncateWrites(NioSocketConduit.java:228) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at io.undertow.conduits.IdleTimeoutConduit.truncateWrites(IdleTimeoutConduit.java:387) ~[undertow-core-2.0.26.Final.jar!/:2.0.26.Final]
-	at org.xnio.conduits.ConduitStreamSinkChannel.close(ConduitStreamSinkChannel.java:186) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.IoUtils.safeClose(IoUtils.java:134) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.conduits.WriteReadyHandler$ChannelListenerHandler.forceTermination(WriteReadyHandler.java:57) ~[xnio-api-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.NioSocketConduit.forceTermination(NioSocketConduit.java:107) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-	at org.xnio.nio.WorkerThread.run(WorkerThread.java:494) ~[xnio-nio-3.3.8.Final.jar!/:3.3.8.Final]
-
+2021-03-19 17:04:26.623  INFO 14984 --- [main] lavalink.server.Launcher                 : Starting Launcher on DESKTOP-MJ7L6T9 with PID 14984 (C:\Users\Simon\projects\DollyBot\Lavalink.jar started by Simon in C:\Users\Simon\projects\DollyBot)
+2021-03-19 17:04:26.623  INFO 14984 --- [main] lavalink.server.Launcher                 : No active profile set, falling back to default profiles: default
+2021-03-19 17:04:26.691  WARN 14984 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2021-03-19 17:04:27.417  WARN 14984 --- [main] io.undertow.websockets.jsr               : UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2021-03-19 17:04:27.435  INFO 14984 --- [main] io.undertow.servlet                      : Initializing Spring embedded WebApplicationContext
+2021-03-19 17:04:27.435  INFO 14984 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 783 ms
+2021-03-19 17:04:27.682  WARN 14984 --- [main] l.server.config.SentryConfiguration      : Turning off sentry
+2021-03-19 17:04:27.910  INFO 14984 --- [main] c.s.d.l.tools.GarbageCollectionMonitor   : GC monitoring enabled, reporting results every 2 minutes.
+2021-03-19 17:04:28.033  INFO 14984 --- [main] lavalink.server.config.KoeConfiguration  : OS: Windows 10, Arch: amd64
+2021-03-19 17:04:28.033  WARN 14984 --- [main] lavalink.server.config.KoeConfiguration  : This system and architecture appears to not support native audio sending! GC pauses may cause your bot to stutter during playback.
+2021-03-19 17:04:28.172  INFO 14984 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-19 17:04:28.357  INFO 14984 --- [main] org.xnio                                 : XNIO version 3.3.8.Final
+2021-03-19 17:04:28.365  INFO 14984 --- [main] org.xnio.nio                             : XNIO NIO Implementation Version 3.3.8.Final
+2021-03-19 17:04:28.404  INFO 14984 --- [main] o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port(s) 2333 (http) with context path ''
+2021-03-19 17:04:28.408  INFO 14984 --- [main] lavalink.server.Launcher                 : Started Launcher in 2.229 seconds (JVM running for 2.664)
+2021-03-19 17:04:28.409  INFO 14984 --- [main] lavalink.server.Launcher                 : You can safely ignore the big red warning about illegal reflection. See https://github.com/Frederikam/Lavalink/issues/295
+2021-03-19 17:04:41.860  INFO 14984 --- [XNIO-1 task-1] io.undertow.servlet                      : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-19 17:04:41.861  INFO 14984 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-19 17:04:41.865  INFO 14984 --- [XNIO-1 task-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2021-03-19 17:04:41.881  INFO 14984 --- [XNIO-1 task-1] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:62357
+2021-03-19 17:04:41.930  INFO 14984 --- [XNIO-1 task-1] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:62357
+2021-03-19 17:05:05.078  INFO 14984 --- [XNIO-1 task-2] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:princess over night"
+2021-03-19 17:05:05.293  INFO 14984 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : {"op": "voiceUpdate", "guildId": "817425099740938240", "sessionId": "8494a67851f0fa8da00469bbfd7e016d", "event": {"token": "7bf3f01d6ff7f113", "guild_id": "817425099740938240", "endpoint": "eu-central4531.discord.media:443"}}
+2021-03-19 17:05:06.032  INFO 14984 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: princess over night
+2021-03-19 17:05:06.304  INFO 14984 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAkgIAMlNvZmlhIFRoZSBGaXJzdCBUaGVtZSBTb25nIC0gQXJpZWwgV2ludGVyIFtMeXJpY3NdAAZZZW9ubmkAAAAAAADDUAALOUs4YXZTMEthQWsAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj05SzhhdlMwS2FBawAHeW91dHViZQAAAAAAAAAA", "noReplace": false, "startTime": "0"}
+2021-03-19 17:05:57.681  INFO 14984 --- [XNIO-1 task-4] l.server.player.AudioLoaderRestHandler   : Got request to load for identifier "ytsearch:Sofia The First Theme Song - Ariel Winter [Lyrics]"
+2021-03-19 17:05:58.373  INFO 14984 --- [lava-daemon-pool-info-loader-2-thread-1] lavalink.server.player.AudioLoader       : Loaded playlist Search results for: Sofia The First Theme Song - Ariel Winter [Lyrics]
+2021-03-19 17:05:58.383  INFO 14984 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : {"op": "play", "guildId": "817425099740938240", "track": "QAAAkgIAMlNvZmlhIFRoZSBGaXJzdCBUaGVtZSBTb25nIC0gQXJpZWwgV2ludGVyIFtMeXJpY3NdAAZZZW9ubmkAAAAAAADDUAALOUs4YXZTMEthQWsAAQAraHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj05SzhhdlMwS2FBawAHeW91dHViZQAAAAAAAAAA", "noReplace": false, "startTime": "0"}
+2021-03-19 17:06:33.270  INFO 14984 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
+2021-03-19 17:06:33.287  INFO 14984 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : {"op": "stop", "guildId": "817425099740938240"}
+2021-03-19 17:11:01.214  INFO 14984 --- [XNIO-1 I/O-5] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:62357 -- CloseStatus[code=1006, reason=]
+2021-03-19 17:11:01.214  INFO 14984 --- [XNIO-1 I/O-5] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2021-03-19 17:11:04.133  INFO 14984 --- [XNIO-1 task-6] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:65065
+2021-03-19 17:11:04.136  INFO 14984 --- [XNIO-1 task-6] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:65065
+2021-03-19 17:19:52.512  INFO 14984 --- [XNIO-1 I/O-1] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:65065 -- CloseStatus[code=1006, reason=]
+2021-03-19 17:19:52.513  INFO 14984 --- [XNIO-1 I/O-1] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2021-03-19 17:19:55.545  INFO 14984 --- [XNIO-1 task-7] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:57156
+2021-03-19 17:19:55.547  INFO 14984 --- [XNIO-1 task-7] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:57156
+2021-03-19 17:20:07.445  INFO 14984 --- [XNIO-1 I/O-12] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:57156 -- CloseStatus[code=1006, reason=]
+2021-03-19 17:20:07.445  INFO 14984 --- [XNIO-1 I/O-12] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2021-03-19 17:20:10.325  INFO 14984 --- [XNIO-1 task-8] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:57168
+2021-03-19 17:20:10.327  INFO 14984 --- [XNIO-1 task-8] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:57168
+2021-03-19 17:25:14.577  INFO 14984 --- [XNIO-1 I/O-12] lavalink.server.io.SocketServer          : Connection closed from /127.0.0.1:57168 -- CloseStatus[code=1006, reason=]
+2021-03-19 17:25:14.578  INFO 14984 --- [XNIO-1 I/O-12] lavalink.server.io.SocketContext         : Shutting down 0 playing players.
+2021-03-19 17:25:17.547  INFO 14984 --- [XNIO-1 task-9] l.server.io.HandshakeInterceptorImpl     : Incoming connection from /127.0.0.1:57416
+2021-03-19 17:25:17.549  INFO 14984 --- [XNIO-1 task-9] lavalink.server.io.SocketServer          : Connection successfully established from /127.0.0.1:57416
