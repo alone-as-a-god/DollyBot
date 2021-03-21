@@ -39,8 +39,9 @@ export const useStyles = makeStyles((theme) => ({
     width: "50%",
     maxWidth: "1200px",
     marginBottom: "2rem",
-    [theme.breakpoints.down("md")]: {},
-    width: "60%",
+    [theme.breakpoints.down("md")]: {
+      width: "60%",
+    },
     [theme.breakpoints.down("sm")]: {
       width: "80%",
     },

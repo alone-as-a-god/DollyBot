@@ -1,4 +1,4 @@
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./NotFoundStyle";
@@ -21,12 +21,12 @@ const NotFound = () => {
         rootRef = element;
       }}
     >
-      <img src={Icon404} className={classes.img}></img>
+      <img src={Icon404} alt="" className={classes.img}></img>
       <div>
         <Typography className={classes.text} variant="h3">
           Oh No! Dolly coudn't find the page you're looking for :(
         </Typography>
-        <Typography variant="h5" className={classes.link} component={Link} to="/" variant="h3">
+        <Typography className={classes.link} component={Link} to="/" variant="h3">
           back to home
         </Typography>
       </div>

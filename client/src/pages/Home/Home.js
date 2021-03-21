@@ -15,8 +15,8 @@ const Home = ({ wasOpened, setWasOpened }) => {
 
   return (
     <div ref={(element) => (home = element)}>
-      <Hero wasOpened={wasOpened} setWasOpened={setWasOpened} />
-      <Features wasOpened={wasOpened} setWasOpened={setWasOpened} />
+      <Hero />
+      <Features />
     </div>
   );
 };

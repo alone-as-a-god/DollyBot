@@ -1,5 +1,4 @@
-import { Grid, Typography } from "@material-ui/core";
-import React, { useEffect, useRef } from "react";
+import { Typography } from "@material-ui/core";
 import FeatureCard from "../FeatureCard/FeatureCard";
 import { useStyles } from "./FeaturesStyle";
 import { BsMusicNoteBeamed } from "react-icons/bs";
@@ -8,11 +7,11 @@ import dashboardIcon from "@iconify/icons-carbon/dashboard";
 import consoleIcon from "@iconify/icons-mdi/console";
 import Robot from "./robot_greeting.svg";
 import rackServerLine from "@iconify/icons-clarity/rack-server-line";
-const Features = ({ wasOpened }) => {
+const Features = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <img src={Robot} className={classes.robotIcon}></img>
+      <img src={Robot} className={classes.robotIcon} alt="robot icon"></img>
 
       <Typography variant="h1" className={classes.title}>
         Features
