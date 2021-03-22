@@ -113,19 +113,27 @@ const Navbar = () => {
                 dolly
               </Typography>
             </Link>
-            <Link className={classes.link} to="/" onClick={() => setOpen(false)}>
+            <Link className={`${classes.link} ${window.location.pathname == "/" && classes.active}`} to="/" onClick={() => setOpen(false)}>
               home
             </Link>
-            <Link className={classes.link} to="/dashboard" onClick={() => setOpen(false)}>
+            <Link
+              className={`${classes.link} ${window.location.pathname == "/dashboard" && classes.active}`}
+              to="/dashboard"
+              onClick={() => setOpen(false)}
+            >
               dashboard
             </Link>
-            <Link className={classes.link} to="/about" onClick={() => setOpen(false)}>
+            <Link className={`${classes.link} ${window.location.pathname == "/about" && classes.active}`} to="/about" onClick={() => setOpen(false)}>
               about
             </Link>
-            <Link className={classes.link} to="/commands" onClick={() => setOpen(false)}>
+            <Link
+              className={`${classes.link} ${window.location.pathname == "/commands" && classes.active}`}
+              to="/commands"
+              onClick={() => setOpen(false)}
+            >
               commands
             </Link>
-            <Link className={classes.link} to="/login" onClick={() => setOpen(false)}>
+            <Link className={`${classes.link} ${window.location.pathname == "/login" && classes.active}`} to="/login" onClick={() => setOpen(false)}>
               login
             </Link>
             <Button

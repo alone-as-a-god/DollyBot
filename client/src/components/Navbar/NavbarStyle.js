@@ -80,12 +80,11 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     padding: "2em",
     height: "100%",
-    width: "60vw",
-    [theme.breakpoints.down("xs")]: {
-      width: "80vw",
-    },
+    width: "80vw",
+    maxWidth: "400px",
   },
   link: {
+    margin: "2px 0",
     textTransform: "capitalize",
     color: theme.palette.secondary.main,
     textDecoration: "none",
@@ -95,5 +94,8 @@ export const useStyles = makeStyles((theme) => ({
       background: "#27283F",
     },
     padding: ".25em",
+  },
+  active: {
+    background: "#27283F",
   },
 }));
