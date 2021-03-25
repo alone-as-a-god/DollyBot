@@ -14,7 +14,7 @@ const Home = ({ wasOpened, setWasOpened }) => {
   }, []);
 
   return (
-    <div ref={(element) => (home = element)}>
+    <div ref={(element) => (home = element)} style={{ zIndex: "1" }}>
       <Hero />
       <Features />
     </div>

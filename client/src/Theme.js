@@ -19,7 +19,7 @@ export default createMuiTheme({
   typography: {
     h1: {
       fontFamily: "Poppins",
-      fontSize: "clamp(4em, 12vw, 5.5em)",
+      fontSize: "clamp(4em, 12vw, 5em)",
       fontWeight: "500",
     },
     h2: {

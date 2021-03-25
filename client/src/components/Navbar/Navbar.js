@@ -6,8 +6,11 @@ import NavbarLink from "../NavbarLink/NavbarLink";
 import { TweenMax, TimelineLite } from "gsap";
 import { RiMenu3Fill } from "react-icons/ri";
 import { useWindowWidth } from "../../hooks/useViewportWidth";
+import { links as menuLinks } from "../../utils/links";
 import Logo from "./logo.svg";
-const Navbar = () => {
+import MobileMenu from "../MobileMenu/MobileMenu";
+import UserMenu from "../UserMenu/UserMenu";
+const Navbar = ({ user }) => {
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState(false);
   const history = useHistory();
@@ -93,61 +96,17 @@ const Navbar = () => {
             links = el;
           }}
         >
-          <NavbarLink to="/">home</NavbarLink>
-          <NavbarLink to="/dashboard">dashboard</NavbarLink>
-          <NavbarLink to="/about">about</NavbarLink>
-          <NavbarLink to="/commands">commands</NavbarLink>
-          <NavbarLink to="/login">login</NavbarLink>
+          {menuLinks.map((link) => {
+            return <NavbarLink link={link}></NavbarLink>;
+          })}
           <Button variant="contained" disableElevation color="primary" className={classes.button}>
             invite
           </Button>
+          {user && <UserMenu user={user}></UserMenu>}
         </div>
       </nav>
       <div ref={(el) => (line = el)} className={classes.line}></div>
-      {width < 960 && (
-        <Drawer open={open} className={classes.drawer} onClose={() => setOpen(false)} anchor="right">
-          <div className={classes.drawerContainer}>
-            <Link to="/" className={classes.logoContainer} style={{ justifyContent: "flex-start", margin: ".5em 0" }}>
-              <img src={Logo} alt="dolly logo" className={classes.logo}></img>
-              <Typography variant="h3" className={classes.logoText}>
-                dolly
-              </Typography>
-            </Link>
-            <Link className={`${classes.link} ${window.location.pathname == "/" && classes.active}`} to="/" onClick={() => setOpen(false)}>
-              home
-            </Link>
-            <Link
-              className={`${classes.link} ${window.location.pathname == "/dashboard" && classes.active}`}
-              to="/dashboard"
-              onClick={() => setOpen(false)}
-            >
-              dashboard
-            </Link>
-            <Link className={`${classes.link} ${window.location.pathname == "/about" && classes.active}`} to="/about" onClick={() => setOpen(false)}>
-              about
-            </Link>
-            <Link
-              className={`${classes.link} ${window.location.pathname == "/commands" && classes.active}`}
-              to="/commands"
-              onClick={() => setOpen(false)}
-            >
-              commands
-            </Link>
-            <Link className={`${classes.link} ${window.location.pathname == "/login" && classes.active}`} to="/login" onClick={() => setOpen(false)}>
-              login
-            </Link>
-            <Button
-              variant="contained"
-              disableElevation
-              color="primary"
-              className={`${classes.drawerButton} ${classes.button} `}
-              onClick={() => setOpen(false)}
-            >
-              invite
-            </Button>
-          </div>
-        </Drawer>
-      )}
+      {width < 960 && <MobileMenu open={open} setOpen={setOpen}></MobileMenu>}
     </div>
   );
 };

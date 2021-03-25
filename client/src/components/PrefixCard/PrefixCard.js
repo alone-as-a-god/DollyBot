@@ -1,13 +1,17 @@
 import { Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardCard from "../DashboardCard/DashboardCard";
 import { useStyles } from "./PrefixStyle";
 import InputForm from "../InputForm/InputForm";
-const PrefixCard = () => {
+const PrefixCard = ({ refresh }) => {
   const getPrefix = () => {
     return "!";
   };
   const [prefix, setPrefix] = useState(getPrefix());
+
+  useEffect(() => {
+    setPrefix(getPrefix());
+  }, [refresh]);
   const submitPrefix = (e) => {
     e.preventDefault();
     //TODO Post new prefix
