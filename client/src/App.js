@@ -10,24 +10,11 @@ import About from "./pages/About/About";
 import NotFound from "./pages/NotFound/NotFound";
 import YourServers from "./pages/YourServers/YourServers";
 import { useEffect, useState } from "react";
-
-const auth = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has("code")) {
-    console.log(urlParams.get("code"));
-    window.location.href = "http://localhost:3000/dashboard";
-    return true;
-  }
-};
-
+import { auth } from "./functions/Authorization";
 function App() {
-  const [user, setUser] = useState({
-    username: "schnippolo",
-    id: "314996127692881921",
-    avatar: "0e0284c927a28d6c5ca4b9c6f8665e2e",
-  });
+  const [user, setUser] = useState();
   useEffect(() => {
-    auth();
+    auth(setUser);
   }, []);
   return (
     <div>

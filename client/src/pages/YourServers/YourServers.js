@@ -12,10 +12,11 @@ const YourServers = () => {
   ]);
   let serversRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(serversRef, 2, {
+    TweenMax.from(serversRef, 1.5, {
       opacity: "0",
       y: "50px",
       ease: "power4.out",
+      clearProps: "all",
     });
   }, []);
 

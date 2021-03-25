@@ -13,10 +13,11 @@ const Dashboard = () => {
   const [refresh, setRefresh] = useState(false);
   let dashboardRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(dashboardRef, 2, {
+    TweenMax.from(dashboardRef, 1.5, {
       opacity: "0",
       y: "50px",
       ease: "power4.out",
+      clearProps: "all",
     });
     //TODO: get guild info
   }, []);

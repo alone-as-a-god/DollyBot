@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.1",
     "array-move": "^3.0.1",
     "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
     "gsap": "^3.6.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

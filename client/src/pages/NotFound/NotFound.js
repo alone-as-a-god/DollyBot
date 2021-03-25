@@ -8,10 +8,11 @@ const NotFound = () => {
   const classes = useStyles();
   let rootRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(rootRef, 2, {
+    TweenMax.from(rootRef, 1.5, {
       opacity: "0",
       y: "50px",
       ease: "power4.out",
+      clearProps: "all",
     });
   }, []);
   return (

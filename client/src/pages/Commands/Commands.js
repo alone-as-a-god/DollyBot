@@ -10,10 +10,11 @@ const Commands = () => {
   }, []);
   let commandRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(commandRef, 2, {
+    TweenMax.from(commandRef, 1.5, {
       opacity: "0",
       y: "50px",
       ease: "power4.out",
+      clearProps: "all",
     });
   }, []);
 

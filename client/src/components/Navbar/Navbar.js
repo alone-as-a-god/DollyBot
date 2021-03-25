@@ -58,12 +58,16 @@ const Navbar = ({ user }) => {
       },
       "-=.3"
     );
+    tl.to(navbar, 0, {
+      overflow: "visible",
+    });
   }, []);
 
   const width = useWindowWidth();
   const classes = useStyles();
   return (
     <div
+      style={{ overflow: "hidden" }}
       ref={(el) => {
         navbar = el;
       }}
