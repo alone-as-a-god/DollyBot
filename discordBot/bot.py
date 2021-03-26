@@ -24,6 +24,7 @@ bot = commands.Bot(command_prefix=get_prefix)
 async def on_guild_join( guild):
     print(f"Joined new Guild {guild.name}:{guild.id}")
     await db.add_guild(guild.id, guild.name)
+    await db.update_prefix_dictionary(prefix_dictionary)
 
 
 @bot.event

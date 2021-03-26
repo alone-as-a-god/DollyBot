@@ -4,6 +4,7 @@ from aiosqlite import cursor
 from aiosqlite.core import connect
 import sqlite3 as sql3
 import os
+import random
 DB_PATH = "../database/database.db"
 
 
@@ -76,8 +77,10 @@ async def get_last_track_id(guildID):
     fetched = await cursor.fetchone()
     await connection.close()
 
-    if fetched is None:
+    if fetched[0] is None:
+        print("returning None")
         return 0
+    print(fetched[0])
     return fetched[0]
     
 def get_last_track_id_sync(guildID):
@@ -189,8 +192,29 @@ async def clear_all_tracks():
     await connection.commit()
     await connection.close()
 
-async def main():                       #Testing out the above methods (working as of now)
-    await add_tracks(1, "despacito")
+async def shuffle_queue(guildID):
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        SELECT id, songName
+        FROM "queue"
+        WHERE guildID = ?
+        '''
+    await cursor.execute(sql, (str(guildID),))
+    list = await cursor.fetchall()
+    newList = [seq[1] for seq in list]
+    print(newList)
+    random.shuffle(newList)
+    
+    print(newList)
+    await clear_tracks(guildID)
+    for i in newList:
+        await add_tracks(guildID, i)
+        
+    
+
+async def main():                       #Testing out the above methods 
+    await shuffle_queue(123)
     
 
         
