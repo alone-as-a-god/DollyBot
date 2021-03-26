@@ -6,13 +6,14 @@
 
 #General files
 *.mp3
-
+logs/
 #Python
 /discordBot/.env
+/**/__pycache__
 
 #Database
-/database/__pycache__
 
 #Node
 /backend/.env
 /backend/node_modules
+node_modules/

@@ -1,15 +1,21 @@
-import React from "react";
+import { TweenMax } from "gsap/gsap-core";
+import React, { useEffect, useRef } from "react";
 import Features from "../../components/Features/Features";
 import Hero from "../../components/Hero/Hero";
-import Navbar from "../../components/Navbar/Navbar";
 
-const Home = () => {
+const Home = ({ wasOpened, setWasOpened }) => {
+  let home = useRef(null);
+  useEffect(() => {
+    TweenMax.from(home, 2, {
+      opacity: "0",
+      y: "50px",
+      ease: "power4.out",
+    });
+  }, []);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <Navbar />
-        <Hero />
-      </div>
+    <div ref={(element) => (home = element)}>
+      <Hero />
       <Features />
     </div>
   );

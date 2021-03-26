@@ -17,9 +17,9 @@ where npm 1>nul 2>nul || (
     exit /b
 )
 
-:: Check if python is installed
+:: Check if Python is installed
 where python 1>nul 2>nul || (
-    echo ERROR: python is not installed
+    echo ERROR: Python is not installed
     exit /b
 )
 
@@ -29,16 +29,37 @@ where pip 1>nul 2>nul || (
     exit /b
 )
 
+:: Start the python setup script
+python setup.py || (
+    exit /b
+)
+
+
+:: Install nodemon globally
+echo Installing nodemon
+cd ..
+call npm install -g nodemon
+
+:: Install backend dependencies
+echo Installing backend dependencies
+cd backend
+call npm install
+cd ..
+
+:: Install client dependencies
+echo Installing client dependencies
+cd client
+call npm install
+cd ..
+
+
 :: Install pipenv
 echo Installing pipenv
 pip install pipenv
-
-:: Install nodemon
-echo Installing nodemon
-call npm install -g nodemon
 
 :: Initialize pipenv
 echo Initializing pipenv
 cd discordBot
 pipenv install
 cd ..
+
