@@ -170,6 +170,11 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await player.stop()
         await print("Skipping...")
         
+    @commands.command(name="shuffle")
+    async def shuffle_command(self, ctx):
+        await db.shuffle_queue(ctx.guild.id)
+        await ctx.send("Queue shuffled!")
+        
         
         
     @connect_command.error
