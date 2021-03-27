@@ -14,7 +14,6 @@ import asyncio
 extensions = ["music"]
 
 def get_prefix(bot, message):
-    print(str(prefix_dictionary))
     key = str(message.guild.id)
     return prefix_dictionary[key]
 
@@ -33,7 +32,7 @@ async def on_ready():
     thread = Thread(target=asyncio.run, args=(server.notification_Listener(),))       #Starts a new thread with the socketserver, to listen for new messages (target asyncio so it runs in async mode lol)
     thread.start()
     await db.update_prefix_dictionary(prefix_dictionary)
-    print('Logged ins')
+    print('Logged in')
     
     
 @bot.command(name="ping", aliases=["p"])
