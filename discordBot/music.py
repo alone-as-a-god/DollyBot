@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 import re 
 import sys
+import datetime as dt
 sys.path.append("../database")
 import db
 
@@ -36,7 +37,13 @@ class NoValidRepeatMode(commands.CommandError):
 
 #Regex matches youtube URL
 URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-
+OPTIONS = {
+    "1️⃣": 0,
+    "2⃣": 1,
+    "3⃣": 2,
+    "4⃣": 3,
+    "5⃣": 4,
+}
 
 def setup(bot):                         #Adds this file as cog to the main bot
     bot.add_cog(Music(bot))
@@ -45,7 +52,7 @@ def setup(bot):                         #Adds this file as cog to the main bot
 class Player(wavelink.Player):                  
     def __init__(self, *args, **kwargs):                        #Constructor for the wavelink player
         super().__init__(*args, **kwargs)
-        self.queue_position = 0
+        self.queue_position = 1
         
     async def connect(self, ctx, channel=None):                 #Tries and connects to target channel
         if self.is_connected:                                   
@@ -64,24 +71,58 @@ class Player(wavelink.Player):
 
         
     async def add_tracks(self, ctx, tracks):
-        print("id = " + str(ctx.guild.id))
         if isinstance(tracks, wavelink.TrackPlaylist):        
            
             for track in tracks.tracks:
                 db.add_tracks_sync(ctx.guild.id, track)
-                print(f"Added {track} to db")
             await ctx.send("Added playlist to queue")
             if not self.is_playing: 
                 await self.play(tracks.tracks[0])
                 
         else:
-            tracks = tracks[0]
+            if isinstance(tracks, (str, list, tuple)):
+                tracks = tracks[0]
             db.add_tracks_sync(ctx.guild.id, tracks)
-            print(f"Added {tracks} to db")
             await ctx.send(f"Added {tracks.title} to Queue")
             if not self.is_playing: 
                 await self.play(tracks)
 
+    async def choose_track(self, ctx, tracks):                  #Function to choose out of 5 songs dispalyed in an embed
+        def _check(r, u):
+            return(
+                r.emoji in OPTIONS.keys()
+                and u == ctx.author
+                and r.message.id == msg.id
+            )
+        
+        embed = discord.Embed(
+            title = "Choose a song",
+            description = (
+                "\n".join(
+                    f"**{i+1}.**{t.title} ({t.length//60000}:{str(t.length%60).zfill(2)})"              #DISGUSTING        first takes number of track +1, then title, length divided by 60k because its in microseconds, zfill adds zeroes at the end until it is mm:ss format
+                    for i, t in enumerate(tracks[:5])
+                )
+                ),
+            color=ctx.author.color,
+            timestamp=dt.datetime.utcnow()
+        )
+        embed.set_author(name="Query Results")                                                                  #Embed formatting
+        embed.set_footer(text=f"Invoked by {ctx.author.display_name}", icon_url=ctx.author.avatar_url)
+        
+        msg = await ctx.send(embed=embed)
+        
+        for emoji in list(OPTIONS.keys())[:min(len(tracks),len(OPTIONS))]:                                  #Adds all emojis from enum as reaction
+            await msg.add_reaction(emoji)
+            
+        try:
+            reaction, _ = await self.bot.wait_for("reaction_add",timeout=30, check=_check)                  #Waits for user to choose a reaction and therefore track
+        except asyncio.TimeoutError:
+            await msg.delete()
+            await ctx.message.delete()
+        else:
+            await msg.delete()
+            return tracks[OPTIONS[reaction.emoji]]       
+        
 
 class Music(commands.Cog, wavelink.WavelinkMixin):
 
@@ -144,7 +185,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await ctx.send(f"Joined {channel.name}")
 
     @commands.command(name="play")
-    async def play_command(self, ctx, *, query: str):
+    async def play_command(self, ctx, *, query: t.Optional[str]):
         player = self.get_player(ctx)
         if not player.is_connected:
             await player.connect(ctx)
@@ -153,6 +194,19 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if not re.match(URL_REGEX, query):
             query = f"ytsearch:{query}"    
         track = await self.wavelink.get_tracks(query)
+        await player.add_tracks(ctx, track)
+    
+    @commands.command(name="search", aliases=["s"])
+    async def search_command(self, ctx, *, query:t.Optional[str]):
+        player = self.get_player(ctx)
+
+        if not re.match(URL_REGEX, query):
+            query = f"ytsearch:{query}"  
+        tracks = await self.wavelink.get_tracks(query)
+        
+        track = await player.choose_track(ctx, tracks)
+        if not player.is_connected:
+            await player.connect(ctx)
         await player.add_tracks(ctx, track)
        
         
@@ -168,12 +222,31 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def skip_command(self, ctx):
         player = self.get_player(ctx)
         await player.stop()
-        await print("Skipping...")
+        await ctx.send("Skipping...")
         
     @commands.command(name="shuffle")
     async def shuffle_command(self, ctx):
         await db.shuffle_queue(ctx.guild.id)
         await ctx.send("Queue shuffled!")
+
+    
+    @commands.command(name="queue", aliases=["q"])
+    async def queue_command(self, ctx):
+        embedVar = discord.Embed(title="Queue", color=ctx.author.color)
+        player = self.get_player(ctx)
+        pos = player.queue_position
+        currentTrack = await db.get_next_track(ctx.guild.id, pos - 1)
+        embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
+        trackList = ""
+        for i in range(10):
+            track = await db.get_next_track(ctx.guild.id, pos + i)
+            
+            if track is not None:
+                trackList = f"{trackList} \n {track[0]}"
+                #await ctx.send(f"{i}: {track}")
+                
+        embedVar.add_field(name="Next Up:",value=trackList, inline=False)
+        await ctx.send(embed=embedVar)
         
         
         

@@ -78,9 +78,7 @@ async def get_last_track_id(guildID):
     await connection.close()
 
     if fetched[0] is None:
-        print("returning None")
         return 0
-    print(fetched[0])
     return fetched[0]
     
 def get_last_track_id_sync(guildID):
@@ -137,7 +135,6 @@ async def get_next_track(guildID, current_track_id):
         WHERE id=? 
         AND guildID=?
         '''
-    
     await cursor.execute(sql, (str(current_track_id+1), str(guildID),))
     track = await cursor.fetchone()
     await connection.close()
@@ -203,10 +200,7 @@ async def shuffle_queue(guildID):
     await cursor.execute(sql, (str(guildID),))
     list = await cursor.fetchall()
     newList = [seq[1] for seq in list]
-    print(newList)
     random.shuffle(newList)
-    
-    print(newList)
     await clear_tracks(guildID)
     for i in newList:
         await add_tracks(guildID, i)
