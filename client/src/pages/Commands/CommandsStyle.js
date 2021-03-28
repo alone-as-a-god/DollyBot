@@ -24,17 +24,19 @@ export const useStyles = makeStyles((theme) => ({
       paddingRight: theme.spacing(2),
     },
   },
-  container: {},
   accordion: {
     background: theme.palette.primary.dark,
     color: theme.palette.secondary.main,
     borderColor: "red",
     width: "60%",
+    [theme.breakpoints.down("lg")]: {
+      width: "80%",
+    },
     [theme.breakpoints.down("md")]: {
-      width: "70%",
+      width: "80%",
     },
     [theme.breakpoints.down("sm")]: {
-      width: "80%",
+      width: "100%",
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%",
@@ -57,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   alias: {
-    opacity: "70%",
+    opacity: "80%",
     marginLeft: "1em",
   },
   accordionTitle: {
@@ -65,5 +67,11 @@ export const useStyles = makeStyles((theme) => ({
       display: "flex",
       alignItems: "center",
     },
+  },
+  accordionText: {
+    opacity: "80%",
+  },
+  commandName: {
+    fontSize: "1.75em",
   },
 }));

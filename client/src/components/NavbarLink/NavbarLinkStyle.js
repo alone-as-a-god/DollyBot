@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
-    borderBottom: "3px solid transparent",
+    borderBottom: "4px solid transparent",
+    borderTop: "4px solid transparent",
     float: "left",
     display: "flex",
     justifyContent: "center",
@@ -16,6 +17,6 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "1.25em",
   },
   active: {
-    borderBottom: "3px solid" + theme.palette.secondary.main,
+    borderBottom: "4px solid" + theme.palette.secondary.main,
   },
 }));

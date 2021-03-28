@@ -3,26 +3,18 @@ import React, { useEffect, useRef } from "react";
 import { useStyles } from "./CommandsStyle";
 import { MdExpandMore } from "react-icons/md";
 import { TweenMax } from "gsap/gsap-core";
+import { commands } from "../../utils/commands";
 const Commands = () => {
-  const commands = [
-    { name: "play", description: "plays music" },
-    { name: "prefix", description: "change prefix", aliases: ["p"] },
-    { name: "clear", description: "clear queue", aliases: ["cls"] },
-    { name: "next", description: "plays next song in queue/skips current song" },
-    { name: "pause", description: "pauses music" },
-    { name: "resume", description: "resumes music" },
-    { name: "shuffle", description: "shuffles music in queue", aliases: ["mix"] },
-  ];
-
   useEffect(() => {
     //TODO: api call
   }, []);
   let commandRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(commandRef, 2, {
+    TweenMax.from(commandRef, 1.5, {
       opacity: "0",
       y: "50px",
       ease: "power4.out",
+      clearProps: "all",
     });
   }, []);
 
@@ -38,12 +30,12 @@ const Commands = () => {
           Commands
         </Typography>
         <Typography className={classes.text}>Use your prefix followed by the following commands</Typography>
-        <div className={classes.container}>
+        <div>
           {commands.map((command) => {
             return (
               <Accordion className={classes.accordion}>
                 <AccordionSummary expandIcon={<MdExpandMore className={classes.icon} />} className={classes.accordionTitle}>
-                  <Typography variant="h5">{command.name}</Typography>
+                  <Typography className={classes.commandName}>{command.name}</Typography>
                   {command.aliases !== undefined &&
                     command.aliases.map((alias) => {
                       return <Typography className={classes.alias}>{alias}</Typography>;

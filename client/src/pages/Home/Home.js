@@ -3,13 +3,14 @@ import React, { useEffect, useRef } from "react";
 import Features from "../../components/Features/Features";
 import Hero from "../../components/Hero/Hero";
 
-const Home = ({ wasOpened, setWasOpened }) => {
+const Home = () => {
   let home = useRef(null);
   useEffect(() => {
-    TweenMax.from(home, 2, {
+    TweenMax.from(home, 1.5, {
       opacity: "0",
       y: "50px",
       ease: "power4.out",
+      clearProps: "all",
     });
   }, []);
 

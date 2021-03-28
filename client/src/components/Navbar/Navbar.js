@@ -1,13 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useStyles } from "./NavbarStyle";
-import { Button, IconButton, Typography, Drawer } from "@material-ui/core";
+import { Button, IconButton, Typography } from "@material-ui/core";
 import NavbarLink from "../NavbarLink/NavbarLink";
 import { TweenMax, TimelineLite } from "gsap";
 import { RiMenu3Fill } from "react-icons/ri";
 import { useWindowWidth } from "../../hooks/useViewportWidth";
 import Logo from "./logo.svg";
+import MobileMenu from "../MobileMenu/MobileMenu";
+import UserMenu from "../UserMenu/UserMenu";
+import { UserContext } from "../../UserContext";
+const { REACT_APP_LOGIN_URL } = process.env;
 const Navbar = () => {
+  const [user, setUser] = useContext(UserContext);
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState(false);
   const history = useHistory();
@@ -55,12 +60,16 @@ const Navbar = () => {
       },
       "-=.3"
     );
+    tl.to(navbar, 0, {
+      overflow: "visible",
+    });
   }, []);
 
   const width = useWindowWidth();
   const classes = useStyles();
   return (
     <div
+      style={{ overflow: "hidden" }}
       ref={(el) => {
         navbar = el;
       }}
@@ -93,53 +102,18 @@ const Navbar = () => {
             links = el;
           }}
         >
-          <NavbarLink to="/">home</NavbarLink>
-          <NavbarLink to="/dashboard">dashboard</NavbarLink>
-          <NavbarLink to="/about">about</NavbarLink>
-          <NavbarLink to="/commands">commands</NavbarLink>
-          <NavbarLink to="/login">login</NavbarLink>
+          <NavbarLink path="/">home</NavbarLink>
+          <NavbarLink path="/about">about</NavbarLink>
+          <NavbarLink path="/commands">commands</NavbarLink>
+          {!user && <NavbarLink href={REACT_APP_LOGIN_URL}>login</NavbarLink>}
           <Button variant="contained" disableElevation color="primary" className={classes.button}>
             invite
           </Button>
+          {user && <UserMenu user={user} setUser={setUser}></UserMenu>}
         </div>
       </nav>
       <div ref={(el) => (line = el)} className={classes.line}></div>
-      {width < 960 && (
-        <Drawer open={open} className={classes.drawer} onClose={() => setOpen(false)} anchor="right">
-          <div className={classes.drawerContainer}>
-            <Link to="/" className={classes.logoContainer} style={{ justifyContent: "flex-start", margin: ".5em 0" }}>
-              <img src={Logo} alt="dolly logo" className={classes.logo}></img>
-              <Typography variant="h3" className={classes.logoText}>
-                dolly
-              </Typography>
-            </Link>
-            <Link className={classes.link} to="/" onClick={() => setOpen(false)}>
-              home
-            </Link>
-            <Link className={classes.link} to="/dashboard" onClick={() => setOpen(false)}>
-              dashboard
-            </Link>
-            <Link className={classes.link} to="/about" onClick={() => setOpen(false)}>
-              about
-            </Link>
-            <Link className={classes.link} to="/commands" onClick={() => setOpen(false)}>
-              commands
-            </Link>
-            <Link className={classes.link} to="/login" onClick={() => setOpen(false)}>
-              login
-            </Link>
-            <Button
-              variant="contained"
-              disableElevation
-              color="primary"
-              className={`${classes.drawerButton} ${classes.button} `}
-              onClick={() => setOpen(false)}
-            >
-              invite
-            </Button>
-          </div>
-        </Drawer>
-      )}
+      {width < 960 && <MobileMenu open={open} setOpen={setOpen}></MobileMenu>}
     </div>
   );
 };
