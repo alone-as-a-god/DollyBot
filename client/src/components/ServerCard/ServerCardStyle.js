@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    height: "100%",
     borderRadius: "1rem",
     padding: "2rem 1rem",
     display: "flex",
@@ -18,6 +19,7 @@ export const useStyles = makeStyles((theme) => ({
   img: {
     borderRadius: "50%",
     width: "60%",
+
     marginBottom: "1rem",
   },
 }));

@@ -1,16 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useStyles } from "./NavbarStyle";
-import { Button, IconButton, Typography, Drawer } from "@material-ui/core";
+import { Button, IconButton, Typography } from "@material-ui/core";
 import NavbarLink from "../NavbarLink/NavbarLink";
 import { TweenMax, TimelineLite } from "gsap";
 import { RiMenu3Fill } from "react-icons/ri";
 import { useWindowWidth } from "../../hooks/useViewportWidth";
-import { links as menuLinks } from "../../utils/links";
 import Logo from "./logo.svg";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import UserMenu from "../UserMenu/UserMenu";
-const Navbar = ({ user }) => {
+import { UserContext } from "../../UserContext";
+const { REACT_APP_LOGIN_URL } = process.env;
+const Navbar = () => {
+  const [user, setUser] = useContext(UserContext);
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState(false);
   const history = useHistory();
@@ -100,13 +102,14 @@ const Navbar = ({ user }) => {
             links = el;
           }}
         >
-          {menuLinks.map((link) => {
-            return <NavbarLink link={link}></NavbarLink>;
-          })}
+          <NavbarLink path="/">home</NavbarLink>
+          <NavbarLink path="/about">about</NavbarLink>
+          <NavbarLink path="/commands">commands</NavbarLink>
+          {!user && <NavbarLink href={REACT_APP_LOGIN_URL}>login</NavbarLink>}
           <Button variant="contained" disableElevation color="primary" className={classes.button}>
             invite
           </Button>
-          {user && <UserMenu user={user}></UserMenu>}
+          {user && <UserMenu user={user} setUser={setUser}></UserMenu>}
         </div>
       </nav>
       <div ref={(el) => (line = el)} className={classes.line}></div>

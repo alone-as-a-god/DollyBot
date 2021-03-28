@@ -7,7 +7,21 @@ const ServerCard = ({ guild }) => {
   const history = useHistory();
   return (
     <div className={classes.root} onClick={() => history.push(`/dashboard/${guild.id}`)}>
-      <img className={classes.img} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.icon} />
+      {guild.icon ? (
+        [
+          guild.icon.startsWith("a_", 0) ? (
+            <img className={classes.img} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.gif`} alt={guild.icon} />
+          ) : (
+            <img className={classes.img} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.icon} />
+          ),
+        ]
+      ) : (
+        <img
+          className={classes.img}
+          src={`https://eu.ui-avatars.com/api/?background=27283F&color=F9F7FF&name=${guild.name.charAt(0)}`}
+          alt={guild.icon}
+        />
+      )}
       <Typography>{guild.name}</Typography>
     </div>
   );

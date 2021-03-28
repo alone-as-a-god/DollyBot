@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
   },
   options: {
+    padding: ".5rem",
     zIndex: "9999",
     position: "absolute",
     background: theme.palette.primary.dark,
@@ -36,6 +37,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
   },
   optionsItem: {
+    borderRadius: "5px",
     padding: ".75rem 1.5rem",
     display: "flex",
     alignItems: "center",

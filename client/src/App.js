@@ -9,18 +9,16 @@ import Commands from "./pages/Commands/Commands";
 import About from "./pages/About/About";
 import NotFound from "./pages/NotFound/NotFound";
 import YourServers from "./pages/YourServers/YourServers";
-import { useEffect, useState } from "react";
-import { auth } from "./functions/Authorization";
+import { UserProvider } from "./UserContext";
 function App() {
-  const [user, setUser] = useState();
-  useEffect(() => {
-    auth(setUser);
-  }, []);
   return (
     <div>
       <Router>
         <ThemeProvider theme={theme}>
-          <Navbar user={user} />
+          <UserProvider>
+            <Navbar />
+          </UserProvider>
+
           <Switch>
             <Route path="/dashboard" exact render={() => <YourServers />}></Route>
             <Route path="/dashboard/:id" render={() => <Dashboard />}></Route>

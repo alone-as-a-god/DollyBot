@@ -1,22 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./NavbarLinkStyle";
-const NavbarLink = ({ link }) => {
+const NavbarLink = ({ path, href, children }) => {
   const classes = useStyles();
   return (
     <>
-      {link.href ? (
-        <a href={link.href} className={classes.root}>
-          {link.name}
+      {href ? (
+        <a href={href} className={classes.root}>
+          {children}
         </a>
       ) : (
-        <Link
-          to={link.path}
-          className={`${classes.root} ${
-            !link.includes ? window.location.pathname === link.path && classes.active : window.location.pathname.includes(link.path) && classes.active
-          }`}
-        >
-          {link.name}
+        <Link to={path} className={`${classes.root} ${window.location.pathname === path && classes.active}`}>
+          {children}
         </Link>
       )}
     </>

@@ -1,41 +1,16 @@
 const express = require("express");
+const router = express.Router();
 require("dotenv").config();
 const querystring = require("querystring");
 const axios = require("axios");
+
+//enviroment variables
 const API_ENDPOINT = process.env.API_ENDPOINT;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
-const router = express.Router();
 const options = { headers: { "Content-Type": "application/x-www-form-urlencoded" } };
-
-const refreshToken = async (refresh_token) => {
-  let response_token;
-  const access_data = querystring.stringify({
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    grant_type: "refresh_token",
-    refresh_token: refresh_token,
-    redirect_uri: REDIRECT_URI,
-    scope: "identify email connections guilds",
-  });
-  try {
-    response_token = await axios.post(API_ENDPOINT, access_data, options);
-  } catch (err) {
-    return false;
-  }
-  return response_token.data.access_token;
-};
-
-router.get("/user", (req, res) => {
-  if (!req.session) res.sendStatus(404);
-  res.send({
-    username: req.session.username,
-    id: req.session.userId,
-    avatar: req.session.userAvatar,
-  });
-});
 
 router.get("/:code", (req, res) => {
   const authorize = async (code) => {
@@ -67,34 +42,10 @@ router.get("/:code", (req, res) => {
         avatar: response_userinfo.data.avatar,
       });
     } catch (err) {
-      console.log("Error authorizing");
+      // console.log("Error authorizing");
     }
   };
   authorize(req.params.code);
-});
-
-router.get("/guilds", (req, res) => {
-  const getGuilds = async () => {
-    try {
-      if (!req.session.refresh_token) res.sendStatus(404);
-      const access_token = refreshToken(req.session.refresh_token);
-      const response_guildinfo = await axios.get("https://discord.com/api/users/@me/guilds", {
-        headers: { authorization: `Bearer ${access_token}` },
-      });
-      //TODO: check with database for mutual servers, refresh token
-
-      
-      res.send(response_guildinfo.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  getGuilds();
-});
-
-router.get("/logout", (req, res) => {
-  req.session.destroy();
-  res.clearCookie("connect.sid", { path: "/" });
 });
 
 module.exports = router;

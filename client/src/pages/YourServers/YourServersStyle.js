@@ -25,9 +25,4 @@ export const useStyles = makeStyles((theme) => ({
     margin: "2rem 0",
     color: theme.palette.secondary.main,
   },
-  container: {
-    [theme.breakpoints.down("xs")]: {
-      justifyContent: "center",
-    },
-  },
 }));

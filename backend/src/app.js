@@ -15,9 +15,8 @@ var corsOptions = {
   exposedHeaders: ["set-cookie"],
 };
 app.use(cors(corsOptions));
-
 app.use(
-  "/api/auth",
+  "/api",
   session({
     secret: "dolly is cool",
     resave: false,
@@ -25,7 +24,7 @@ app.use(
     cookie: {
       httpOnly: false,
       secure: false,
-      sameSite: true,
+      // sameSite: true,
       maxAge: 1000 * 60 * 60 * 24 * 30,
     },
   })

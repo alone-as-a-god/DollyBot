@@ -12,6 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: "999999",
   },
   link: {
+    cursor: "pointer",
     margin: "2px 0",
     textTransform: "capitalize",
     color: theme.palette.secondary.main,
@@ -48,5 +49,20 @@ export const useStyles = makeStyles((theme) => ({
   logoText: {
     color: theme.palette.secondary.main,
     letterSpacing: "1px",
+  },
+  userContainer: {
+    display: "flex",
+    alignItems: "center",
+    margin: ".5rem 0",
+  },
+  username: {
+    color: theme.palette.secondary.main,
+    fontSize: "1.5em",
+  },
+  avatar: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    marginRight: "1rem",
   },
 }));
