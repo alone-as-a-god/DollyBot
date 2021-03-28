@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    position: "sticky",
+    position: "relative",
+    zIndex: "9999999 !important",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -10,7 +11,6 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText,
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
-    overflow: "hidden",
     height: "80px",
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(6),
@@ -73,27 +73,5 @@ export const useStyles = makeStyles((theme) => ({
   logoText: {
     color: theme.palette.secondary.main,
     letterSpacing: "1px",
-  },
-  drawerContainer: {
-    background: theme.palette.primary.dark,
-    display: "flex",
-    flexDirection: "column",
-    padding: "2em",
-    height: "100%",
-    width: "60vw",
-    [theme.breakpoints.down("xs")]: {
-      width: "80vw",
-    },
-  },
-  link: {
-    textTransform: "capitalize",
-    color: theme.palette.secondary.main,
-    textDecoration: "none",
-    fontSize: "clamp(1.25em, 5vw, 1.75em)",
-    borderRadius: "5px",
-    "&:hover": {
-      background: "#27283F",
-    },
-    padding: ".25em",
   },
 }));

@@ -1,12 +1,12 @@
 import { Button, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardCard from "../DashboardCard/DashboardCard";
 import SongItem from "../SongItem/SongItem";
 import { ReactSortable } from "react-sortablejs";
 import { useStyles } from "./QueueCardStyle";
 import InputForm from "../InputForm/InputForm";
 
-const QueueCard = () => {
+const QueueCard = ({ refresh }) => {
   const getSongs = () => {
     //TODO: implement get songs
     const songs = [
@@ -54,9 +54,12 @@ const QueueCard = () => {
     console.log(songName);
   };
 
-  // useEffect(() => {
-  //   console.log(songs, displayedSongs);
-  // }, [songLimit]);
+  useEffect(() => {
+    setSongs(getSongs());
+    setDisplayedSongs(getSongs());
+    setSongName("");
+    setSongLimit(10);
+  }, [refresh]);
 
   const classes = useStyles();
   return (

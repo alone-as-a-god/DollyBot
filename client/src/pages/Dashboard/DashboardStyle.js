@@ -21,9 +21,22 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: theme.palette.secondary.main,
-    margin: "2rem 0",
+    marginBottom: "2rem",
+    overflowWrap: "break-word",
     [theme.breakpoints.down("xs")]: {
       fontSize: "3.25em",
+    },
+  },
+  iconContainer: {
+    margin: "2rem 0",
+  },
+  iconButton: {
+    marginRight: "1rem",
+    fontSize: "1.75em",
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.secondary.main,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.extradark,
     },
   },
 }));
