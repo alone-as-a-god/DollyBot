@@ -34,9 +34,10 @@ app.use(
   })
 );
 
-app.use("/api", routes);
-
+//Call this before calling the router
 app.use(express.json());
+
+app.use("/api", routes);
 
 //Start server
 app.listen(port, () => {
