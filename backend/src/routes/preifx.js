@@ -1,18 +1,18 @@
-const express = require("express")
-const net = require("net")
-const sqlite3 = require("sqlite3").verbose()
+const express = require("express");
+const net = require("net");
+const sqlite3 = require("sqlite3").verbose();
 
-const router = express.Router()
-const dbPath = process.env.DB_PATH || "../database/database.db"
+const router = express.Router();
+const dbPath = process.env.DB_PATH || "../database/database.db";
 
 
 //Gets the prefix of a specific guild
 router.get("/:guildID", (req, res) => {
-    let db = new sqlite3.Database(dbPath)
+    let db = new sqlite3.Database(dbPath);
     let sql = `
         SELECT prefix 
         FROM guild
-        WHERE guildID = ?`
+        WHERE guildID = ?`;
 
     db.get(sql, [req.params.guildID], (err, row) => {
         if (err) {
@@ -21,44 +21,44 @@ router.get("/:guildID", (req, res) => {
 
         //Check if row contains data
         if(row){
-            res.json({prefix: row.prefix})
+            res.json({prefix: row.prefix});
         }else{
-            res.sendStatus(404)
+            res.sendStatus(404);
         }
     })
 
-    db.close()
+    db.close();
 })
 
 //Change the prefix of a specific guild
 router.post("/", (req, res) => {
-    let prefix = req.body.prefix
-    let guildID =  req.body.guildID  
+    let prefix = req.body.prefix;
+    let guildID =  req.body.guildID;
 
     //Check if both values are not empty
     if(!prefix || ! guildID){
-        res.sendStatus(400)
-        return
+        res.sendStatus(400);
+        return;
     }
 
-    let db = new sqlite3.Database(dbPath)
+    let db = new sqlite3.Database(dbPath);
     let sql = `
         UPDATE guild
         SET prefix = ?
-        WHERE guildID = ?`
+        WHERE guildID = ?`;
 
     db.run(sql, [prefix, guildID], (err) => {
         if (err) {
             return console.error(err.message);
         } 
         
-        console.log(`Updated prefix of guild: ${guildID} to ${prefix}`)
+        console.log(`Updated prefix of guild: ${guildID} to ${prefix}`);
 
-        sendNotification("updateDictionary")
-        res.sendStatus(200)     //TODO: Return error code if sendNotification failed
+        sendNotification("updateDictionary");
+        res.sendStatus(200);     //TODO: Return error code if sendNotification failed
     })
 
-    db.close()
+    db.close();
 })
 
 
