@@ -65,6 +65,19 @@ async def update_prefix_dictionary(dictionary):
     
     await connection.close()
     
+async def update_position(guildID, position):
+    connection = await db_connect()
+    cursor = await connection.cursor()
+    sql = '''
+        UPDATE guild
+        SET position = ?
+        WHERE guildID = ?
+        '''
+    await cursor.execute(sql, (str(position), str(guildID),))
+    await connection.commit()
+    await connection.close()
+    
+    
 async def get_last_track_id(guildID):
     connection = await db_connect()
     cursor = await connection.cursor()
@@ -120,7 +133,6 @@ def add_tracks_sync(guildID, track, url):
         (guildID, id, songName, url)
         VALUES (?,?,?,?)
         '''
-    print(f"{guildID}:{track}:{url}")
     cursor.execute(sql, ((str(guildID)), str(last_id), str(track), str(url),))
     connection.commit()
     connection.close()
@@ -164,7 +176,7 @@ async def update_track(guildID, track_name, track_id):
         WHERE id = ?
         AND guildID=?
         '''
-    await cursor.execute(sql, (str(track_name), str(track_id), str(guildID)))
+    await cursor.execute(sql, (str(track_name), str(track_id), str(guildID),))
     await connection.commit()
     await connection.close()
         
@@ -178,6 +190,7 @@ async def clear_tracks(guildID):
     await cursor.execute(sql, (str(guildID),))
     await connection.commit()
     await connection.close()
+    await update_position(guildID, 1)
     
 async def clear_all_tracks():
     connection = await db_connect()
@@ -187,6 +200,11 @@ async def clear_all_tracks():
         '''
     await cursor.execute(sql)
     await connection.commit()
+    
+    sql = '''
+        UPDATE guild
+        SET position = 1
+        '''
     await connection.close()
 
 async def shuffle_queue(guildID):   #REWRITE FOR URL

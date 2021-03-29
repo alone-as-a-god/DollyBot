@@ -39,6 +39,17 @@ async def on_ready():
 async def pingCommand(ctx):
     await ctx.send("Jolene")
 
+@bot.command(name="prefix")
+async def prefix_command(ctx, prefix):
+    await db.update_prefix(ctx.guild.id, prefix)
+    await db.update_prefix_dictionary(prefix_dictionary)
+    await ctx.send(f"Prefix changed to '{prefix}'")
+    
+@bot.command(name="purge")
+async def purge_command(ctx, amount=10):
+    await ctx.channel.purge(limit=amount)
+    
+
 if __name__ == "__main__":
     for extension in extensions:
         bot.load_extension(extension)
