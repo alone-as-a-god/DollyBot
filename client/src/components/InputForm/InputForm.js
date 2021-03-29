@@ -1,7 +1,7 @@
-import { Button, TextField } from "@material-ui/core";
+import { Button, CircularProgress, TextField } from "@material-ui/core";
 import React from "react";
 import { useStyles } from "./InputFormStyle";
-const InputForm = ({ label, onSubmit, value, onChange }) => {
+const InputForm = ({ loading, label, onSubmit, value, onChange }) => {
   const classes = useStyles();
   return (
     <form onSubmit={onSubmit}>
@@ -24,9 +24,18 @@ const InputForm = ({ label, onSubmit, value, onChange }) => {
             className: classes.inputText,
           }}
         ></TextField>
-        <Button type="submit" color="secondary" variant="contained" disableElevation>
-          submit
-        </Button>
+
+        <div style={{ width: "fit-content", position: "relative" }}>
+          <Button disabled={loading} type="submit" color="secondary" variant="contained" disableElevation>
+            submit
+          </Button>
+          {loading && (
+            <CircularProgress
+              style={{ position: "absolute", top: "50%", left: "50%", color: "white", marginTop: "-12px", marginLeft: "-12px" }}
+              size={24}
+            ></CircularProgress>
+          )}
+        </div>
       </div>
     </form>
   );

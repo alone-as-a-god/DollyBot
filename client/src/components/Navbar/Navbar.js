@@ -12,7 +12,7 @@ import UserMenu from "../UserMenu/UserMenu";
 import { UserContext } from "../../UserContext";
 const { REACT_APP_LOGIN_URL } = process.env;
 const Navbar = () => {
-  const [user, setUser] = useContext(UserContext);
+  const [user, dispatch] = useContext(UserContext);
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState(false);
   const history = useHistory();
@@ -109,7 +109,7 @@ const Navbar = () => {
           <Button variant="contained" disableElevation color="primary" className={classes.button}>
             invite
           </Button>
-          {user && <UserMenu user={user} setUser={setUser}></UserMenu>}
+          {user && <UserMenu></UserMenu>}
         </div>
       </nav>
       <div ref={(el) => (line = el)} className={classes.line}></div>
