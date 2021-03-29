@@ -16,6 +16,8 @@ router.get("/:guildID", (req, res) => {
 
     db.get(sql, [req.params.guildID], (err, row) => {
         if (err) {
+            //TODO: send better error message
+            res.sendStatus(400);
             return console.error(err.message);
         } 
 
@@ -25,13 +27,14 @@ router.get("/:guildID", (req, res) => {
         }else{
             res.sendStatus(404);
         }
-    })
+    });
 
     db.close();
-})
+});
 
 //Change the prefix of a specific guild
 router.post("/", (req, res) => {
+    console.log(req.body)
     let prefix = req.body.prefix;
     let guildID =  req.body.guildID;
 
@@ -49,6 +52,8 @@ router.post("/", (req, res) => {
 
     db.run(sql, [prefix, guildID], (err) => {
         if (err) {
+            //TODO: send better error message
+            res.sendStatus(400);
             return console.error(err.message);
         } 
         
@@ -56,28 +61,28 @@ router.post("/", (req, res) => {
 
         sendNotification("updateDictionary");
         res.sendStatus(200);     //TODO: Return error code if sendNotification failed
-    })
+    });
 
     db.close();
-})
+});
 
 
 //Send a notification to the Pyhton server
 function sendNotification(msg) {
-    const client = new net.Socket()
+    const client = new net.Socket();
 
     client.on("error", (err) => {
-        console.log(`An error occured: ${err}`)
-    })
+        console.log(`An error occured: ${err}`);
+    });
 
-    const botIp = process.env.BOT_ADDRESS || "localhost"
-    const botPort = process.env.BOT_PORT || 12345
+    const botIp = process.env.BOT_ADDRESS || "localhost";
+    const botPort = process.env.BOT_PORT || 12345;
    
     client.connect(botPort, botIp, () => {
-        console.log(`Connected to ${botIp}:${botPort}`)
-        client.write(msg)
-        client.destroy()
-    })
+        console.log(`Connected to ${botIp}:${botPort}`);
+        client.write(msg);
+        client.destroy();
+    });
 }
 
-module.exports = router
+module.exports = router;
