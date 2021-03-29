@@ -40,7 +40,7 @@ router.post("/add", (req, res) => {
         db.run(sql, [guildID, id + 1, songName], (err) => {
             if (err) {
                 //TODO: send better error message
-            res.sendStatus(400)
+                res.sendStatus(400)
                 return console.error(err.message);
             } 
     
@@ -53,7 +53,25 @@ router.post("/add", (req, res) => {
 
 //Delete a song from the queue
 router.post("/delete", (req, res) => {
-    //TODO: delete from db
+    let guildID = req.body.guildID;
+    let id = req.body.id;
+
+    let db = new sqlite3.Database(dbPath);
+    let sql = `
+        DELETE FROM queue
+        WHERE guildID = ? AND id = ?`;
+
+    db.run(sql, [guildID, id], (err) => {
+        if (err) {
+            //TODO: send better error message
+            res.sendStatus(400)
+            return console.error(err.message);
+        }
+
+        res.sendStatus(200);
+    });
+
+    db.close();
 });
 
 
