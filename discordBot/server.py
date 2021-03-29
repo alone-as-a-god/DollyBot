@@ -20,6 +20,5 @@ async def notification_Listener():                         #method gets called u
         print ("received:",rcvdData)
         if(rcvdData == "updateDictionary"):
             await db.update_prefix_dictionary(prefix_dictionary)
-            print("after: " +str(prefix_dictionary))
 
         c.close()                                   #since only one message is sent at a time, the socket gets closed again, to make sure other connections are possible

@@ -40,7 +40,7 @@ async def get_prefix(guildID):              #Returns the prefix of the specified
     connection = await db_connect()         
     cursor = await connection.cursor()
     sql = '''
-        SELECT prefix 
+        SELECT prefix
         FROM guild
         WHERE guildID = ?
         '''
@@ -96,32 +96,32 @@ def get_last_track_id_sync(guildID):
         return 0
     return fetched[0]
 
-async def add_tracks(guildID, track):
+async def add_tracks(guildID, track, url):
     connection = await db_connect()
     
     cursor = await connection.cursor()
     sql = '''
         INSERT OR IGNORE
         INTO queue
-        (guildID, id, songName)
-        VALUES (?,?,?)
+        (guildID, id, songName, url)
+        VALUES (?,?,?,?)
         '''
-    await cursor.execute(sql, ((str(guildID)), str(await get_last_track_id(guildID)+1), str(track),))
+    await cursor.execute(sql, ((str(guildID)), str(await get_last_track_id(guildID)+1), str(track), str(url)))
     await connection.commit()
     await connection.close()
     
-def add_tracks_sync(guildID, track):
+def add_tracks_sync(guildID, track, url):
     last_id = get_last_track_id_sync(guildID)+1
     connection = sql3.connect(DB_PATH)
     cursor = connection.cursor() #OR IGNORE
     sql = '''
         INSERT 
         INTO queue
-        (guildID, id, songName)
-        VALUES (?,?,?)
+        (guildID, id, songName, url)
+        VALUES (?,?,?,?)
         '''
-    
-    cursor.execute(sql, ((str(guildID)), str(last_id), str(track)))
+    print(f"{guildID}:{track}:{url}")
+    cursor.execute(sql, ((str(guildID)), str(last_id), str(track), str(url),))
     connection.commit()
     connection.close()
     
@@ -189,21 +189,25 @@ async def clear_all_tracks():
     await connection.commit()
     await connection.close()
 
-async def shuffle_queue(guildID):
+async def shuffle_queue(guildID):   #REWRITE FOR URL
     connection = await db_connect()
     cursor = await connection.cursor()
     sql = '''
-        SELECT id, songName
+        SELECT id, songName, url
         FROM "queue"
         WHERE guildID = ?
         '''
     await cursor.execute(sql, (str(guildID),))
     list = await cursor.fetchall()
-    newList = [seq[1] for seq in list]
+    newList = []
+    for seq in list:
+        seq = (seq[1], seq[2])
+        newList.append(seq)
+
     random.shuffle(newList)
     await clear_tracks(guildID)
     for i in newList:
-        await add_tracks(guildID, i)
+        await add_tracks(guildID, i[0], i[1])
         
     
 
