@@ -5,8 +5,10 @@ import SongItem from "../SongItem/SongItem";
 import { ReactSortable } from "react-sortablejs";
 import { useStyles } from "./QueueCardStyle";
 import InputForm from "../InputForm/InputForm";
-import { axios } from "axios";
+import axios from "axios";
+
 const { REACT_APP_API_ENDPOINT } = process.env;
+const YOUTUBE_REGEX = `^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.?be)\/.+$`;
 const QueueCard = ({ refresh, guildID }) => {
   const [songs, setSongs] = useState({ status: "loading" });
   const [songName, setSongName] = useState("");
@@ -20,20 +22,44 @@ const QueueCard = ({ refresh, guildID }) => {
   const addSong = (e) => {
     e.preventDefault();
     setSongs({ status: "loading" });
-    axios
-      .post(`${REACT_APP_API_ENDPOINT}/music/add`, { guildID: guildID, songName: e.target.value })
-      .then((response) => {
-        return axios.get(`${REACT_APP_API_ENDPOINT}/music/all`);
-      })
-      .then((response) => {
-        setSongs({ status: "done", data: response.data });
-      });
+
+    if (songName.match(YOUTUBE_REGEX)) {
+      setSongName(songName.replace(/\s/g, "")); //remove spaces
+      const substrings = songName.split("watch?v=");
+      const id = substrings[substrings.length - 1];
+      console.log(id);
+      axios
+        .get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&maxResults=1&key=AIzaSyDioJoz3dUl53RSC5QcIFx7tIBORGfWi9g`)
+        .then((response) => {
+          const url = songName;
+          const name = response.data.items[0].snippet.title;
+          return axios.post(`${REACT_APP_API_ENDPOINT}/music/add`, { guildID: guildID, songName: name, url: url });
+        });
+    } else {
+      axios
+        .get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${songName}&key=AIzaSyDioJoz3dUl53RSC5QcIFx7tIBORGfWi9g`)
+        .then((response) => {
+          const url = `https://www.youtube.com/watch?v=${response.data.items[0].id.videoId}`;
+          const name = response.data.items[0].snippet.title;
+          console.log(url, name);
+          return axios.post(`${REACT_APP_API_ENDPOINT}/music/add`, { guildID: guildID, songName: name, url: url });
+        });
+    }
+
+    // axios
+    //   .post(`${REACT_APP_API_ENDPOINT}/music/add`, { guildID: guildID, songName: songName })
+    //   .then((response) => {
+    //     return axios.get(`${REACT_APP_API_ENDPOINT}/music/all/${guildID}`);
+    //   })
+    //   .then((response) => {
+    //     setSongs({ status: "done", data: response.data });
+    //   });
   };
 
   const getSongs = () => {
     setSongs({ status: "loading" });
-    axios.get(`${REACT_APP_API_ENDPOINT}/music/all`).then((response) => {
-      setSongs({ status: "loading", data: response.data });
+    axios.get(`${REACT_APP_API_ENDPOINT}/music/all/${guildID}`).then((response) => {
+      setSongs({ status: "done", data: response.data });
     });
   };
 
@@ -58,8 +84,7 @@ const QueueCard = ({ refresh, guildID }) => {
 
       {songs.status === "done" && (
         <div className={classes.songContainer}>
-          {songs.data.map((song, index) => {
-            console.log(song);
+          {songs.data.map((song) => {
             return <SongItem onDelete={onDelete} key={song.id} song={song}></SongItem>;
           })}
         </div>

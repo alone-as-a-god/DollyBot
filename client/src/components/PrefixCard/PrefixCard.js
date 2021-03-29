@@ -16,9 +16,11 @@ const PrefixCard = ({ refresh, guildID }) => {
 
   const submitPrefix = (e) => {
     e.preventDefault();
-    if (prefix.data === prefix.data_old) return; //dont call api if prefix stayed the same
+    if (prefix.data === prefix.data_old) return; //dont call api if prefix is still  the same
     setPrefix({ ...prefix, status: "loading" });
-    axios.post(`${REACT_APP_API_ENDPOINT}/prefix/`, { guildID: guildID, prefix: prefix.data }).then((res) => {
+    console.log("change prefix");
+    axios.post(`${REACT_APP_API_ENDPOINT}/prefix`, { guildID: guildID, prefix: prefix.data }).then((res) => {
+      console.log(res);
       setPrefix({ ...prefix, status: "done", data_old: prefix.data });
     });
   };

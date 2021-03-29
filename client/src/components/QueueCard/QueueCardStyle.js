@@ -14,6 +14,6 @@ export const useStyles = makeStyles((theme) => ({
   songContainer: {
     marginTop: "1rem",
     maxHeight: "600px",
-    overflowY: "scroll",
+    overflowY: "auto",
   },
 }));
