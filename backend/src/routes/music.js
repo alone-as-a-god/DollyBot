@@ -6,26 +6,42 @@ const router = express.Router();
 const dbPath = process.env.DB_PATH || "../database/database.db";
 
 
-
-
 //Gets the song thats currently playing
 router.get("/current", (req, res) => {
     //TODO: get from db
 });
 
 //Get an array of all the tracks in the queue
-router.get("/all", (req, res) => {
-    //TODO: get from db
+router.get("/all/:guildID", (req, res) => {
+    let guildID = req.params.guildID;
+    let currentID = 0;   //TODO: get the id of the currently playing song
+
+    let db = new sqlite3.Database(dbPath);
+    let sql = `
+        SELECT id, songName, url
+        FROM queue
+        WHERE guildID = ? AND id > ?`;
+
+    db.all(sql, [guildID, currentID], (err, rows) => {
+        if (err) {
+            //TODO: send better error message
+            res.sendStatus(400);
+            return console.error(err.message);
+        }
+
+        res.send(rows);
+    });
+
+    db.close();
 });
 
 //Add a new song to the queue
 router.post("/add", (req, res) => {
     let guildID = req.body.guildID;
     let songName = req.body.songName;
-
     //The value from the callback is used in this part
     getLastTrackID(guildID, (id) => {
-        if(!id){
+        if(id === null || id === undefined){
             //TODO: send better error message
             res.sendStatus(400);
             return;
@@ -40,7 +56,7 @@ router.post("/add", (req, res) => {
         db.run(sql, [guildID, id + 1, songName], (err) => {
             if (err) {
                 //TODO: send better error message
-                res.sendStatus(400)
+                res.sendStatus(400);
                 return console.error(err.message);
             } 
     
@@ -64,7 +80,7 @@ router.post("/delete", (req, res) => {
     db.run(sql, [guildID, id], (err) => {
         if (err) {
             //TODO: send better error message
-            res.sendStatus(400)
+            res.sendStatus(400);
             return console.error(err.message);
         }
 
@@ -87,11 +103,15 @@ function getLastTrackID(guildID, callback){
     
     db.get(sql, [guildID], (err, row) => {
         if (err) {
-            callback(null)
-            return console.log(err.message)
+            callback(null);
+            return console.log(err.message);
         }
 
-        return callback(row.id) //Store value in callback
+        if(row.id === null){
+            return callback(0); //Store value in callback
+        }else{
+            return callback(row.id); //Store value in callback
+        }
     });
 
     db.close();

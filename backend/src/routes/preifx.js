@@ -5,26 +5,27 @@ const sqlite3 = require("sqlite3").verbose();
 const router = express.Router();
 const dbPath = process.env.DB_PATH || "../database/database.db";
 
-
 //Gets the prefix of a specific guild
 router.get("/:guildID", (req, res) => {
+    let guildID = req.params.guildID
+
     let db = new sqlite3.Database(dbPath);
     let sql = `
-        SELECT prefix 
+        SELECT prefix
         FROM guild
         WHERE guildID = ?`;
 
-    db.get(sql, [req.params.guildID], (err, row) => {
+    db.get(sql, [guildID], (err, row) => {
         if (err) {
             //TODO: send better error message
             res.sendStatus(400);
             return console.error(err.message);
-        } 
+        }
 
         //Check if row contains data
-        if(row){
+        if (row) {
             res.json({prefix: row.prefix});
-        }else{
+        } else {
             res.sendStatus(404);
         }
     });
@@ -34,12 +35,11 @@ router.get("/:guildID", (req, res) => {
 
 //Change the prefix of a specific guild
 router.post("/", (req, res) => {
-    console.log(req.body)
     let prefix = req.body.prefix;
-    let guildID =  req.body.guildID;
+    let guildID = req.body.guildID;
 
     //Check if both values are not empty
-    if(!prefix || ! guildID){
+    if (!prefix || !guildID) {
         res.sendStatus(400);
         return;
     }
@@ -55,17 +55,16 @@ router.post("/", (req, res) => {
             //TODO: send better error message
             res.sendStatus(400);
             return console.error(err.message);
-        } 
-        
+        }
+
         console.log(`Updated prefix of guild: ${guildID} to ${prefix}`);
 
         sendNotification("updateDictionary");
-        res.sendStatus(200);     //TODO: Return error code if sendNotification failed
+        res.sendStatus(200); //TODO: Return error code if sendNotification failed
     });
 
     db.close();
 });
-
 
 //Send a notification to the Pyhton server
 function sendNotification(msg) {
@@ -77,7 +76,7 @@ function sendNotification(msg) {
 
     const botIp = process.env.BOT_ADDRESS || "localhost";
     const botPort = process.env.BOT_PORT || 12345;
-   
+
     client.connect(botPort, botIp, () => {
         console.log(`Connected to ${botIp}:${botPort}`);
         client.write(msg);
