@@ -8,7 +8,6 @@ import datetime as dt
 sys.path.append("../database")
 import db
 
-#TODO: Search for ALAAAARM and add the server id
 
 class AlreadyConnectedToChannel(commands.CommandError):
     pass
@@ -145,6 +144,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             track = await self.wavelink.get_tracks(track)
             await payload.player.advance(track[0])
             payload.player.queue_position += 1
+            await db.update_position(payload.player.guild_id, payload.player.queue_position)
         else:
             await db.clear_tracks(payload.player.guild_id)                                                                     #ALAAAARM
         
@@ -220,7 +220,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def stop_command(self, ctx):
         player = self.get_player(ctx)
         await db.clear_tracks(ctx.guild.id)
-        #await db.clear_auto_increment("queue")
         await player.stop()
         await ctx.send("Playback stopped")
     
@@ -242,6 +241,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         player = self.get_player(ctx)
         pos = player.queue_position
         currentTrack = await db.get_next_track(ctx.guild.id, pos - 1)
+        if currentTrack is None:
+            raise QueueIsEmpty
         embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
         trackList = ""
         for i in range(10):
