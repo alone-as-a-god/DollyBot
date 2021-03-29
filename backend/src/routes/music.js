@@ -10,23 +10,31 @@ const dbPath = process.env.DB_PATH || "../database/database.db";
 router.get("/current/:guildID", (req, res) => {
     let guildID = req.params.guildID;
 
-    let db = new sqlite3.Database(dbPath);
-    let sql = `
-        SELECT position
-        FROM guild
-        WHERE guildID = ?`;
-
-    db.get(sql, [guildID], (err, row) => {
-        if (err) {
+    getCurrentTrackID(guildID, (id) => {
+        if (id === null || id === undefined) {
             //TODO: send better error message
             res.sendStatus(400);
-            return console.error(err.message);
+            return;
         }
 
-        res.json({id: row.position})
-    });
+        let db = new sqlite3.Database(dbPath);
+        let sql = `
+            SELECT id, songName, url
+            FROM queue
+            WHERE guildID = ? AND id = ?`;
 
-    db.close();
+        db.get(sql, [guildID, id], (err, row) => {
+            if (err) {
+                //TODO: send better error message
+                res.sendStatus(400);
+                return console.error(err.message);
+            }
+
+            res.send(row);
+        });
+
+        db.close();
+    });
 });
 
 //Get an array of all the tracks in the queue
@@ -59,7 +67,7 @@ router.post("/add", (req, res) => {
     let songName = req.body.songName;
     //The value from the callback is used in this part
     getLastTrackID(guildID, (id) => {
-        if(id === null || id === undefined){
+        if (id === null || id === undefined) {
             //TODO: send better error message
             res.sendStatus(400);
             return;
@@ -67,20 +75,21 @@ router.post("/add", (req, res) => {
 
         let db = new sqlite3.Database(dbPath);
         let sql = `
-            INSERT OR IGNORE
+            INSERT
+            OR IGNORE
             INTO queue(guildID, id, songName)
             VALUES (?, ?, ?)`;
-    
+
         db.run(sql, [guildID, id + 1, songName], (err) => {
             if (err) {
                 //TODO: send better error message
                 res.sendStatus(400);
                 return console.error(err.message);
-            } 
-    
+            }
+
             res.sendStatus(200)
         });
-    
+
         db.close();
     });
 });
@@ -92,7 +101,8 @@ router.post("/delete", (req, res) => {
 
     let db = new sqlite3.Database(dbPath);
     let sql = `
-        DELETE FROM queue
+        DELETE
+        FROM queue
         WHERE guildID = ? AND id = ?`;
 
     db.run(sql, [guildID, id], (err) => {
@@ -110,25 +120,49 @@ router.post("/delete", (req, res) => {
 
 
 //Stores the ID of the last track in the callback
-function getLastTrackID(guildID, callback){
-    let id = null;
-
+function getLastTrackID(guildID, callback) {
     let db = new sqlite3.Database(dbPath);
-    let sql =`
+    let sql = `
         SELECT MAX(id) AS id
         FROM "queue"
         WHERE guildID = ?`;
-    
+
     db.get(sql, [guildID], (err, row) => {
         if (err) {
             callback(null);
             return console.log(err.message);
         }
 
-        if(row.id === null){
+        if (row.id === null) {
             return callback(0); //Store value in callback
-        }else{
+        } else {
             return callback(row.id); //Store value in callback
+        }
+    });
+
+    db.close();
+}
+
+//Stores the ID of the current track in the callback
+function getCurrentTrackID(guildID, callback) {
+    let db = new sqlite3.Database(dbPath);
+    let sql = `
+        SELECT position
+        FROM guild
+        WHERE guildID = ?`;
+
+    db.get(sql, [guildID], (err, row) => {
+        if (err) {
+            //TODO: send better error message
+            callback(null)
+            return console.error(err.message);
+        }
+
+        //TODO: change later, maybe
+        if (!row.position) {
+            return callback(1); //Store value in callback
+        } else {
+            return callback(row.position); //Store value in callback
         }
     });
 
