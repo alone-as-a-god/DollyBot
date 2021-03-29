@@ -72,9 +72,9 @@ class Player(wavelink.Player):
         
     async def add_tracks(self, ctx, tracks):
         if isinstance(tracks, wavelink.TrackPlaylist):        
-           
+
             for track in tracks.tracks:
-                db.add_tracks_sync(ctx.guild.id, track)
+                db.add_tracks_sync(ctx.guild.id, track, track.uri)
             await ctx.send("Added playlist to queue")
             if not self.is_playing: 
                 await self.play(tracks.tracks[0])
@@ -82,7 +82,7 @@ class Player(wavelink.Player):
         else:
             if isinstance(tracks, (str, list, tuple)):
                 tracks = tracks[0]
-            db.add_tracks_sync(ctx.guild.id, tracks)
+            db.add_tracks_sync(ctx.guild.id, tracks, tracks.uri)
             await ctx.send(f"Added {tracks.title} to Queue")
             if not self.is_playing: 
                 await self.play(tracks)
