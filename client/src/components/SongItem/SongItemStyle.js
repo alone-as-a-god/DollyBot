@@ -17,5 +17,6 @@ export const useStyles = makeStyles((theme) => ({
   songInfo: {
     marginLeft: "1rem",
     fontSize: "1.25em",
+    color: theme.palette.secondary.main,
   },
 }));

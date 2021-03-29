@@ -1,64 +1,45 @@
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import DashboardCard from "../DashboardCard/DashboardCard";
 import SongItem from "../SongItem/SongItem";
 import { ReactSortable } from "react-sortablejs";
 import { useStyles } from "./QueueCardStyle";
 import InputForm from "../InputForm/InputForm";
-
-const QueueCard = ({ refresh, id }) => {
-  const getSongs = () => {
-    //TODO: implement get songs
-    const songs = [
-      { title: "Jolene", id: 1 },
-      { title: "Jolene", id: 2 },
-      { title: "Jolene", id: 3 },
-      { title: "Jolene", id: 4 },
-      { title: "Jolene", id: 5 },
-      { title: "Jolene", id: 6 },
-      { title: "Jolene", id: 7 },
-      { title: "Jolene", id: 8 },
-      { title: "Jolene", id: 9 },
-      { title: "Jolene", id: 10 },
-      { title: "Jolene", id: 11 },
-      { title: "Jolene", id: 12 },
-      { title: "Jolene", id: 13 },
-      { title: "Jolene", id: 14 },
-      { title: "Jolene", id: 15 },
-      { title: "Jolene", id: 16 },
-      { title: "Jolene", id: 17 },
-      { title: "Jolene", id: 18 },
-      { title: "Jolene", id: 19 },
-      { title: "Jolene", id: 20 },
-    ];
-    return songs;
-  };
-  const [songs, setSongs] = useState(getSongs());
-  const [displayedSongs, setDisplayedSongs] = useState([...songs]);
+import { axios } from "axios";
+const { REACT_APP_API_ENDPOINT } = process.env;
+const QueueCard = ({ refresh, guildID }) => {
+  const [songs, setSongs] = useState({ status: "loading" });
   const [songName, setSongName] = useState("");
-  const [songLimit, setSongLimit] = useState(10);
-
-  const reorderSongs = () => {
-    //TODO: post songs
-  };
 
   const onDelete = (id) => {
-    setSongs(songs.filter((s) => s.id !== id));
-    setDisplayedSongs(displayedSongs.filter((s) => s.id !== id));
-    //TODO: implement post new song list
+    axios.post(`${REACT_APP_API_ENDPOINT}/music/delete`, { guildID: guildID, songID: id }).then((response) => {
+      setSongs({ data: songs.data.filter((s) => s.id !== id), status: "done" });
+    });
   };
 
   const addSong = (e) => {
     e.preventDefault();
-    //TODO: post new song
-    console.log(songName);
+    setSongs({ status: "loading" });
+    axios
+      .post(`${REACT_APP_API_ENDPOINT}/music/add`, { guildID: guildID, songName: e.target.value })
+      .then((response) => {
+        return axios.get(`${REACT_APP_API_ENDPOINT}/music/all`);
+      })
+      .then((response) => {
+        setSongs({ status: "done", data: response.data });
+      });
+  };
+
+  const getSongs = () => {
+    setSongs({ status: "loading" });
+    axios.get(`${REACT_APP_API_ENDPOINT}/music/all`).then((response) => {
+      setSongs({ status: "loading", data: response.data });
+    });
   };
 
   useEffect(() => {
-    setSongs(getSongs());
-    setDisplayedSongs(getSongs());
+    getSongs();
     setSongName("");
-    setSongLimit(10);
   }, [refresh]);
 
   const classes = useStyles();
@@ -68,14 +49,23 @@ const QueueCard = ({ refresh, id }) => {
         Queue
       </Typography>
       <Typography className={classes.text}>Submit a songname or Youtube-URL that will be added to queue. </Typography>
-      <InputForm label="Songname or URL" value={songName} onChange={setSongName} onSubmit={addSong}></InputForm>
-      <ReactSortable onUpdate={reorderSongs} list={displayedSongs} setList={setDisplayedSongs} animation={200} delayOnTouchStart={true} delay={2}>
+      <InputForm label="Songname or URL" value={songName} defaultValue="" onChange={setSongName} onSubmit={addSong}></InputForm>
+      {/* <ReactSortable onUpdate={reorderSongs} list={displayedSongs} setList={setDisplayedSongs} animation={200} delayOnTouchStart={true} delay={2}>
         {displayedSongs.slice(0, songLimit).map((song, index) => {
           return <SongItem onDelete={onDelete} key={song.id} song={song} index={index}></SongItem>;
         })}
-      </ReactSortable>
-      {songs.length === 0 && <Typography className={classes.text}>No songs currently in queue</Typography>}
-      {songs.length > songLimit && (
+      </ReactSortable> */}
+
+      {songs.status === "done" && (
+        <div className={classes.songContainer}>
+          {songs.data.map((song, index) => {
+            console.log(song);
+            return <SongItem onDelete={onDelete} key={song.id} song={song}></SongItem>;
+          })}
+        </div>
+      )}
+      {/* {songs.length === 0 && <Typography className={classes.text}>No songs currently in queue</Typography>} */}
+      {/* {songs.length > songLimit && (
         <Button color="secondary" onClick={() => setSongLimit(songLimit + 10)} style={{ zIndex: "999" }}>
           show more
         </Button>
@@ -84,7 +74,7 @@ const QueueCard = ({ refresh, id }) => {
         <Button color="secondary" onClick={() => setSongLimit(10)} style={{ zIndex: "999" }}>
           collapse
         </Button>
-      )}
+      )} */}
     </DashboardCard>
   );
 };

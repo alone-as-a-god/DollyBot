@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.secondary.main,
     marginBottom: "1rem",
+    fontSize: "clamp(2.25em, 5vw, 3em)",
   },
 
   text: {

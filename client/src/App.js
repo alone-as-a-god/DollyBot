@@ -18,24 +18,25 @@ function App() {
         <ThemeProvider theme={theme}>
           <UserProvider>
             <Navbar />
-          </UserProvider>
 
-          <Switch>
-            <Route path="/dashboard" exact render={() => <YourServers />}></Route>
-            <Route
-              path="/dashboard/:id"
-              render={() => (
-                <YourServersProvider>
-                  <Dashboard />
-                </YourServersProvider>
-              )}
-            ></Route>
-            <Route path="/commands" exact render={() => <Commands />}></Route>
-            <Route path="/about" exact render={() => <About />}></Route>
-            <Route path="/" exact render={() => <Home></Home>}></Route>
-            <Route exact render={() => <NotFound />}></Route>
-          </Switch>
-          <Footer />
+            <Switch>
+              <Route path="/dashboard" exact render={() => <YourServers />}></Route>
+              <Route
+                path="/dashboard/:id"
+                render={() => (
+                  <YourServersProvider>
+                    <Dashboard />
+                  </YourServersProvider>
+                )}
+              ></Route>
+              <Route path="/commands" exact render={() => <Commands />}></Route>
+              <Route path="/about" exact render={() => <About />}></Route>
+              <Route path="/" exact render={() => <Home></Home>}></Route>
+              <Route exact render={() => <NotFound />}></Route>
+            </Switch>
+
+            <Footer />
+          </UserProvider>
         </ThemeProvider>
       </Router>
     </div>

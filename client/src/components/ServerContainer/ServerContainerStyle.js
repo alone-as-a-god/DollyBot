@@ -9,4 +9,7 @@ export const useStyles = makeStyles((theme) => ({
   notificationText: {
     color: theme.palette.secondary.dark,
   },
+  skeleton: {
+    borderRadius: "20px",
+  },
 }));
