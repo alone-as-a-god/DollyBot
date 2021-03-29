@@ -1,12 +1,17 @@
 import { Grid, IconButton, Typography } from "@material-ui/core";
 import { TweenMax } from "gsap/gsap-core";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import PrefixCard from "../../components/PrefixCard/PrefixCard";
 import QueueCard from "../../components/QueueCard/QueueCard";
 import { useStyles } from "./DashboardStyle";
 import { IoMdArrowBack, IoMdRefresh } from "react-icons/io";
+import { YourServersContext, YourServersProvider } from "../YourServers/YourServersContext";
+import Skeleton from "@material-ui/lab/Skeleton";
+
 const Dashboard = () => {
+  const [guilds, setGuilds] = useContext(YourServersContext);
+  const [guild, setGuild] = useState({ status: "loading" });
   const { id } = useParams();
   const classes = useStyles();
   const history = useHistory();
@@ -19,8 +24,11 @@ const Dashboard = () => {
       ease: "power4.out",
       clearProps: "all",
     });
-    //TODO: get guild info
   }, []);
+
+  useEffect(() => {
+    if (guilds.data) setGuild(guilds.data.filter((g) => g.id === id)[0], { status: "done" });
+  }, [guilds]);
   return (
     <div
       className={classes.root}
@@ -37,14 +45,14 @@ const Dashboard = () => {
         </IconButton>
       </div>
       <Typography variant="h1" className={classes.title}>
-        {id}
+        {guild.status === "loading" ? <Skeleton /> : guild.name}
       </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={7}>
-          <QueueCard refresh={refresh}></QueueCard>
+          {guild.status === "loading" ? <Skeleton /> : <QueueCard refresh={refresh} id={id}></QueueCard>}
         </Grid>
         <Grid item xs={12} md={5}>
-          <PrefixCard refresh={refresh}></PrefixCard>
+          {guild.status === "loading" ? <Skeleton /> : <PrefixCard refresh={refresh} id={id}></PrefixCard>}
         </Grid>
       </Grid>
     </div>

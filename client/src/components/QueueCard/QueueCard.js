@@ -6,7 +6,7 @@ import { ReactSortable } from "react-sortablejs";
 import { useStyles } from "./QueueCardStyle";
 import InputForm from "../InputForm/InputForm";
 
-const QueueCard = ({ refresh }) => {
+const QueueCard = ({ refresh, id }) => {
   const getSongs = () => {
     //TODO: implement get songs
     const songs = [

@@ -2,12 +2,11 @@ import { Button, Drawer, Typography } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import { useStyles } from "./MobileMenuStyle";
 import Logo from "../Navbar/logo.svg";
-import { logout } from "../../functions/Authorization";
 import { UserContext } from "../../UserContext";
 import { useContext } from "react";
 const { REACT_APP_LOGIN_URL } = process.env;
 const MobileMenu = ({ open, setOpen }) => {
-  const [user, setUser] = useContext(UserContext);
+  const [user, dispatch] = useContext(UserContext);
   const classes = useStyles();
   const history = useHistory();
   return (
@@ -69,7 +68,7 @@ const MobileMenu = ({ open, setOpen }) => {
             <a
               className={classes.link}
               onClick={() => {
-                logout(() => setUser());
+                dispatch({ type: "LOGOUT" });
                 setOpen(false);
                 history.push("/");
               }}

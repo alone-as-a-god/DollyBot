@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   icon: {
+    padding: "5px",
     cursor: "pointer",
     color: theme.palette.primary.main,
     fontSize: "2.25em",

@@ -7,10 +7,8 @@ const cors = require("cors");
 const app = express();
 const routes = require("./routes");
 
-
 const port = process.env.BACKEND_PORT || 4000;
 const dbPath = process.env.DB_PATH || "../database/database.db"; //TODO: export this variable, so that other files can use it
-
 
 var corsOptions = {
   origin: "http://localhost:3000",
@@ -36,6 +34,8 @@ app.use(
 
 //Call this before calling the router
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/api", routes);
 
 app.use("/api", routes);
 
