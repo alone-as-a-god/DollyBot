@@ -10,6 +10,7 @@ import About from "./pages/About/About";
 import NotFound from "./pages/NotFound/NotFound";
 import YourServers from "./pages/YourServers/YourServers";
 import { UserProvider } from "./UserContext";
+import { YourServersContext, YourServersProvider } from "./pages/YourServers/YourServersContext";
 function App() {
   return (
     <div>
@@ -21,7 +22,14 @@ function App() {
 
           <Switch>
             <Route path="/dashboard" exact render={() => <YourServers />}></Route>
-            <Route path="/dashboard/:id" render={() => <Dashboard />}></Route>
+            <Route
+              path="/dashboard/:id"
+              render={() => (
+                <YourServersProvider>
+                  <Dashboard />
+                </YourServersProvider>
+              )}
+            ></Route>
             <Route path="/commands" exact render={() => <Commands />}></Route>
             <Route path="/about" exact render={() => <About />}></Route>
             <Route path="/" exact render={() => <Home></Home>}></Route>

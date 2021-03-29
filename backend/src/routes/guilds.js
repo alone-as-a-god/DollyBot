@@ -22,6 +22,7 @@ var db = new sqlite.Database(DB_PATH, sqlite.OPEN_READWRITE, (err) => {
 const options = { headers: { "Content-Type": "application/x-www-form-urlencoded" } };
 
 router.get("/", (req, res) => {
+  console.log("auth");
   const getGuilds = async () => {
     const access_data = querystring.stringify({
       client_id: CLIENT_ID,
@@ -60,9 +61,8 @@ router.get("/", (req, res) => {
             icon: response_guildinfo.data.filter((guild) => guild.id == row.guildID)[0].icon,
           });
         });
-
         console.log(matchingGuilds);
-
+        req.session.guilds = matchingGuilds;
         res.send(matchingGuilds);
       });
     } catch (err) {
@@ -70,5 +70,12 @@ router.get("/", (req, res) => {
     }
   };
   getGuilds();
+});
+
+router.get("/:id", (req, res) => {
+  console.log(req.session.guilds);
+  if (!req.session.guilds) return res.sendStatus(400);
+  const guild = req.session.guilds.filter((guild) => guild.id == req.params.id);
+  res.send(...guild);
 });
 module.exports = router;

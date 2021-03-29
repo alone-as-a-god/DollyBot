@@ -5,9 +5,8 @@ const { REACT_APP_API_ENDPOINT } = process.env;
 export const YourServersContext = createContext();
 
 export const YourServersProvider = (props) => {
-  const [guilds, setGuilds] = useState({});
+  const [guilds, setGuilds] = useState({ status: "loading" });
   useEffect(() => {
-    setGuilds({ ...guilds, status: "loading" });
     axios
       .get(`${REACT_APP_API_ENDPOINT}/guilds`, { withCredentials: true })
       .then((response) => {
@@ -16,9 +15,8 @@ export const YourServersProvider = (props) => {
         setGuilds({ data: response.data, status: "done" });
       })
       .catch((error) => {
-        if (!error.response) setGuilds({ ...guilds, status: "network-error" });
+        if (!error.response) setGuilds({ status: "network-error" });
       });
-    console.log(guilds);
   }, []);
 
   return <YourServersContext.Provider value={[guilds, setGuilds]}>{props.children}</YourServersContext.Provider>;

@@ -15,6 +15,10 @@ export const useStyles = makeStyles((theme) => ({
     userSelect: "none",
     fontSize: "1.25em",
     textAlign: "center",
+    "&:hover": {
+      boxShadow: theme.shadows[3],
+      // marginTop: "-5px",
+    },
   },
   img: {
     borderRadius: "50%",
