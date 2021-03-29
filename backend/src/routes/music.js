@@ -6,15 +6,33 @@ const router = express.Router();
 const dbPath = process.env.DB_PATH || "../database/database.db";
 
 
-//Gets the song thats currently playing
-router.get("/current", (req, res) => {
-    //TODO: get from db
+//Gets the id of the currently playing song
+router.get("/current/:guildID", (req, res) => {
+    let guildID = req.params.guildID;
+
+    let db = new sqlite3.Database(dbPath);
+    let sql = `
+        SELECT position
+        FROM guild
+        WHERE guildID = ?`;
+
+    db.get(sql, [guildID], (err, row) => {
+        if (err) {
+            //TODO: send better error message
+            res.sendStatus(400);
+            return console.error(err.message);
+        }
+
+        res.json({id: row.position})
+    });
+
+    db.close();
 });
 
 //Get an array of all the tracks in the queue
 router.get("/all/:guildID", (req, res) => {
     let guildID = req.params.guildID;
-    let currentID = 0;   //TODO: get the id of the currently playing song
+    let currentID = 0;   //TODO julian: get the id of the currently playing song, or ignore it
 
     let db = new sqlite3.Database(dbPath);
     let sql = `
