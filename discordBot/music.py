@@ -8,7 +8,6 @@ import datetime as dt
 sys.path.append("../database")
 import db
 
-#TODO: Search for ALAAAARM and add the server id
 
 class AlreadyConnectedToChannel(commands.CommandError):
     pass
@@ -20,9 +19,6 @@ class QueueIsEmpty(commands.CommandError):
     pass
 
 class NoTracksFound(commands.CommandError):
-    pass
-
-class PlayerIsAlreadyPaused(commands.CommandError):
     pass
 
 class PlayerIsAlreadyPlaying(commands.CommandError):
@@ -148,6 +144,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             track = await self.wavelink.get_tracks(track)
             await payload.player.advance(track[0])
             payload.player.queue_position += 1
+            await db.update_position(payload.player.guild_id, payload.player.queue_position)
         else:
             await db.clear_tracks(payload.player.guild_id)                                                                     #ALAAAARM
         
@@ -182,6 +179,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
         player = self.get_player(ctx)
         channel = await player.connect(ctx, channel)
+        if channel is None:
+            raise NoVoiceChannel
         await ctx.send(f"Joined {channel.name}")
 
     @commands.command(name="play")
@@ -193,7 +192,14 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         query = query.strip("<>")
         if not re.match(URL_REGEX, query):
             query = f"ytsearch:{query}"    
-        track = await self.wavelink.get_tracks(query)
+        
+        for _ in range(3):    
+            track = await self.wavelink.get_tracks(query)
+            if track is not None:
+                break
+            if _ == 3:
+                await ctx.send("No matches found")
+    
         await player.add_tracks(ctx, track)
     
     @commands.command(name="search", aliases=["s"])
@@ -214,7 +220,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def stop_command(self, ctx):
         player = self.get_player(ctx)
         await db.clear_tracks(ctx.guild.id)
-        #await db.clear_auto_increment("queue")
         await player.stop()
         await ctx.send("Playback stopped")
     
@@ -236,6 +241,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         player = self.get_player(ctx)
         pos = player.queue_position
         currentTrack = await db.get_next_track(ctx.guild.id, pos - 1)
+        if currentTrack is None:
+            raise QueueIsEmpty
         embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
         trackList = ""
         for i in range(10):
@@ -247,6 +254,19 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
                 
         embedVar.add_field(name="Next Up:",value=trackList, inline=False)
         await ctx.send(embed=embedVar)
+        
+    @commands.command(name="clear")
+    async def clear_command(self, ctx):
+        await db.clear_tracks(ctx.guild.id)
+        player = self.get_player(ctx)
+        await player.stop()
+        await ctx.send("Queue cleared!")
+        
+    @commands.command(name="jump")
+    async def jump_command(self, ctx, timestamp):
+        player = self.get_player(ctx)
+        await player.seek(int(timestamp)*1000)
+        await ctx.send(f"Jumped to {timestamp} seconds")
         
         
         
@@ -270,4 +290,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             await ctx.send("No more tracks in queue.")
         if isinstance(exc, QueueIsEmpty):
             await ctx.send("Queue is empty.")
+            
+    @queue_command.error
+    async def queue_command_error(self, ctx, exc):
+        if isinstance(exc, QueueIsEmpty):
+            await ctx.send("Queue is Empty")
             
