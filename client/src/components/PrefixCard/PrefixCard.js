@@ -5,25 +5,27 @@ import { useStyles } from "./PrefixStyle";
 import axios from "axios";
 import InputForm from "../InputForm/InputForm";
 const { REACT_APP_API_ENDPOINT } = process.env;
-const PrefixCard = ({ refresh, id }) => {
+const PrefixCard = ({ refresh, guildID }) => {
   const [prefix, setPrefix] = useState({ status: "loading" });
 
   useEffect(() => {
-    axios.get(`${REACT_APP_API_ENDPOINT}/prefix/${id}`).then((res) => {
-      setPrefix({ status: "done", data: res.data.prefix });
+    axios.get(`${REACT_APP_API_ENDPOINT}/prefix/${guildID}`).then((res) => {
+      setPrefix({ status: "done", data: res.data.prefix, data_old: res.data.prefix });
     });
   }, [refresh]);
 
   const submitPrefix = (e) => {
     e.preventDefault();
+    if (prefix.data === prefix.data_old) return; //dont call api if prefix is still  the same
     setPrefix({ ...prefix, status: "loading" });
-    axios.post(`${REACT_APP_API_ENDPOINT}/prefix/`, { guildID: id, prefix: prefix.data }).then((res) => {
-      setPrefix({ ...prefix, status: "done" });
+    console.log("change prefix");
+    axios.post(`${REACT_APP_API_ENDPOINT}/prefix`, { guildID: guildID, prefix: prefix.data }).then((res) => {
+      setPrefix({ ...prefix, status: "done", data_old: prefix.data });
     });
   };
 
-  const prefixChange = (prefix) => {
-    setPrefix({ status: "done", data: prefix });
+  const prefixChange = (value) => {
+    setPrefix({ status: "done", ...prefix, data: value });
   };
   const classes = useStyles();
   return (

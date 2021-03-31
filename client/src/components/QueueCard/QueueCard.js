@@ -1,64 +1,83 @@
-import { Button, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import DashboardCard from "../DashboardCard/DashboardCard";
 import SongItem from "../SongItem/SongItem";
 import { ReactSortable } from "react-sortablejs";
 import { useStyles } from "./QueueCardStyle";
 import InputForm from "../InputForm/InputForm";
+import axios from "axios";
 
-const QueueCard = ({ refresh, id }) => {
-  const getSongs = () => {
-    //TODO: implement get songs
-    const songs = [
-      { title: "Jolene", id: 1 },
-      { title: "Jolene", id: 2 },
-      { title: "Jolene", id: 3 },
-      { title: "Jolene", id: 4 },
-      { title: "Jolene", id: 5 },
-      { title: "Jolene", id: 6 },
-      { title: "Jolene", id: 7 },
-      { title: "Jolene", id: 8 },
-      { title: "Jolene", id: 9 },
-      { title: "Jolene", id: 10 },
-      { title: "Jolene", id: 11 },
-      { title: "Jolene", id: 12 },
-      { title: "Jolene", id: 13 },
-      { title: "Jolene", id: 14 },
-      { title: "Jolene", id: 15 },
-      { title: "Jolene", id: 16 },
-      { title: "Jolene", id: 17 },
-      { title: "Jolene", id: 18 },
-      { title: "Jolene", id: 19 },
-      { title: "Jolene", id: 20 },
-    ];
-    return songs;
-  };
-  const [songs, setSongs] = useState(getSongs());
-  const [displayedSongs, setDisplayedSongs] = useState([...songs]);
+const { REACT_APP_API_ENDPOINT, REACT_APP_YOUTUBE_API_KEY } = process.env;
+const YOUTUBE_REGEX = `^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.?be)\/.+$`;
+const QueueCard = ({ refresh, guildID }) => {
+  const [songs, setSongs] = useState({ status: "loading", data: [] });
   const [songName, setSongName] = useState("");
-  const [songLimit, setSongLimit] = useState(10);
-
-  const reorderSongs = () => {
-    //TODO: post songs
-  };
 
   const onDelete = (id) => {
-    setSongs(songs.filter((s) => s.id !== id));
-    setDisplayedSongs(displayedSongs.filter((s) => s.id !== id));
-    //TODO: implement post new song list
+    axios.post(`${REACT_APP_API_ENDPOINT}/music/delete`, { guildID: guildID, id: id }).then((response) => {
+      setSongs({ data: songs.data.filter((s) => s.id !== id), status: "done" });
+    });
   };
 
   const addSong = (e) => {
     e.preventDefault();
-    //TODO: post new song
-    console.log(songName);
+    setSongs({ status: "loading", data: [] });
+
+    if (songName.match(YOUTUBE_REGEX)) {
+      setSongName(songName.replace(/\s/g, "")); //remove spaces
+      const substrings = songName.split("watch?v=");
+      const id = substrings[substrings.length - 1];
+      axios
+        .get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&maxResults=1&key=${REACT_APP_YOUTUBE_API_KEY}`)
+        .then((response) => {
+          const url = songName;
+          const name = response.data.items[0].snippet.title;
+          return axios.post(`${REACT_APP_API_ENDPOINT}/music/add`, { guildID: guildID, songName: name, url: url });
+        })
+        .then((response) => {
+          return axios.get(`${REACT_APP_API_ENDPOINT}/music/all/${guildID}`);
+        })
+        .then((response) => {
+          console.log(response.data);
+          setSongs({ status: "done", data: response.data });
+        });
+    } else {
+      axios
+        .get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${songName}&key=${REACT_APP_YOUTUBE_API_KEY}`)
+        .then((response) => {
+          const url = `https://www.youtube.com/watch?v=${response.data.items[0].id.videoId}`;
+          const name = response.data.items[0].snippet.title;
+          return axios.post(`${REACT_APP_API_ENDPOINT}/music/add`, { guildID: guildID, songName: name, url: url });
+        })
+        .then((response) => {
+          return axios.get(`${REACT_APP_API_ENDPOINT}/music/all/${guildID}`);
+        })
+        .then((response) => {
+          setSongs({ status: "done", data: response.data });
+          setSongName("");
+        });
+    }
+  };
+
+  const getSongs = () => {
+    setSongs({ status: "loading" });
+    axios
+      .get(`${REACT_APP_API_ENDPOINT}/music/all/${guildID}`)
+      .then((response) => {
+        if (response.status === 204) return setSongs({ status: "empty-error", data: [] });
+        setSongs({ status: "done", data: response.data });
+      })
+      .catch((err) => {
+        if (err.response) {
+          setSongs({ status: "error", data: [] });
+        }
+      });
   };
 
   useEffect(() => {
-    setSongs(getSongs());
-    setDisplayedSongs(getSongs());
+    getSongs();
+    console.log(songs.data);
     setSongName("");
-    setSongLimit(10);
   }, [refresh]);
 
   const classes = useStyles();
@@ -68,14 +87,23 @@ const QueueCard = ({ refresh, id }) => {
         Queue
       </Typography>
       <Typography className={classes.text}>Submit a songname or Youtube-URL that will be added to queue. </Typography>
-      <InputForm label="Songname or URL" value={songName} onChange={setSongName} onSubmit={addSong}></InputForm>
-      <ReactSortable onUpdate={reorderSongs} list={displayedSongs} setList={setDisplayedSongs} animation={200} delayOnTouchStart={true} delay={2}>
+      <InputForm label="Songname or URL" value={songName} defaultValue="" onChange={setSongName} onSubmit={addSong}></InputForm>
+      {/* <ReactSortable onUpdate={reorderSongs} list={displayedSongs} setList={setDisplayedSongs} animation={200} delayOnTouchStart={true} delay={2}>
         {displayedSongs.slice(0, songLimit).map((song, index) => {
           return <SongItem onDelete={onDelete} key={song.id} song={song} index={index}></SongItem>;
         })}
-      </ReactSortable>
-      {songs.length === 0 && <Typography className={classes.text}>No songs currently in queue</Typography>}
-      {songs.length > songLimit && (
+      </ReactSortable> */}
+      {songs.status === "error" && <Typography className={classes.text}>Can't get songs from database</Typography>}
+      {typeof songs.data !== "undefined" && songs.data.length === 0 && <Typography className={classes.text}>Queue is empty</Typography>}
+      {songs.status === "done" && (
+        <div className={classes.songContainer}>
+          {songs.data.map((song) => {
+            return <SongItem onDelete={onDelete} key={song.id} song={song}></SongItem>;
+          })}
+        </div>
+      )}
+      {/* {songs.length === 0 && <Typography className={classes.text}>No songs currently in queue</Typography>} */}
+      {/* {songs.length > songLimit && (
         <Button color="secondary" onClick={() => setSongLimit(songLimit + 10)} style={{ zIndex: "999" }}>
           show more
         </Button>
@@ -84,7 +112,7 @@ const QueueCard = ({ refresh, id }) => {
         <Button color="secondary" onClick={() => setSongLimit(10)} style={{ zIndex: "999" }}>
           collapse
         </Button>
-      )}
+      )} */}
     </DashboardCard>
   );
 };

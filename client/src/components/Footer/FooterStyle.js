@@ -41,11 +41,15 @@ export const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: "none",
+    cursor: "pointer",
   },
   linkText: {
     color: theme.palette.primary.main,
     textTransform: "capitalize",
     fontFamily: "Poppins",
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
   robot: {
     position: "absolute",

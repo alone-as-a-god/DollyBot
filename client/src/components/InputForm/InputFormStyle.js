@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
   },
   inputContainer: {
-    minWidth: "250px",
+    // minWidth: "250px",
     display: "flex",
     flexWrap: "none",
     alignItems: "flex-end",

@@ -10,9 +10,9 @@ const ServerCard = ({ guild }) => {
       {guild.icon ? (
         [
           guild.icon.startsWith("a_", 0) ? (
-            <img className={classes.img} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.gif`} alt={guild.icon} />
+            <img key={1} className={classes.img} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.gif`} alt={guild.icon} />
           ) : (
-            <img className={classes.img} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.icon} />
+            <img key={2} className={classes.img} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.icon} />
           ),
         ]
       ) : (

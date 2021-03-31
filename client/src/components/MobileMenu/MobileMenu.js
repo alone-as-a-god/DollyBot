@@ -59,7 +59,7 @@ const MobileMenu = ({ open, setOpen }) => {
         {user && (
           <>
             <Link
-              className={`${classes.link} ${window.location.pathname === "/dashboard" && classes.active}`}
+              className={`${classes.link} ${window.location.pathname.includes("/dashboard") && classes.active}`}
               to="/dashboard"
               onClick={() => setOpen(false)}
             >

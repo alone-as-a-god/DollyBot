@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     overflow: "hidden",
     marginBottom: "200px",
+    minHeight: "100vh",
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
     [theme.breakpoints.down("md")]: {
@@ -23,12 +24,14 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
     marginBottom: "2rem",
     overflowWrap: "break-word",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "3.25em",
-    },
+    fontSize: "clamp(2.5em, 8vw, 5em)",
   },
   iconContainer: {
     margin: "2rem 0",
+  },
+  skeleton: {
+    borderRadius: "1rem",
+    marginBottom: "1rem",
   },
   iconButton: {
     marginRight: "1rem",
@@ -38,5 +41,8 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.primary.extradark,
     },
+  },
+  notificationText: {
+    color: theme.palette.secondary.dark,
   },
 }));

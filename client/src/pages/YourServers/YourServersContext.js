@@ -10,12 +10,12 @@ export const YourServersProvider = (props) => {
     axios
       .get(`${REACT_APP_API_ENDPOINT}/guilds`, { withCredentials: true })
       .then((response) => {
-        if (response.data === "") return setGuilds({ status: "noguilds-error" });
-
+        if (response.status === 204) return setGuilds({ status: "noguilds-error" });
         setGuilds({ data: response.data, status: "done" });
       })
       .catch((error) => {
-        if (!error.response) setGuilds({ status: "network-error" });
+        if (!error.response) return setGuilds({ status: "network-error" });
+        if (error.response.status === 429) setGuilds({ status: "discord-api-error" });
       });
   }, []);
 

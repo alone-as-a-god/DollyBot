@@ -3,15 +3,32 @@ import React, { useContext } from "react";
 import ServerCard from "../ServerCard/ServerCard";
 import { useStyles } from "./ServerContainerStyle";
 import { YourServersContext } from "../../pages/YourServers/YourServersContext";
+import Skeleton from "@material-ui/lab/Skeleton";
 const ServerContainer = () => {
   const classes = useStyles();
-  const [guilds, setGuilds] = useContext(YourServersContext);
+  const [guilds] = useContext(YourServersContext);
 
   return (
     <>
       {guilds.status === "loading" && (
+        <Grid container spacing={3} className={classes.container}>
+          <Grid item lg={3} md={4} sm={6} xs={10}>
+            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+          </Grid>
+          <Grid item lg={3} md={4} sm={6} xs={10}>
+            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+          </Grid>
+          <Grid item lg={3} md={4} sm={6} xs={10}>
+            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+          </Grid>
+          <Grid item lg={3} md={4} sm={6} xs={10}>
+            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+          </Grid>
+        </Grid>
+      )}
+      {guilds.status === "discord-api-error" && (
         <Typography variant="h5" className={classes.notificationText}>
-          Loading ...
+          Discord API limit reached. Try again later.
         </Typography>
       )}
       {guilds.status === "network-error" && (

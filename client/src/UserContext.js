@@ -33,6 +33,7 @@ export const UserProvider = (props) => {
         .catch((err) => {
           dispatch({ type: "LOGIN_FAILED" });
         });
+      return;
     }
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -46,7 +47,6 @@ export const UserProvider = (props) => {
           dispatch({ type: "LOGIN_FAILED" });
         });
     }
-    console.log(user);
   }, []);
 
   return <UserContext.Provider value={[user, dispatch]}>{props.children}</UserContext.Provider>;

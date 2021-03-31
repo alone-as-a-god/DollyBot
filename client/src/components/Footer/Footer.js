@@ -1,11 +1,15 @@
 import { IconButton, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 import { useStyles } from "./FooterStyle";
 import Robot from "./robot.svg";
+const { REACT_APP_LOGIN_URL } = process.env;
 const Footer = () => {
+  const [user, dispatch] = useContext(UserContext);
+  const history = useHistory();
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -23,12 +27,23 @@ const Footer = () => {
       <div className={classes.linksContainer}>
         <div>
           <Typography className={classes.header}>options</Typography>
-          <Link className={classes.link} to="/login">
-            <Typography className={classes.linkText}>login</Typography>
-          </Link>
-          <Link className={classes.link} to="/logout">
-            <Typography className={classes.linkText}>logout</Typography>
-          </Link>
+          {user && (
+            <a
+              className={classes.link}
+              onClick={() => {
+                dispatch({ type: "LOGOUT" });
+                history.push("/");
+              }}
+            >
+              <Typography className={classes.linkText}>logout</Typography>
+            </a>
+          )}
+          {!user && (
+            <a className={classes.link} href={REACT_APP_LOGIN_URL}>
+              <Typography className={classes.linkText}>login</Typography>
+            </a>
+          )}
+
           <Link className={classes.link} to="/invite">
             <Typography className={classes.linkText}>invite</Typography>
           </Link>
@@ -38,9 +53,12 @@ const Footer = () => {
           <Link to="/" className={classes.link}>
             <Typography className={classes.linkText}>home</Typography>
           </Link>
-          <Link to="/dashboard" className={classes.link}>
-            <Typography className={classes.linkText}>dashboard</Typography>
-          </Link>
+          {user && (
+            <Link to="/dashboard" className={classes.link}>
+              <Typography className={classes.linkText}>dashboard</Typography>
+            </Link>
+          )}
+
           <Link to="/commands" className={classes.link}>
             <Typography className={classes.linkText}>commands</Typography>
           </Link>
