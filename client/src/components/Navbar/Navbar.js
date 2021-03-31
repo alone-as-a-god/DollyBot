@@ -10,7 +10,7 @@ import Logo from "./logo.svg";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import UserMenu from "../UserMenu/UserMenu";
 import { UserContext } from "../../UserContext";
-const { REACT_APP_LOGIN_URL } = process.env;
+const { REACT_APP_LOGIN_URL, REACT_APP_INVITE_URL } = process.env;
 const Navbar = () => {
   const [user, dispatch] = useContext(UserContext);
   const [url, setUrl] = useState("");
@@ -106,7 +106,7 @@ const Navbar = () => {
           <NavbarLink path="/about">about</NavbarLink>
           <NavbarLink path="/commands">commands</NavbarLink>
           {!user && <NavbarLink href={REACT_APP_LOGIN_URL}>login</NavbarLink>}
-          <Button variant="contained" disableElevation color="primary" className={classes.button}>
+          <Button variant="contained" disableElevation color="primary" className={classes.button} href={REACT_APP_INVITE_URL} target="_blank">
             invite
           </Button>
           {user && <UserMenu></UserMenu>}

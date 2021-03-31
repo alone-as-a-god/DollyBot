@@ -20,7 +20,6 @@ const PrefixCard = ({ refresh, guildID }) => {
     setPrefix({ ...prefix, status: "loading" });
     console.log("change prefix");
     axios.post(`${REACT_APP_API_ENDPOINT}/prefix`, { guildID: guildID, prefix: prefix.data }).then((res) => {
-      console.log(res);
       setPrefix({ ...prefix, status: "done", data_old: prefix.data });
     });
   };

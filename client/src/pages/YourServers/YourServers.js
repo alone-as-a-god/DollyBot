@@ -7,7 +7,6 @@ import { YourServersProvider } from "./YourServersContext";
 import { UserContext } from "../../UserContext";
 import { Redirect } from "react-router";
 
-const { REACT_APP_API_ENDPOINT } = process.env;
 const YourServers = () => {
   const classes = useStyles();
   const [user] = useContext(UserContext);
@@ -23,7 +22,6 @@ const YourServers = () => {
 
   return (
     <>
-      {!user && <Redirect to="/"></Redirect>}
       <div
         className={classes.root}
         ref={(element) => {

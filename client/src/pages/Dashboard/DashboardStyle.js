@@ -42,4 +42,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.extradark,
     },
   },
+  notificationText: {
+    color: theme.palette.secondary.dark,
+  },
 }));

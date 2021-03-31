@@ -19,4 +19,9 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "1.25em",
     color: theme.palette.secondary.main,
   },
+  container: {
+    display: "flex",
+
+    // alignItems: "center",
+  },
 }));

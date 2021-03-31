@@ -33,7 +33,7 @@ const Dashboard = () => {
   }, [guilds]);
   return (
     <>
-      {!user || (!guilds && <Redirect to="/"></Redirect>)}
+      {!guilds && <Redirect to="/"></Redirect>}
       <div
         className={classes.root}
         ref={(element) => {
@@ -48,26 +48,35 @@ const Dashboard = () => {
             <IoMdRefresh />
           </IconButton>
         </div>
-        {guild.status !== "loading" ? (
+        {guilds.status === "discord-api-error" && (
+          <Typography variant="h5" className={classes.notificationText}>
+            Discord API limit reached. Try again later.
+          </Typography>
+        )}
+        {guilds.status === "network-error" && (
+          <Typography variant="h5" className={classes.notificationText}>
+            Can't reach server.
+          </Typography>
+        )}
+        {guilds.status === "done" && guild.status === "done" ? (
           <Typography variant="h1" className={classes.title}>
             {guild.data.name}
           </Typography>
         ) : (
-          <>
-            <Skeleton height="100px" variant="rect" className={classes.skeleton} />
-          </>
+          <Skeleton height="100px" variant="rect" className={classes.skeleton} />
         )}
+
         <Grid container spacing={4}>
           <Grid item xs={12} md={7}>
             {guild.status === "loading" ? (
-              <Skeleton variant="rect" height="400px" className={classes.skeleton} />
+              <Skeleton variant="rect" height="350px" className={classes.skeleton} />
             ) : (
               <QueueCard refresh={refresh} guildID={id}></QueueCard>
             )}
           </Grid>
           <Grid item xs={12} md={5}>
             {guild.status === "loading" ? (
-              <Skeleton height="300px" variant="rect" className={classes.skeleton} />
+              <Skeleton height="350px" variant="rect" className={classes.skeleton} />
             ) : (
               <PrefixCard refresh={refresh} guildID={id}></PrefixCard>
             )}
