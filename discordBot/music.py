@@ -15,6 +15,9 @@ class AlreadyConnectedToChannel(commands.CommandError):
 class NoVoiceChannel(commands.CommandError):
     pass
 
+class NotPlaying(commands.CommandError):
+    pass
+
 class QueueIsEmpty(commands.CommandError):
     pass
 
@@ -27,8 +30,6 @@ class PlayerIsAlreadyPlaying(commands.CommandError):
 class NoMoreTracks(commands.CommandError):
     pass
 
-class NoValidRepeatMode(commands.CommandError):
-    pass
 
 
 #Regex matches youtube URL
@@ -95,7 +96,7 @@ class Player(wavelink.Player):
             title = "Choose a song",
             description = (
                 "\n".join(
-                    f"**{i+1}.**{t.title} ({t.length//60000}:{str(t.length%60).zfill(2)})"              #DISGUSTING        first takes number of track +1, then title, length divided by 60k because its in microseconds, zfill adds zeroes at the end until it is mm:ss format
+                    f"**{i+1}.**{t.title} ({t.length//60000}:{str(t.length%60).zfill(2)})"             
                     for i, t in enumerate(tracks[:5])
                 )
                 ),
@@ -199,6 +200,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
                 break
             if _ == 3:
                 await ctx.send("No matches found")
+        
     
         await player.add_tracks(ctx, track)
     
@@ -226,6 +228,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @commands.command(name="skip")
     async def skip_command(self, ctx):
         player = self.get_player(ctx)
+        track = await db.get_next_track(ctx.guild.id, player.queue_position)
+        if track is None:
+            raise NoMoreTracks
         await player.stop()
         await ctx.send("Skipping...")
         
@@ -236,7 +241,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     
     @commands.command(name="queue", aliases=["q"])
-    async def queue_command(self, ctx):
+    async def queue_command(self, ctx, amount=10):
         embedVar = discord.Embed(title="Queue", color=ctx.author.color)
         player = self.get_player(ctx)
         pos = player.queue_position
@@ -245,15 +250,17 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             raise QueueIsEmpty
         embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
         trackList = ""
-        for i in range(10):
+        for i in range(amount):
             track = await db.get_next_track(ctx.guild.id, pos + i)
             
             if track is not None:
                 trackList = f"{trackList} \n {track[0]}"
-                #await ctx.send(f"{i}: {track}")
-                
-        embedVar.add_field(name="Next Up:",value=trackList, inline=False)
+
+        if(trackList!=""):
+            embedVar.add_field(name="Next Up:",value=trackList, inline=False)
         await ctx.send(embed=embedVar)
+        print("habibi")  
+        
         
     @commands.command(name="clear")
     async def clear_command(self, ctx):
@@ -262,13 +269,24 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await player.stop()
         await ctx.send("Queue cleared!")
         
+    
     @commands.command(name="jump")
     async def jump_command(self, ctx, timestamp):
         player = self.get_player(ctx)
+        if not player.is_playing:
+            raise NotPlaying
+        if not player.is_connected:
+            raise NoVoiceChannel
+        
         await player.seek(int(timestamp)*1000)
         await ctx.send(f"Jumped to {timestamp} seconds")
         
         
+    
+    @jump_command.error
+    async def jump_command_error(self, ctx, exc):
+        if isinstance(exc, NoVoiceChannel) or isinstance(exc, NotPlaying):
+            await ctx.send("Not playing any Music")
         
     @connect_command.error
     async def connect_command_error(self, ctx, exc):
@@ -288,8 +306,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def skip_command_error(self, ctx, exc):
         if isinstance(exc, NoMoreTracks):
             await ctx.send("No more tracks in queue.")
-        if isinstance(exc, QueueIsEmpty):
-            await ctx.send("Queue is empty.")
             
     @queue_command.error
     async def queue_command_error(self, ctx, exc):
