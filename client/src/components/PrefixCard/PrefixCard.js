@@ -18,7 +18,6 @@ const PrefixCard = ({ refresh, guildID }) => {
     e.preventDefault();
     if (prefix.data === prefix.data_old) return; //dont call api if prefix is still  the same
     setPrefix({ ...prefix, status: "loading" });
-    console.log("change prefix");
     axios.post(`${REACT_APP_API_ENDPOINT}/prefix`, { guildID: guildID, prefix: prefix.data }).then((res) => {
       setPrefix({ ...prefix, status: "done", data_old: prefix.data });
     });
@@ -34,13 +33,7 @@ const PrefixCard = ({ refresh, guildID }) => {
         Prefix
       </Typography>
       <Typography className={classes.text}>Set the prefix you want to use for your bot</Typography>
-      <InputForm
-        loading={prefix.status == "loading" ? true : false}
-        value={prefix.data}
-        onChange={prefixChange}
-        onSubmit={submitPrefix}
-        label="Prefix"
-      ></InputForm>
+      <InputForm loading={prefix.status === "loading"} value={prefix.data} onChange={prefixChange} onSubmit={submitPrefix} label="Prefix"></InputForm>
     </DashboardCard>
   );
 };

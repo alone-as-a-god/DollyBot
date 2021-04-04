@@ -1,5 +1,4 @@
 import { Typography } from "@material-ui/core";
-import React from "react";
 import { useHistory } from "react-router";
 import { useStyles } from "./ServerCardStyle";
 const ServerCard = ({ guild, icon, onClick }) => {

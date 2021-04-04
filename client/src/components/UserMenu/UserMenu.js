@@ -34,7 +34,7 @@ const UserMenu = ({ scroll }) => {
             <AiFillCaretDown />
           </IconButton>
           {open && (
-            <div className={`${classes.options} ${scroll && classes.scrollOption}`} style={{ zIndex: "99999" }}>
+            <div className={`${classes.options} ${scroll && classes.scrollOption}`}>
               <div
                 className={classes.optionsItem}
                 onClick={() => {

@@ -6,7 +6,6 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
     fontSize: "clamp(2.25em, 5vw, 3em)",
   },
-
   text: {
     color: theme.palette.secondary.dark,
     marginBottom: "1rem",

@@ -5,8 +5,8 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    padding: "2rem 0",
     minHeight: "100vh",
+    padding: "2rem 0",
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(6),
       paddingRight: theme.spacing(6),
@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "4rem",
   },
   text: {
-    color: "#27283F",
+    color: theme.palette.primary.extradark,
     fontSize: "clamp(2em, 5vw, 3em)",
     marginBottom: "1rem",
   },

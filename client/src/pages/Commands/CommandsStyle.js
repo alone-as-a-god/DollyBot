@@ -1,12 +1,8 @@
 import { makeStyles } from "@material-ui/core";
-import Curve from "./curve.svg";
 export const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
     padding: "2rem 0",
-    backgroundPosition: "top right",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "contain",
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
     [theme.breakpoints.down("md")]: {
@@ -16,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
-      background: "url()",
     },
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing(2),
@@ -24,10 +19,10 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   accordion: {
+    width: "60%",
     background: theme.palette.primary.dark,
     color: theme.palette.secondary.main,
     borderColor: "red",
-    width: "60%",
     [theme.breakpoints.down("lg")]: {
       width: "80%",
     },
@@ -42,8 +37,8 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   title: {
-    color: theme.palette.secondary.main,
     marginBottom: "1rem",
+    color: theme.palette.secondary.main,
     [theme.breakpoints.down("xs")]: {
       fontSize: "3em",
     },
@@ -52,14 +47,13 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
     fontSize: "1.5em",
   },
-
   text: {
     color: theme.palette.secondary.main,
     marginBottom: "1rem",
   },
-  alias: {
-    opacity: "80%",
-    marginLeft: "1em",
+  syntax: {
+    marginLeft: ".75em",
+    color: theme.palette.secondary.dark,
   },
   accordionTitle: {
     "&>div": {
@@ -67,8 +61,8 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: "center",
     },
   },
-  accordionText: {
-    opacity: "80%",
+  description: {
+    color: theme.palette.secondary.dark,
   },
   commandName: {
     fontSize: "1.75em",

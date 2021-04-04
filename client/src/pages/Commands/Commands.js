@@ -34,12 +34,16 @@ const Commands = () => {
               <Accordion className={classes.accordion} expanded={expanded === index} onChange={handleChange(index)}>
                 <AccordionSummary expandIcon={<MdExpandMore className={classes.icon} />} className={classes.accordionTitle}>
                   <Typography className={classes.commandName}>{command.name}</Typography>
-                  {command.aliases !== undefined &&
-                    command.aliases.map((alias) => {
-                      return <Typography className={classes.alias}>{alias}</Typography>;
+                  {command.syntax &&
+                    command.syntax.map((syntax, index) => {
+                      return (
+                        <Typography key={index} className={classes.syntax}>
+                          {syntax}
+                        </Typography>
+                      );
                     })}
                 </AccordionSummary>
-                <AccordionDetails className={classes.accordionText}>
+                <AccordionDetails className={classes.description}>
                   <Typography> {command.description}</Typography>
                 </AccordionDetails>
               </Accordion>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./NavbarLinkStyle";
 import { motion } from "framer-motion";
@@ -11,11 +10,7 @@ const NavbarLink = ({ path, children }) => {
         {children}
       </Link>
       {window.location.pathname === path ? (
-        <motion.div
-          layoutId="navbarlink"
-          className={`${classes.line} ${window.location.pathname === path && classes.active}`}
-          // transition={{ type: "spring", stiffness: 70 }}
-        ></motion.div>
+        <motion.div layoutId="navbarlink" className={`${classes.line} ${window.location.pathname === path && classes.active}`}></motion.div>
       ) : (
         <div className={`${classes.line}`}></div>
       )}
@@ -24,4 +19,3 @@ const NavbarLink = ({ path, children }) => {
 };
 
 export default NavbarLink;
-// ${ && classes.active}

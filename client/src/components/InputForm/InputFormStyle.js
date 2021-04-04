@@ -2,11 +2,10 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   input: {
-    fontSize: "1em",
-    padding: "0 !important",
+    marginRight: "1em",
     color: theme.palette.secondary.main,
     borderColor: theme.palette.secondary.main,
-    marginRight: "1em",
+    fontSize: "1em",
     "&$focused": {
       color: theme.palette.secondary.main,
       borderColor: theme.palette.secondary.main,
@@ -42,6 +41,10 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: "1rem",
       },
     },
+  },
+  buttonContainer: {
+    width: "fit-content",
+    position: "relative",
   },
   button: {
     borderRadius: "99em",

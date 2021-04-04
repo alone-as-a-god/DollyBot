@@ -31,17 +31,18 @@ code {
 }
 
 #hand {
-  animation: handAnimation 1s linear infinite alternate-reverse;
-  transform-origin: 100% 100%;
   transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: hand 0.6s infinite alternate linear;
+  position: absolute;
 }
 
-@keyframes handAnimation {
+@keyframes hand {
   from {
     transform: rotateZ(0deg);
   }
   to {
-    transform: rotateZ(360deg);
+    transform: rotateZ(30deg);
   }
 }
 

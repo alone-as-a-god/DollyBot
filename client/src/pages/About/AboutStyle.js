@@ -1,9 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundPosition: "top right",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "contain",
     minHeight: "100vh",
     padding: "2rem 0",
     paddingLeft: theme.spacing(16),
@@ -15,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
-      background: "url('')",
     },
     [theme.breakpoints.down("xs")]: {
       paddingLeft: theme.spacing(2),

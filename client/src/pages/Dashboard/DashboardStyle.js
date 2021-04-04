@@ -2,11 +2,11 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    overflow: "hidden",
-    marginBottom: "200px",
     minHeight: "100vh",
+    marginBottom: "200px",
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
+    overflow: "hidden",
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(6),
       paddingRight: theme.spacing(6),
@@ -21,8 +21,8 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   title: {
-    color: theme.palette.secondary.main,
     marginBottom: "2rem",
+    color: theme.palette.secondary.main,
     overflowWrap: "break-word",
     fontSize: "clamp(2.5em, 8vw, 5em)",
   },
@@ -30,8 +30,8 @@ export const useStyles = makeStyles((theme) => ({
     margin: "2rem 0",
   },
   skeleton: {
-    borderRadius: "1rem",
     marginBottom: "1rem",
+    borderRadius: "1rem",
   },
   iconButton: {
     marginRight: "1rem",

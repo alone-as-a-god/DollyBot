@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useStyles } from "./NavbarStyle";
-import { Button, ButtonGroup, IconButton, Typography } from "@material-ui/core";
+import { Button, IconButton, Typography } from "@material-ui/core";
 import NavbarLink from "../NavbarLink/NavbarLink";
-import { TweenMax, TimelineLite } from "gsap";
+import { TimelineLite } from "gsap";
 import { RiMenu3Fill } from "react-icons/ri";
 import { useWindowWidth } from "../../hooks/useViewportWidth";
-import Logo from "./logo.svg";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import UserMenu from "../UserMenu/UserMenu";
 import { UserContext } from "../../UserContext";
@@ -76,6 +75,7 @@ const Navbar = () => {
   useEffect(() => {
     if (width > 960) setOpen(false);
   }, [width]);
+
   const classes = useStyles();
   return (
     <>
@@ -87,7 +87,7 @@ const Navbar = () => {
             logo = el;
           }}
         >
-          <motion.svg width="626" height="626" viewBox="0 0 626 626" fill="none" xmlns="http://www.w3.org/2000/svg" className={classes.logo}>
+          <svg width="626" height="626" viewBox="0 0 626 626" fill="none" xmlns="http://www.w3.org/2000/svg" className={classes.logo}>
             <path
               d="M313 626C485.865 626 626 485.865 626 313C626 140.135 485.865 0 313 0C140.135 0 0 140.135 0 313C0 485.865 140.135 626 313 626Z"
               fill={scroll ? "#474A80" : "#32345A"}
@@ -118,7 +118,7 @@ const Navbar = () => {
               fill="#CADDE1"
             />
             <path d="M487.526 443.035L425.264 467.65L487.526 443.035Z" fill="#CADDE1" />
-          </motion.svg>
+          </svg>
 
           <Typography variant="h3" className={classes.logoText}>
             dolly
@@ -136,6 +136,7 @@ const Navbar = () => {
         <AnimateSharedLayout>
           <div
             className={classes.linkContainer}
+            id="nav"
             ref={(el) => {
               links = el;
             }}

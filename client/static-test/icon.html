@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <svg width="211" height="211" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="carbon:dashboard">
+        <path id="bar2" d="M158.25 138.469H171.438V171.438H158.25V138.469Z" fill="#F9F7FF" />
+        <path id="bar1" d="M131.875 105.5H145.062V171.438H131.875V105.5Z" fill="#F9F7FF" />
+        <path
+          id="circle"
+          d="M72.5312 171.438C63.7906 171.427 55.411 167.95 49.2304 161.77C43.0498 155.589 39.573 147.209 39.5625 138.469H52.75C52.75 142.381 53.9102 146.206 56.0837 149.459C58.2573 152.712 61.3467 155.247 64.9613 156.744C68.5758 158.241 72.5532 158.633 76.3904 157.87C80.2276 157.107 83.7523 155.223 86.5187 152.456C89.2852 149.69 91.1691 146.165 91.9324 142.328C92.6957 138.491 92.3039 134.513 90.8067 130.899C89.3095 127.284 86.7741 124.195 83.5211 122.021C80.2681 119.848 76.4436 118.688 72.5312 118.688V105.5C81.2751 105.5 89.6608 108.973 95.8437 115.156C102.027 121.339 105.5 129.725 105.5 138.469C105.5 147.213 102.027 155.598 95.8437 161.781C89.6608 167.964 81.2751 171.438 72.5312 171.438Z"
+          fill="#F9F7FF"
+        />
+        <path
+          id="Vector"
+          d="M184.625 13.1875H26.375C22.8785 13.191 19.5263 14.5815 17.0539 17.0539C14.5815 19.5263 13.191 22.8785 13.1875 26.375V184.625C13.191 188.121 14.5815 191.474 17.0539 193.946C19.5263 196.419 22.8785 197.809 26.375 197.812H184.625C188.121 197.807 191.472 196.416 193.944 193.944C196.416 191.472 197.807 188.121 197.812 184.625V26.375C197.809 22.8785 196.419 19.5263 193.946 17.0539C191.474 14.5815 188.121 13.191 184.625 13.1875ZM184.625 72.5312H92.3125V26.375H184.625V72.5312ZM79.125 26.375V72.5312H26.375V26.375H79.125ZM26.375 184.625V85.7188H184.625L184.638 184.625H26.375Z"
+          fill="#F9F7FF"
+        />
+      </g>
+    </svg>
+  </body>
+  <style>
+    body {
+      background: black;
+    }
+    #circle {
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+      animation: hand 2.5s infinite alternate ease;
+    }
+
+    #bar1,
+    #bar2 {
+      transform-box: fill-box;
+      transform-origin: 100% 100%;
+      animation: bar 1.2s infinite alternate linear;
+    }
+    #bar2 {
+      animation-delay: 0.7s;
+    }
+    @keyframes bar {
+      from {
+        transform: scaleY(1);
+      }
+      to {
+        transform: scaleY(0.5);
+      }
+    }
+    @keyframes hand {
+      from {
+        transform: rotateZ(0deg);
+      }
+      to {
+        transform: rotateZ(180deg);
+      }
+    }
+  </style>
+</html>
