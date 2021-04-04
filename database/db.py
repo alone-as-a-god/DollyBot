@@ -142,7 +142,7 @@ async def get_next_track(guildID, current_track_id):
     connection = await db_connect()
     cursor = await connection.cursor()
     sql = '''
-        SELECT songName
+        SELECT url
         FROM queue
         WHERE id=? 
         AND guildID=?
@@ -150,13 +150,14 @@ async def get_next_track(guildID, current_track_id):
     await cursor.execute(sql, (str(current_track_id+1), str(guildID),))
     track = await cursor.fetchone()
     await connection.close()
-    return track
+    print(f"fetched: {track}")
+    return track[0]
 
 def get_next_track_sync(guildID, current_track_id):
     connection = sql3.connect(DB_PATH)
     cursor = connection.cursor()
     sql = '''
-        SELECT songName
+        SELECT url
         FROM queue
         WHERE id=?
         AND guildID=?
@@ -165,7 +166,8 @@ def get_next_track_sync(guildID, current_track_id):
     cursor.execute(sql, (str(current_track_id+1), str(guildID),))
     track = cursor.fetchone()
     connection.close()
-    return track
+    print(f"fetched: {track}")
+    return track[0]
 
 async def update_track(guildID, track_name, track_id):
     connection = await db_connect()
@@ -230,7 +232,11 @@ async def shuffle_queue(guildID):   #REWRITE FOR URL
     
 
 async def main():                       #Testing out the above methods 
-    await shuffle_queue(123)
+    title = "鎌田純子『眠れぬ夜はジャスミン茶を』MV【Official】"
+    await add_tracks(123, title, "youtuber.com/v=akjdsaks")
+    newTitle = await get_next_track(123,0)
+    print(newTitle[0])
+    #await shuffle_queue(123)
     
 
         
