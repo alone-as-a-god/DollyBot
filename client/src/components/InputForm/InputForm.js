@@ -28,7 +28,7 @@ const InputForm = ({ loading, label, onSubmit, value, defaultValue, onChange }) 
         )}
 
         <div style={{ width: "fit-content", position: "relative" }}>
-          <Button disabled={loading} type="submit" color="secondary" variant="contained" disableElevation>
+          <Button disabled={loading} type="submit" color="secondary" variant="contained" disableElevation className={classes.button}>
             submit
           </Button>
           {loading && (

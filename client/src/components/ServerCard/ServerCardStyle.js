@@ -17,13 +17,14 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     "&:hover": {
       boxShadow: theme.shadows[3],
-      // marginTop: "-5px",
     },
   },
   img: {
     borderRadius: "50%",
     width: "60%",
-
     marginBottom: "1rem",
+  },
+  icon: {
+    fontSize: "6em",
   },
 }));

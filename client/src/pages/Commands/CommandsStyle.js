@@ -3,8 +3,7 @@ import Curve from "./curve.svg";
 export const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
-    paddingTop: "2rem",
-    background: `url('${Curve}')`,
+    padding: "2rem 0",
     backgroundPosition: "top right",
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",

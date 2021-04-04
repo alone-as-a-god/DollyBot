@@ -4,6 +4,7 @@ import { useStyles } from "./MobileMenuStyle";
 import Logo from "../Navbar/logo.svg";
 import { UserContext } from "../../UserContext";
 import { useContext } from "react";
+import MobileLink from "../MobileLink/MobileLink";
 const { REACT_APP_LOGIN_URL } = process.env;
 const MobileMenu = ({ open, setOpen }) => {
   const [user, dispatch] = useContext(UserContext);
@@ -12,7 +13,7 @@ const MobileMenu = ({ open, setOpen }) => {
   return (
     <Drawer open={open} onClose={() => setOpen(false)} anchor="right">
       <div className={classes.drawerContainer}>
-        <Link to="/" className={classes.logoContainer} style={{ justifyContent: "flex-start", margin: ".5em 0" }}>
+        <Link to="/" className={classes.logoContainer}>
           <img src={Logo} alt="dolly logo" className={classes.logo}></img>
           <Typography variant="h3" className={classes.logoText}>
             dolly
@@ -22,12 +23,12 @@ const MobileMenu = ({ open, setOpen }) => {
         {user && (
           <div className={classes.userContainer}>
             {user.avatar ? (
-              <img className={classes.avatar} src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="" />
+              <img className={classes.avatar} src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="user icon" />
             ) : (
               <img
                 className={classes.avatar}
                 src={`https://eu.ui-avatars.com/api/?background=27283F&color=F9F7FF&name=${user.username.charAt(0)}`}
-                alt={user.username}
+                alt="user icon"
               />
             )}
 
@@ -36,36 +37,16 @@ const MobileMenu = ({ open, setOpen }) => {
             </Typography>
           </div>
         )}
+        <MobileLink title="Home" to="/" onClick={() => setOpen(false)}></MobileLink>
+        <MobileLink title="About" to="/about" onClick={() => setOpen(false)}></MobileLink>
+        <MobileLink title="Commands" to="/commands" onClick={() => setOpen(false)}></MobileLink>
 
-        <Link className={`${classes.link} ${window.location.pathname === "/" && classes.active}`} to="/" onClick={() => setOpen(false)}>
-          Home
-        </Link>
-        <Link className={`${classes.link} ${window.location.pathname === "/about" && classes.active}`} to="/about" onClick={() => setOpen(false)}>
-          About
-        </Link>
-        <Link
-          className={`${classes.link} ${window.location.pathname === "/commands" && classes.active}`}
-          to="/commands"
-          onClick={() => setOpen(false)}
-        >
-          Commands
-        </Link>
-
-        {!user && (
-          <a href={REACT_APP_LOGIN_URL} className={classes.link}>
-            Login
-          </a>
-        )}
         {user && (
           <>
-            <Link
-              className={`${classes.link} ${window.location.pathname.includes("/dashboard") && classes.active}`}
-              to="/dashboard"
-              onClick={() => setOpen(false)}
-            >
-              Dashboard
-            </Link>
-            <a
+            <MobileLink title="Dashboard" to="/dashboard" includes onClick={() => setOpen(false)}></MobileLink>
+            <MobileLink
+              title="Logout"
+              href="#"
               className={classes.link}
               onClick={() => {
                 dispatch({ type: "LOGOUT" });
@@ -74,9 +55,10 @@ const MobileMenu = ({ open, setOpen }) => {
               }}
             >
               Logout
-            </a>
+            </MobileLink>
           </>
         )}
+        {!user && <MobileLink title="Login" href={REACT_APP_LOGIN_URL} includes onClick={() => setOpen(false)}></MobileLink>}
 
         <Button
           variant="contained"

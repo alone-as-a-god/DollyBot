@@ -8,7 +8,7 @@ import dashboardIcon from "@iconify/icons-carbon/dashboard";
 import { MdExitToApp } from "react-icons/md";
 import { useHistory } from "react-router";
 import { UserContext } from "../../UserContext";
-const UserMenu = () => {
+const UserMenu = ({ scroll }) => {
   const classes = useStyles();
   const [user, dispatch] = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -22,19 +22,19 @@ const UserMenu = () => {
       {user && (
         <div className={classes.root} ref={options}>
           {user.avatar ? (
-            <img className={classes.avatar} src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="" />
+            <img className={classes.avatar} src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`} alt="user icon" />
           ) : (
             <img
               className={classes.avatar}
               src={`https://eu.ui-avatars.com/api/?background=27283F&color=F9F7FF&name=${user.username.charAt(0)}`}
-              alt={user.name}
+              alt="user icon"
             />
           )}
           <IconButton className={classes.icon} onClick={() => setOpen((open) => !open)}>
             <AiFillCaretDown />
           </IconButton>
           {open && (
-            <div className={classes.options} style={{ zIndex: "99999" }}>
+            <div className={`${classes.options} ${scroll && classes.scrollOption}`} style={{ zIndex: "99999" }}>
               <div
                 className={classes.optionsItem}
                 onClick={() => {

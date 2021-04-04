@@ -10,14 +10,17 @@ import About from "./pages/About/About";
 import NotFound from "./pages/NotFound/NotFound";
 import YourServers from "./pages/YourServers/YourServers";
 import { UserProvider } from "./UserContext";
-import { YourServersContext, YourServersProvider } from "./pages/YourServers/YourServersContext";
+import { YourServersProvider } from "./pages/YourServers/YourServersContext";
+import { useStyles } from "./AppStyle";
 function App() {
+  const classes = useStyles();
   return (
     <div>
       <Router>
         <ThemeProvider theme={theme}>
           <UserProvider>
             <Navbar />
+            <div className={classes.navReplace}></div>
 
             <Switch>
               <Route path="/dashboard" exact render={() => <YourServers />}></Route>
