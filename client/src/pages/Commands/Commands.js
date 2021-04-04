@@ -1,22 +1,20 @@
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@material-ui/core";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useStyles } from "./CommandsStyle";
 import { MdExpandMore } from "react-icons/md";
-import { TweenMax } from "gsap/gsap-core";
 import { commands } from "../../utils/commands";
+import { pageFadeIn, toTop } from "../../utils/animation";
 const Commands = () => {
-  useEffect(() => {
-    //TODO: api call
-  }, []);
+  const [expanded, setExpanded] = useState(-1);
   let commandRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(commandRef, 1.5, {
-      opacity: "0",
-      y: "50px",
-      ease: "power4.out",
-      clearProps: "all",
-    });
+    toTop();
+    pageFadeIn(commandRef);
   }, []);
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
   const classes = useStyles();
   return (
@@ -31,9 +29,9 @@ const Commands = () => {
         </Typography>
         <Typography className={classes.text}>Use your prefix followed by the following commands</Typography>
         <div>
-          {commands.map((command) => {
+          {commands.map((command, index) => {
             return (
-              <Accordion className={classes.accordion}>
+              <Accordion className={classes.accordion} expanded={expanded === index} onChange={handleChange(index)}>
                 <AccordionSummary expandIcon={<MdExpandMore className={classes.icon} />} className={classes.accordionTitle}>
                   <Typography className={classes.commandName}>{command.name}</Typography>
                   {command.aliases !== undefined &&

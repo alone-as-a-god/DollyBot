@@ -1,21 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./NavbarLinkStyle";
-const NavbarLink = ({ path, href, children }) => {
+import { motion } from "framer-motion";
+const NavbarLink = ({ path, children }) => {
   const classes = useStyles();
   return (
-    <>
-      {href ? (
-        <a href={href} className={classes.root}>
-          {children}
-        </a>
+    <div className={classes.container}>
+      <div className={`${classes.line}`}></div>
+      <Link to={path} className={`${classes.root}`}>
+        {children}
+      </Link>
+      {window.location.pathname === path ? (
+        <motion.div
+          layoutId="navbarlink"
+          className={`${classes.line} ${window.location.pathname === path && classes.active}`}
+          // transition={{ type: "spring", stiffness: 70 }}
+        ></motion.div>
       ) : (
-        <Link to={path} className={`${classes.root} ${window.location.pathname === path && classes.active}`}>
-          {children}
-        </Link>
+        <div className={`${classes.line}`}></div>
       )}
-    </>
+    </div>
   );
 };
 
 export default NavbarLink;
+// ${ && classes.active}

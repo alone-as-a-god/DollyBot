@@ -2,16 +2,14 @@ import { Typography } from "@material-ui/core";
 import { TweenMax } from "gsap/gsap-core";
 import React, { useEffect, useRef } from "react";
 import { useStyles } from "./AboutStyle";
+import { pageFadeIn, toTop } from "../../utils/animation";
+import { Link } from "react-router-dom";
 const About = () => {
   const classes = useStyles();
   let rootRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(rootRef, 1.5, {
-      opacity: "0",
-      y: "50px",
-      ease: "power4.out",
-      clearProps: "all",
-    });
+    toTop();
+    pageFadeIn(rootRef);
   }, []);
   return (
     <div className={classes.root}>
@@ -29,8 +27,11 @@ const About = () => {
             Project
           </Typography>
           <Typography className={classes.text}>
-            Dolly is a Discord-Bot that can be managed via our web dashboard. It offers a lot of powerful commands for example playing music, pausing,
-            looping and many more.
+            Dolly is a Discord bot that can be managed via our web dashboard. The focus lies on playing music. It offers a lot of commands for example
+            shuffling, skipping, looping and{" "}
+            <Link to="/commands" className={classes.link}>
+              many more.
+            </Link>
           </Typography>
         </div>
         <div className={classes.container}>
@@ -38,7 +39,11 @@ const About = () => {
             Motivation
           </Typography>
           <Typography className={classes.text}>
-            This Project was started as a school project. We had the assignment to create a Project using Webservices and a UI to go along with it.
+            This Project was started as a school project. We had the assignment to create a Project using Webservices, Databases and a UI to go along
+            with it. Follow our journey on{" "}
+            <a href="https://github.com/alone-as-a-god/DollyBot" target="_blank" className={classes.link}>
+              GitHub.
+            </a>
           </Typography>
         </div>
       </div>

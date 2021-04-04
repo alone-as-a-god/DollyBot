@@ -3,17 +3,13 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./NotFoundStyle";
 import Icon404 from "./404_2.svg";
-import { TweenMax } from "gsap/gsap-core";
+import { pageFadeIn, toTop } from "../../utils/animation";
 const NotFound = () => {
   const classes = useStyles();
   let rootRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(rootRef, 1.5, {
-      opacity: "0",
-      y: "50px",
-      ease: "power4.out",
-      clearProps: "all",
-    });
+    toTop();
+    pageFadeIn(rootRef);
   }, []);
   return (
     <div
@@ -22,7 +18,7 @@ const NotFound = () => {
         rootRef = element;
       }}
     >
-      <img src={Icon404} alt="" className={classes.img}></img>
+      <img src={Icon404} alt="404 Error icon" className={classes.img}></img>
       <div>
         <Typography className={classes.text} variant="h3">
           Oh No! Dolly coudn't find the page you're looking for :(

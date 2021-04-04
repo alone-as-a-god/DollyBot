@@ -2,16 +2,28 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    position: "relative",
-    zIndex: "9999999 !important",
+    height: "125px",
+    position: "fixed",
+    width: "100%",
+    zIndex: "10",
+    top: "0",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
-    height: "80px",
+
+    [theme.breakpoints.up("xl")]: {
+      height: "150px",
+    },
+    [theme.breakpoints.up("xxl")]: {
+      height: "175px",
+    },
+    [theme.breakpoints.down("lg")]: {
+      height: "125px",
+    },
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(6),
       paddingRight: theme.spacing(6),
@@ -23,9 +35,32 @@ export const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down("xs")]: {
       fontSize: ".8em",
-      height: "70px",
+      height: "90px",
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(2),
+    },
+
+    transition: "all 0.3s ease-out",
+    transitionProperty: "height, opacity, background",
+  },
+  scroll: {
+    paddingTop: ".75em",
+    paddingBottom: ".75em",
+
+    background: theme.palette.primary.dark,
+    borderBottom: `1px solid ${theme.palette.secondary.main}`,
+
+    [theme.breakpoints.up("xl")]: {
+      height: "100px",
+    },
+    [theme.breakpoints.up("xxl")]: {
+      height: "115px",
+    },
+    [theme.breakpoints.down("lg")]: {
+      height: "80px",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "70px",
     },
   },
 
@@ -38,7 +73,6 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   line: {
-    height: "1px",
     background: theme.palette.secondary.main,
     width: "100%",
     zIndex: "999",
@@ -52,6 +86,21 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   button: {
+    "&:nth-child(1)": {
+      marginLeft: "2em",
+    },
+    borderRadius: "99em",
+    padding: ".375em 1.25em",
+    margin: "0 .25em",
+  },
+  invite: {
+    background: theme.palette.primary.dark,
+    "&:hover": {
+      background: "#27283F",
+    },
+  },
+  buttonScroll: {
+    background: theme.palette.primary.main,
     "&:hover": {
       background: "#27283F",
     },
@@ -67,8 +116,19 @@ export const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
   },
   logo: {
-    width: "50px",
     marginRight: "1rem",
+    [theme.breakpoints.up("xl")]: {
+      height: "70px",
+      width: "70px",
+    },
+    [theme.breakpoints.down("lg")]: {
+      height: "60px",
+      width: "60px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: "50px",
+      width: "50px",
+    },
   },
   logoText: {
     color: theme.palette.secondary.main,

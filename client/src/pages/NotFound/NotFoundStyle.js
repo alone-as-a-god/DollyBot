@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    marginTop: "2rem",
+    padding: "2rem 0",
     minHeight: "100vh",
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(6),

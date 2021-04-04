@@ -1,5 +1,4 @@
 import { Grid, IconButton, Typography } from "@material-ui/core";
-import { TweenMax } from "gsap/gsap-core";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router";
 import PrefixCard from "../../components/PrefixCard/PrefixCard";
@@ -8,11 +7,9 @@ import { useStyles } from "./DashboardStyle";
 import { IoMdArrowBack, IoMdRefresh } from "react-icons/io";
 import { YourServersContext } from "../YourServers/YourServersContext";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { UserContext } from "../../UserContext";
-
+import { pageFadeIn, toTop } from "../../utils/animation";
 const Dashboard = () => {
-  const [user] = useContext(UserContext);
-  const [guilds, setGuilds] = useContext(YourServersContext);
+  const [guilds] = useContext(YourServersContext);
   const [guild, setGuild] = useState({ status: "loading" });
   const { id } = useParams();
   const classes = useStyles();
@@ -20,20 +17,17 @@ const Dashboard = () => {
   const [refresh, setRefresh] = useState(false);
   let dashboardRef = useRef(null);
   useEffect(() => {
-    TweenMax.from(dashboardRef, 1.5, {
-      opacity: "0",
-      y: "50px",
-      ease: "power4.out",
-      clearProps: "all",
-    });
+    toTop();
+    pageFadeIn(dashboardRef);
   }, []);
 
   useEffect(() => {
     if (guilds.data) setGuild({ data: guilds.data.filter((g) => g.id === id)[0], status: "done" });
+    console.log(guild);
   }, [guilds]);
   return (
     <>
-      {!guilds && <Redirect to="/"></Redirect>}
+      {guild.status === "done" && !guild.data && <Redirect to="/"></Redirect>}
       <div
         className={classes.root}
         ref={(element) => {
@@ -58,7 +52,7 @@ const Dashboard = () => {
             Can't reach server.
           </Typography>
         )}
-        {guilds.status === "done" && guild.status === "done" ? (
+        {guild.status === "done" && guild.data ? (
           <Typography variant="h1" className={classes.title}>
             {guild.data.name}
           </Typography>

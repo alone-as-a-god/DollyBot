@@ -60,7 +60,9 @@ export default createMuiTheme({
       sm: 600,
       md: 960,
       lg: 1440,
-      xl: 1920,
+      xl: 1921,
+      xxl: 2560,
+      xxxl: 3890,
     },
   },
 });

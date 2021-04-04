@@ -1,17 +1,12 @@
-import { TweenMax } from "gsap/gsap-core";
 import React, { useEffect, useRef } from "react";
 import Features from "../../components/Features/Features";
 import Hero from "../../components/Hero/Hero";
-
+import { pageFadeIn, toTop } from "../../utils/animation";
 const Home = () => {
   let home = useRef(null);
   useEffect(() => {
-    TweenMax.from(home, 1.5, {
-      opacity: "0",
-      y: "50px",
-      ease: "power4.out",
-      clearProps: "all",
-    });
+    toTop();
+    pageFadeIn(home);
   }, []);
 
   return (

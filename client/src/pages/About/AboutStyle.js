@@ -1,12 +1,11 @@
 import { makeStyles } from "@material-ui/core";
-import Curve from "./curve3.svg";
 export const useStyles = makeStyles((theme) => ({
   root: {
-    background: `url('${Curve}')`,
     backgroundPosition: "top right",
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
     minHeight: "100vh",
+    padding: "2rem 0",
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
     [theme.breakpoints.down("md")]: {
@@ -24,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   header: {
-    padding: "2rem 0",
+    paddingBottom: "2rem",
     fontSize: "clamp(4em, 12vw, 5.5em)",
     color: theme.palette.secondary.main,
   },
@@ -48,5 +47,8 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       width: "100%",
     },
+  },
+  link: {
+    color: "inherit",
   },
 }));

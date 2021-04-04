@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: "0 !important",
     color: theme.palette.secondary.main,
     borderColor: theme.palette.secondary.main,
-    marginRight: "2rem",
+    marginRight: "1em",
     "&$focused": {
       color: theme.palette.secondary.main,
       borderColor: theme.palette.secondary.main,
@@ -32,7 +32,6 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
   },
   inputContainer: {
-    // minWidth: "250px",
     display: "flex",
     flexWrap: "none",
     alignItems: "flex-end",
@@ -43,5 +42,9 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: "1rem",
       },
     },
+  },
+  button: {
+    borderRadius: "99em",
+    padding: ".375em 1.25em",
   },
 }));

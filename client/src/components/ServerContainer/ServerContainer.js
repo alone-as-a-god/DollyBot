@@ -4,6 +4,8 @@ import ServerCard from "../ServerCard/ServerCard";
 import { useStyles } from "./ServerContainerStyle";
 import { YourServersContext } from "../../pages/YourServers/YourServersContext";
 import Skeleton from "@material-ui/lab/Skeleton";
+import { AiOutlinePlus } from "react-icons/ai";
+const { REACT_APP_INVITE_URL } = process.env;
 const ServerContainer = () => {
   const classes = useStyles();
   const [guilds] = useContext(YourServersContext);
@@ -13,16 +15,16 @@ const ServerContainer = () => {
       {guilds.status === "loading" && (
         <Grid container spacing={3} className={classes.container}>
           <Grid item lg={3} md={4} sm={6} xs={10}>
-            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+            <Skeleton variant="rect" width="100%" height="300px" className={classes.skeleton} />
           </Grid>
           <Grid item lg={3} md={4} sm={6} xs={10}>
-            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+            <Skeleton variant="rect" width="100%" height="300px" className={classes.skeleton} />
           </Grid>
           <Grid item lg={3} md={4} sm={6} xs={10}>
-            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+            <Skeleton variant="rect" width="100%" height="300px" className={classes.skeleton} />
           </Grid>
           <Grid item lg={3} md={4} sm={6} xs={10}>
-            <Skeleton variant="rect" width="100%" height="350px" className={classes.skeleton} />
+            <Skeleton variant="rect" width="100%" height="300px" className={classes.skeleton} />
           </Grid>
         </Grid>
       )}
@@ -41,16 +43,21 @@ const ServerContainer = () => {
           You have no guilds running our bot.
         </Typography>
       )}
-      <Grid container spacing={3} className={classes.container}>
-        {guilds.data &&
-          guilds.data.map((guild) => {
-            return (
-              <Grid key={guild.id} item lg={3} md={4} sm={6} xs={10}>
-                <ServerCard key={guild.id} guild={guild} id={guild.id} />
-              </Grid>
-            );
-          })}
-      </Grid>
+      {guilds.status === "done" && (
+        <Grid container spacing={3} className={classes.container}>
+          {guilds.data &&
+            guilds.data.map((guild) => {
+              return (
+                <Grid key={guild.id} item lg={3} md={4} sm={6} xs={10}>
+                  <ServerCard key={guild.id} guild={guild} id={guild.id} />
+                </Grid>
+              );
+            })}
+          <Grid item lg={3} md={4} sm={6} xs={10}>
+            <ServerCard icon={<AiOutlinePlus />} onClick={() => window.open(REACT_APP_INVITE_URL, "_blank")} />
+          </Grid>
+        </Grid>
+      )}
     </>
   );
 };

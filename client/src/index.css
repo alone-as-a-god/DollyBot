@@ -45,12 +45,12 @@ code {
   }
 }
 
-@media only screen and (min-width: 2300px) {
+@media only screen and (min-width: 1921px) {
   body {
-    font-size: 1.25em;
+    font-size: clamp(1em, 0.75vw, 1.375em);
   }
 }
-@media only screen and (min-width: 3000px) {
+@media only screen and (min-width: 2561px) {
   body {
     font-size: 1.5em;
   }

@@ -2,11 +2,12 @@ import { IconButton, Typography } from "@material-ui/core";
 import React, { useContext } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
+import { AiOutlineBug } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import { useStyles } from "./FooterStyle";
 import Robot from "./robot.svg";
-const { REACT_APP_LOGIN_URL } = process.env;
+const { REACT_APP_LOGIN_URL, REACT_APP_INVITE_URL } = process.env;
 const Footer = () => {
   const [user, dispatch] = useContext(UserContext);
   const history = useHistory();
@@ -20,8 +21,13 @@ const Footer = () => {
         <IconButton href="https://github.com/alone-as-a-god/DollyBot" target="_blank" className={classes.icon}>
           <FaGithub></FaGithub>
         </IconButton>
-        <IconButton href="mailto:dolly@gmail.com" className={classes.icon}>
+
+        <IconButton href="mailto:dolly@gmail.com" target="_blank" className={classes.icon}>
           <FiMail></FiMail>
+        </IconButton>
+
+        <IconButton href="https://github.com/alone-as-a-god/DollyBot/issues/new" target="_blank" className={classes.icon}>
+          <AiOutlineBug></AiOutlineBug>
         </IconButton>
       </div>
       <div className={classes.linksContainer}>
@@ -44,9 +50,9 @@ const Footer = () => {
             </a>
           )}
 
-          <Link className={classes.link} to="/invite">
+          <a className={classes.link} target="_blank" href={REACT_APP_INVITE_URL}>
             <Typography className={classes.linkText}>invite</Typography>
-          </Link>
+          </a>
         </div>
         <div>
           <Typography className={classes.header}>pages</Typography>

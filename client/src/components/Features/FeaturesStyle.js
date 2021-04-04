@@ -1,59 +1,61 @@
 import { makeStyles } from "@material-ui/core";
 import Mountain from "./mountain.svg";
-import MountainMobile from "./mountain_mobile.svg";
+import MountainMobile from "./mountain_mobile_new.svg";
+import Planet from "./robotmountain.svg";
 export const useStyles = makeStyles((theme) => ({
   root: {
-    padding: "5rem 2em",
+    width: "100%",
     paddingLeft: theme.spacing(16),
-    marginTop: "300px",
+    paddingRight: theme.spacing(16),
+    paddingTop: "clamp(600px, 50vw, 1000px)",
+    paddingBottom: "300px",
     position: "relative",
-    background: `url(${Mountain})`,
+    background: `url(${Planet})`,
     backgroundSize: "cover",
     backgroundPosition: "top left",
     backgroundRepeat: "no-repeat",
+    marginTop: "-200px",
 
-    ["@media (max-width: 1600px)"]: {
-      backgroundSize: "cover",
+    ["@media (min-width: 2000px)"]: {
+      paddingTop: "clamp(1000px, 50vw, 2000px)",
     },
     [theme.breakpoints.down("md")]: {
+      marginTop: "0px",
       paddingLeft: theme.spacing(6),
+      paddingRight: theme.spacing(6),
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: ".9em",
       paddingLeft: theme.spacing(4),
-    },
-    [theme.breakpoints.down("xs")]: {
+      paddingRight: theme.spacing(4),
+      paddingTop: "clamp(500px, 90vw, 900px)",
+      paddingBottom: "100px",
       backgroundPosition: "top",
       background: `url(${MountainMobile})`,
       backgroundSize: "cover",
-      padding: "5rem 0",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
     },
+    [theme.breakpoints.down("xs")]: {
+      paddingTop: "clamp(300px, 90vw, 900px)",
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(4),
+    },
   },
   title: {
     color: theme.palette.primary.contrastText,
-    margin: ".8em 0",
+    marginTop: "1em",
+    marginBottom: ".5em",
     fontSize: "clamp(4em, 12vw, 5.5em)",
     fontWeight: "500",
-  },
-  icon: {
-    fontSize: "clamp(200px, 12vw, 500px)",
-  },
-  featureContainer: {
-    [theme.breakpoints.down("xs")]: {
-      display: "flex",
-      justifyContent: "center",
-    },
-    width: "fit-content",
   },
   robotIcon: {
     width: "clamp(280px, 50vw, 600px)",
     position: "absolute",
     top: "0",
     left: theme.spacing(16),
-    transform: "translateY(-90%) ",
+    transform: "translateY(-80%) rotate(-5deg) ",
     [theme.breakpoints.down("md")]: {
       left: theme.spacing(6),
     },
@@ -73,11 +75,14 @@ export const useStyles = makeStyles((theme) => ({
     rowGap: "3em",
     columnGap: "3em",
     [theme.breakpoints.down("sm")]: {
-      rowGap: "2em",
-      columnGap: "2em",
-    },
-    [theme.breakpoints.down("xs")]: {
       gridTemplateColumns: "1fr",
     },
+  },
+  divider: {
+    background: "white",
+    height: "1px",
+    width: "100%",
+    marginBottom: "3em",
+    marginTop: "1em",
   },
 }));
