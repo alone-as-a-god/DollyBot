@@ -139,9 +139,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def on_player_stop(self, node, payload):   
         track = db.get_next_track_sync(payload.player.guild_id, payload.player.queue_position)                                   #ALAAAARM
         if track is not None:
-            track = track[0]
-            if not re.match(URL_REGEX, track):
-                track = f"ytsearch:{track}"
             track = await self.wavelink.get_tracks(track)
             await payload.player.advance(track[0])
             payload.player.queue_position += 1
@@ -248,13 +245,13 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         currentTrack = await db.get_next_track(ctx.guild.id, pos - 1)
         if currentTrack is None:
             raise QueueIsEmpty
-        embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
+        embedVar.add_field(name="Currently Playing:",value=currentTrack, inline=False)
         trackList = ""
         for i in range(amount):
             track = await db.get_next_track(ctx.guild.id, pos + i)
             
             if track is not None:
-                trackList = f"{trackList} \n {track[0]}"
+                trackList = f"{trackList} \n {track}"
 
         if(trackList!=""):
             embedVar.add_field(name="Next Up:",value=trackList, inline=False)
