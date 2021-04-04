@@ -2,12 +2,12 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: "3px",
     borderBottom: `2px solid ${theme.palette.primary.main}`,
     color: theme.palette.secondary.main,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
     cursor: "pointer",
     userSelect: "none",
   },
@@ -19,9 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "1.25em",
     color: theme.palette.secondary.main,
   },
-  container: {
+  songInfoContainer: {
     display: "flex",
-
-    // alignItems: "center",
   },
 }));

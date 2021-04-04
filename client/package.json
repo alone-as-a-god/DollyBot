@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.8.1",
     "array-move": "^3.0.1",
     "axios": "^0.21.1",
+    "cypress": "^6.8.0",
     "dotenv": "^8.2.0",
     "framer-motion": "^4.1.2",
     "gsap": "^3.6.0",
@@ -28,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "e2e": "cypress open"
   },
   "eslintConfig": {
     "extends": [

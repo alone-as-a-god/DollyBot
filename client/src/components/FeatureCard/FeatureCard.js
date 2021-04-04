@@ -1,7 +1,5 @@
-import { Typography } from "@material-ui/core";
-import React from "react";
 import { useStyles } from "./FeatureCardStyle";
-import { motion } from "framer-motion";
+import { Typography } from "@material-ui/core";
 const FeatureCard = ({ icon, text, title }) => {
   const classes = useStyles();
   return (

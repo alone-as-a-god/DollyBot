@@ -2,18 +2,18 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   title: {
-    color: theme.palette.secondary.main,
     marginBottom: "1rem",
+    color: theme.palette.secondary.main,
     fontSize: "clamp(2.25em, 5vw, 3em)",
   },
   text: {
-    color: theme.palette.secondary.dark,
     margin: "1rem 0",
+    color: theme.palette.secondary.dark,
     fontSize: "1.25em",
   },
   songContainer: {
-    marginTop: "1rem",
     maxHeight: "600px",
+    marginTop: "1rem",
     overflowY: "auto",
   },
 }));

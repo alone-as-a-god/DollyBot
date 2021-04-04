@@ -2,16 +2,16 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    margin: "2px 0",
-    marginRight: theme.spacing(3),
     display: "flex",
     alignItems: "center",
-    cursor: "pointer",
-    textTransform: "capitalize",
+    margin: "2px 0",
+    marginRight: theme.spacing(3),
     color: theme.palette.secondary.main,
-    textDecoration: "none",
     fontSize: "clamp(1.25em, 5vw, 1.5em)",
+    textTransform: "capitalize",
+    textDecoration: "none",
     borderRadius: "0 99em 99em 0",
+    cursor: "pointer",
     "&:hover": {
       background: "#383A64",
     },
@@ -20,9 +20,9 @@ export const useStyles = makeStyles((theme) => ({
     background: "#383A64",
   },
   bar: {
-    marginRight: `calc(${theme.spacing(3)} - 5px)`,
     width: "5px",
     height: "100%",
+    marginRight: `calc(${theme.spacing(3)} - 5px)`,
     borderRadius: "0 99em 99em 0",
   },
   barActive: {

@@ -1,5 +1,5 @@
 import { IconButton, Typography } from "@material-ui/core";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { AiOutlineBug } from "react-icons/ai";
@@ -21,8 +21,7 @@ const Footer = () => {
         <IconButton href="https://github.com/alone-as-a-god/DollyBot" target="_blank" className={classes.icon}>
           <FaGithub></FaGithub>
         </IconButton>
-
-        <IconButton href="mailto:dolly@gmail.com" target="_blank" className={classes.icon}>
+        <IconButton href="mailto:dollyparton.bot@gmail.com" target="_blank" className={classes.icon}>
           <FiMail></FiMail>
         </IconButton>
 
@@ -32,7 +31,7 @@ const Footer = () => {
       </div>
       <div className={classes.linksContainer}>
         <div>
-          <Typography className={classes.header}>options</Typography>
+          <Typography className={classes.title}>options</Typography>
           {user && (
             <a
               className={classes.link}
@@ -55,7 +54,7 @@ const Footer = () => {
           </a>
         </div>
         <div>
-          <Typography className={classes.header}>pages</Typography>
+          <Typography className={classes.title}>pages</Typography>
           <Link to="/" className={classes.link}>
             <Typography className={classes.linkText}>home</Typography>
           </Link>
@@ -64,7 +63,6 @@ const Footer = () => {
               <Typography className={classes.linkText}>dashboard</Typography>
             </Link>
           )}
-
           <Link to="/commands" className={classes.link}>
             <Typography className={classes.linkText}>commands</Typography>
           </Link>
@@ -73,7 +71,6 @@ const Footer = () => {
           </Link>
         </div>
       </div>
-
       <img src={Robot} className={classes.robot} alt="robot icon" />
     </div>
   );

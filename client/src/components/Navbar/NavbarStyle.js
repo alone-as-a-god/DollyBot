@@ -2,14 +2,14 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    height: "125px",
     position: "fixed",
-    width: "100%",
-    zIndex: "10",
-    top: "0",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    height: "125px",
+    width: "100%",
+    top: "0",
+    zIndex: "10",
     color: theme.palette.primary.contrastText,
     backgroundColor: theme.palette.primary.main,
     paddingLeft: theme.spacing(16),
@@ -32,7 +32,6 @@ export const useStyles = makeStyles((theme) => ({
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
     },
-
     [theme.breakpoints.down("xs")]: {
       fontSize: ".8em",
       height: "90px",
@@ -44,12 +43,8 @@ export const useStyles = makeStyles((theme) => ({
     transitionProperty: "height, opacity, background",
   },
   scroll: {
-    paddingTop: ".75em",
-    paddingBottom: ".75em",
-
     background: theme.palette.primary.dark,
     borderBottom: `1px solid ${theme.palette.secondary.main}`,
-
     [theme.breakpoints.up("xl")]: {
       height: "100px",
     },
@@ -67,7 +62,6 @@ export const useStyles = makeStyles((theme) => ({
   linkContainer: {
     display: "flex",
     alignItems: "center",
-    height: "100%",
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
@@ -80,7 +74,6 @@ export const useStyles = makeStyles((theme) => ({
   icon: {
     color: theme.palette.secondary.main,
     fontSize: "2.5em",
-
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -104,10 +97,6 @@ export const useStyles = makeStyles((theme) => ({
     "&:hover": {
       background: "#27283F",
     },
-  },
-  drawerButton: {
-    margin: ".5rem 0",
-    fontSize: "clamp(1.25em, 5vw, 1.5em)",
   },
   logoContainer: {
     display: "flex",

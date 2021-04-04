@@ -1,5 +1,4 @@
 import { Button, CircularProgress, TextField } from "@material-ui/core";
-import React from "react";
 import { useStyles } from "./InputFormStyle";
 const InputForm = ({ loading, label, onSubmit, value, defaultValue, onChange }) => {
   const classes = useStyles();
@@ -27,7 +26,7 @@ const InputForm = ({ loading, label, onSubmit, value, defaultValue, onChange }) 
           ></TextField>
         )}
 
-        <div style={{ width: "fit-content", position: "relative" }}>
+        <div className={classes.buttonContainer}>
           <Button disabled={loading} type="submit" color="secondary" variant="contained" disableElevation className={classes.button}>
             submit
           </Button>

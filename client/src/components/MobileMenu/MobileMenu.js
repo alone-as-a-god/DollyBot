@@ -60,13 +60,7 @@ const MobileMenu = ({ open, setOpen }) => {
         )}
         {!user && <MobileLink title="Login" href={REACT_APP_LOGIN_URL} includes onClick={() => setOpen(false)}></MobileLink>}
 
-        <Button
-          variant="contained"
-          disableElevation
-          color="primary"
-          className={`${classes.drawerButton} ${classes.button} `}
-          onClick={() => setOpen(false)}
-        >
+        <Button variant="contained" disableElevation color="primary" className={classes.button} onClick={() => setOpen(false)}>
           invite
         </Button>
       </div>

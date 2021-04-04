@@ -1,8 +1,7 @@
 import { Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardCard from "../DashboardCard/DashboardCard";
 import SongItem from "../SongItem/SongItem";
-import { ReactSortable } from "react-sortablejs";
 import { useStyles } from "./QueueCardStyle";
 import InputForm from "../InputForm/InputForm";
 import axios from "axios";
@@ -88,11 +87,7 @@ const QueueCard = ({ refresh, guildID }) => {
       </Typography>
       <Typography className={classes.text}>Submit a songname or Youtube-URL that will be added to queue. </Typography>
       <InputForm label="Songname or URL" value={songName} defaultValue="" onChange={setSongName} onSubmit={addSong}></InputForm>
-      {/* <ReactSortable onUpdate={reorderSongs} list={displayedSongs} setList={setDisplayedSongs} animation={200} delayOnTouchStart={true} delay={2}>
-        {displayedSongs.slice(0, songLimit).map((song, index) => {
-          return <SongItem onDelete={onDelete} key={song.id} song={song} index={index}></SongItem>;
-        })}
-      </ReactSortable> */}
+
       {songs.status === "error" && <Typography className={classes.text}>Can't get songs from database</Typography>}
       {typeof songs.data !== "undefined" && songs.data.length === 0 && <Typography className={classes.text}>Queue is empty</Typography>}
       {songs.status === "done" && (
@@ -102,17 +97,6 @@ const QueueCard = ({ refresh, guildID }) => {
           })}
         </div>
       )}
-      {/* {songs.length === 0 && <Typography className={classes.text}>No songs currently in queue</Typography>} */}
-      {/* {songs.length > songLimit && (
-        <Button color="secondary" onClick={() => setSongLimit(songLimit + 10)} style={{ zIndex: "999" }}>
-          show more
-        </Button>
-      )}
-      {songLimit >= displayedSongs.length && (
-        <Button color="secondary" onClick={() => setSongLimit(10)} style={{ zIndex: "999" }}>
-          collapse
-        </Button>
-      )} */}
     </DashboardCard>
   );
 };

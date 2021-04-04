@@ -1,5 +1,4 @@
 import { Typography } from "@material-ui/core";
-import React from "react";
 import { Link } from "react-router-dom";
 import { useStyles } from "./MobileLinkStyle";
 const MobileLink = ({ title, to, href, onClick, includes }) => {

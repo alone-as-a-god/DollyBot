@@ -6,7 +6,7 @@ const SongItem = ({ song, onDelete }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div className={classes.container}>
+      <div className={classes.songInfoContainer}>
         <span className={classes.songInfo}>
           <Typography> {song.id}</Typography>
         </span>

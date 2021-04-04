@@ -3,13 +3,13 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    background: theme.palette.secondary.main,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "2rem",
     paddingLeft: theme.spacing(16),
     paddingRight: theme.spacing(16),
+    background: theme.palette.secondary.main,
     [theme.breakpoints.down("md")]: {
       paddingLeft: theme.spacing(6),
       paddingRight: theme.spacing(6),
@@ -33,27 +33,27 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.dark,
     textTransform: "lowercase",
   },
-  header: {
-    fontSize: "1.5em",
+  title: {
     color: theme.palette.primary.dark,
+    fontSize: "1.5em",
     fontWeight: "600",
     textTransform: "uppercase",
   },
   link: {
-    textDecoration: "none",
     cursor: "pointer",
+    textDecoration: "none",
   },
   linkText: {
     color: theme.palette.primary.main,
-    textTransform: "capitalize",
     fontFamily: "Poppins",
+    textTransform: "capitalize",
     "&:hover": {
       textDecoration: "underline",
     },
   },
   robot: {
     position: "absolute",
-    right: "0px",
+    right: "0",
     top: "0",
     transform: "translateY(-97%)",
     width: "calc(200px + 5vw)",
@@ -69,7 +69,7 @@ export const useStyles = makeStyles((theme) => ({
     "&>*": {
       marginLeft: theme.spacing(8),
       [theme.breakpoints.down("xs")]: {
-        marginLeft: theme.spacing(0),
+        marginLeft: "0",
         marginTop: theme.spacing(2),
       },
     },
