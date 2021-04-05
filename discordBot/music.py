@@ -5,11 +5,13 @@ from discord.ext import commands
 import re 
 import sys
 import datetime as dt
-sys.path.append("../database")
+import asyncio
+
+sys.path.append("../database")      #Neccessary to load the db.py file from database folder
 import db
 
 
-class AlreadyConnectedToChannel(commands.CommandError):
+class AlreadyConnectedToChannel(commands.CommandError):     #Custom Errors
     pass
 
 class NoVoiceChannel(commands.CommandError):
@@ -32,7 +34,7 @@ class NoMoreTracks(commands.CommandError):
 
 
 
-#Regex matches youtube URL
+#Regex to match youtube URL
 URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 OPTIONS = {
     "1️⃣": 0,
@@ -62,21 +64,20 @@ class Player(wavelink.Player):
         return channel
 
         
-    async def advance(self, track):                                                    #Advances to the next track unless queue is empty
+    async def advance(self, track):           #Advances to the next track unless queue is empty
         if track is not None:
             await self.play(track)
 
         
-    async def add_tracks(self, ctx, tracks):
-        if isinstance(tracks, wavelink.TrackPlaylist):        
-
+    async def add_tracks(self, ctx, tracks):            #Adds track to the database
+        if isinstance(tracks, wavelink.TrackPlaylist):          #Checks if the "track" is a playlist and if so adds each track it contains to the database
             for track in tracks.tracks:
                 db.add_tracks_sync(ctx.guild.id, track, track.uri)
             await ctx.send("Added playlist to queue")
             if not self.is_playing: 
                 await self.play(tracks.tracks[0])
                 
-        else:
+        else:                                               #If it is not a playlist it will add a single track to the database
             if isinstance(tracks, (str, list, tuple)):
                 tracks = tracks[0]
             db.add_tracks_sync(ctx.guild.id, tracks, tracks.uri)
@@ -84,19 +85,19 @@ class Player(wavelink.Player):
             if not self.is_playing: 
                 await self.play(tracks)
 
-    async def choose_track(self, ctx, tracks):                  #Function to choose out of 5 songs dispalyed in an embed
-        def _check(r, u):
+    async def choose_track(self, ctx, tracks):                  #Function to choose out of 5 songs dispalyed in a discord-embed
+        def _check(r, u):                                       #Checks if the added emote is one of the 5 specified in OPTIONS
             return(
                 r.emoji in OPTIONS.keys()
                 and u == ctx.author
                 and r.message.id == msg.id
             )
         
-        embed = discord.Embed(
+        embed = discord.Embed(                              #Discord embed and formatting 
             title = "Choose a song",
             description = (
                 "\n".join(
-                    f"**{i+1}.**{t.title} ({t.length//60000}:{str(t.length%60).zfill(2)})"             
+                    f"**{i+1}.**{t.title} ({t.length//60000}:{str(t.length%60).zfill(2)})"     #Formats each line in a way to identify the song you searched for        
                     for i, t in enumerate(tracks[:5])
                 )
                 ),
@@ -112,10 +113,11 @@ class Player(wavelink.Player):
             await msg.add_reaction(emoji)
             
         try:
-            reaction, _ = await self.bot.wait_for("reaction_add",timeout=30, check=_check)                  #Waits for user to choose a reaction and therefore track
-        except asyncio.TimeoutError:
+            reaction, _ = await self.bot.wait_for("reaction_add",timeout=30, check=_check)  #Waits for an user to react with one of the specified emotes
+        except asyncio.TimeoutError:                #AFter 30 seconds it just returns the first track it found
             await msg.delete()
             await ctx.message.delete()
+            return tracks[0]
         else:
             await msg.delete()
             return tracks[OPTIONS[reaction.emoji]]       
@@ -139,6 +141,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def on_player_stop(self, node, payload):   
         track = db.get_next_track_sync(payload.player.guild_id, payload.player.queue_position)                                   #ALAAAARM
         if track is not None:
+            track = track[0]
+            if not re.match(URL_REGEX, track):
+                track = f"ytsearch:{track}"
             track = await self.wavelink.get_tracks(track)
             await payload.player.advance(track[0])
             payload.player.queue_position += 1
@@ -239,24 +244,27 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     
     @commands.command(name="queue", aliases=["q"])
     async def queue_command(self, ctx, amount=10):
-        embedVar = discord.Embed(title="Queue", color=ctx.author.color)
+        embedVar = discord.Embed(title="Queue", color=ctx.author.color, timestamp=dt.datetime.utcnow())
         player = self.get_player(ctx)
         pos = player.queue_position
-        currentTrack = await db.get_next_track(ctx.guild.id, pos - 1)
+        currentTrack = await db.get_track_name(ctx.guild.id, pos)
         if currentTrack is None:
             raise QueueIsEmpty
-        embedVar.add_field(name="Currently Playing:",value=currentTrack, inline=False)
+        embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
         trackList = ""
         for i in range(amount):
-            track = await db.get_next_track(ctx.guild.id, pos + i)
+            track = await db.get_track_name(ctx.guild.id, pos + i + 1)
             
             if track is not None:
-                trackList = f"{trackList} \n {track}"
+                trackList = f"{trackList} \n {track[0]}"
 
         if(trackList!=""):
             embedVar.add_field(name="Next Up:",value=trackList, inline=False)
+        
+        embedVar.set_author(name="Query Results")                                                                  #Embed formatting
+        embedVar.set_footer(text=f"Invoked by {ctx.author.display_name}", icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embedVar)
-        print("habibi")  
+
         
         
     @commands.command(name="clear")
@@ -308,4 +316,3 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def queue_command_error(self, ctx, exc):
         if isinstance(exc, QueueIsEmpty):
             await ctx.send("Queue is Empty")
-            

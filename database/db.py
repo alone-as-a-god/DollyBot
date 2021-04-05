@@ -8,11 +8,13 @@ import random
 DB_PATH = "../database/database.db"
 
 
+#Since the  following functions are basically all the same, Only a few of them are documented
+
 async def db_connect():                 #Method to establish connection with the database, has to be called in each and every method accessing the Database
     connection = await aiosqlite.connect(DB_PATH)
     return connection
 
-async def add_guild(guildID, guildName):
+async def add_guild(guildID, guildName):      #Adds guild with default prefix to the database
     connection = await db_connect()
     cursor = await connection.cursor()
     sql = '''
@@ -150,8 +152,7 @@ async def get_next_track(guildID, current_track_id):
     await cursor.execute(sql, (str(current_track_id+1), str(guildID),))
     track = await cursor.fetchone()
     await connection.close()
-    print(f"fetched: {track}")
-    return track[0]
+    return track
 
 def get_next_track_sync(guildID, current_track_id):
     connection = sql3.connect(DB_PATH)
@@ -166,21 +167,21 @@ def get_next_track_sync(guildID, current_track_id):
     cursor.execute(sql, (str(current_track_id+1), str(guildID),))
     track = cursor.fetchone()
     connection.close()
-    print(f"fetched: {track}")
-    return track[0]
+    return track
 
-async def update_track(guildID, track_name, track_id):
+async def get_track_name(guildID, current_track_id):
     connection = await db_connect()
     cursor = await connection.cursor()
     sql = '''
-        UPDATE queue 
-        SET songName = ?
+        SELECT songName
+        FROM queue
         WHERE id = ?
-        AND guildID=?
+        AND guildID = ?
         '''
-    await cursor.execute(sql, (str(track_name), str(track_id), str(guildID),))
-    await connection.commit()
+    await cursor.execute(sql, (str(current_track_id), str(guildID),))
+    track = await cursor.fetchone()
     await connection.close()
+    return track
         
 async def clear_tracks(guildID):
     connection = await db_connect()
@@ -231,15 +232,11 @@ async def shuffle_queue(guildID):   #REWRITE FOR URL
         
     
 
-async def main():                       #Testing out the above methods 
-    title = "鎌田純子『眠れぬ夜はジャスミン茶を』MV【Official】"
-    await add_tracks(123, title, "youtuber.com/v=akjdsaks")
-    newTitle = await get_next_track(123,0)
-    print(newTitle[0])
-    #await shuffle_queue(123)
+# async def main():                       #Testing out the above methods without using the bot directly
+#     await shuffle_queue(123)
     
 
         
-if __name__ == "__main__":
-    DB_PATH = "database/database.db"
-    asyncio.run(main())                    #Used to call the main function in async mode
+# if __name__ == "__main__":
+#     DB_PATH = "database/database.db"
+#     asyncio.run(main())                    #Used to call the main function in async mode
