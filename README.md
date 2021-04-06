@@ -49,6 +49,7 @@ Command | Alias | Usage
 ------- | ----- | -----
 help | - | Sends a list of all commands
 prefix [New prefix] | - | Changes the current prefix to the new prefix
+purge [Amount] | - | Deletes a defined amount of messages (Default: 10)
 clear | - | Clears the queue
 connect | join | Connects the bot to a channel
 jump [Timestamp in seconds] | - | Jumps to the timestamp
