@@ -7,7 +7,7 @@ To host Dollybot, you need to have the following programs installed:
 - Node.js
 - npm
 - Python 3.9
-- pi
+- pip
 - AdoptOpenJDK 13.02
 
 ### Evniroment variables
@@ -44,4 +44,17 @@ Start the frontend with `npm run start` inside inside the backend directory.
 To install the backend dependecies you have to run `npm install` inside the client directory.  
 Start the frontend with `npm run start` inside inside the client directory.
 
-## Commands  
+## Commands
+Command | Alias | Usage
+------- | ----- | -----
+help | - | Sends a list of all commands
+prefix [New prefix] | - | Changes the current prefix to the new prefix
+clear | - | Clears the queue
+connect | join | Connects the bot to a channel
+jump [Timestamp in seconds] | - | Jumps to the timestamp
+play [Songname or url] | - | Adds a new song or playlist to the queue
+queue | q | Displays the queue
+search [Songname] | s | Displays the first five youtube search results, from which you can choose what song you want to play
+shuffle | - | Shuffles the queue
+skip | - | Skips the currently playing song
+stop | - | Stops the music
