@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/DollyBot/static/css/main.e685a957.chunk.css",
+    "main.js": "/DollyBot/static/js/main.dd1bf573.chunk.js",
+    "main.js.map": "/DollyBot/static/js/main.dd1bf573.chunk.js.map",
+    "runtime-main.js": "/DollyBot/static/js/runtime-main.43b3db6a.js",
+    "runtime-main.js.map": "/DollyBot/static/js/runtime-main.43b3db6a.js.map",
+    "static/js/2.a76dbac8.chunk.js": "/DollyBot/static/js/2.a76dbac8.chunk.js",
+    "static/js/2.a76dbac8.chunk.js.map": "/DollyBot/static/js/2.a76dbac8.chunk.js.map",
+    "index.html": "/DollyBot/index.html",
+    "static/css/main.e685a957.chunk.css.map": "/DollyBot/static/css/main.e685a957.chunk.css.map",
+    "static/js/2.a76dbac8.chunk.js.LICENSE.txt": "/DollyBot/static/js/2.a76dbac8.chunk.js.LICENSE.txt",
+    "static/media/404_2.0b7b0757.svg": "/DollyBot/static/media/404_2.0b7b0757.svg",
+    "static/media/logo.589788a8.svg": "/DollyBot/static/media/logo.589788a8.svg",
+    "static/media/mountain_mobile_new.047237f1.svg": "/DollyBot/static/media/mountain_mobile_new.047237f1.svg",
+    "static/media/robot.bd78b862.svg": "/DollyBot/static/media/robot.bd78b862.svg",
+    "static/media/robotmountain.7ff47eff.svg": "/DollyBot/static/media/robotmountain.7ff47eff.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43b3db6a.js",
+    "static/js/2.a76dbac8.chunk.js",
+    "static/css/main.e685a957.chunk.css",
+    "static/js/main.dd1bf573.chunk.js"
+  ]
+}
