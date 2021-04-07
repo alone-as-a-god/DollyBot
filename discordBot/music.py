@@ -187,7 +187,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await ctx.send(f"Joined {channel.name}")
 
     @commands.command(name="play", brief="Plays specified song", description="Adds the specified song to the queue. If the bot is not currently playing starts playback.")
-    async def play_command(self, ctx, *, query: t.Optional[str]):
+    async def play_command(self, ctx, *, query):
         player = self.get_player(ctx)
         if not player.is_connected:
             await player.connect(ctx)
@@ -201,7 +201,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             if track is not None:
                 break
             if _ == 3:
-                await ctx.send("No matches found")
+                raise NoTracksFound
 
         await player.add_tracks(ctx, track)
         if not player.is_playing:
@@ -211,17 +211,25 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             
     
     @commands.command(name="search", aliases=["s"], brief="Lists youtube results for specified keyword", description="Upon invocation returns an embed with the first 5 youtube results for the specified keyword. A user may use the emotes to choose one of the 5 tracks.")
-    async def search_command(self, ctx, *, query:t.Optional[str]):
+    async def search_command(self, ctx, *, query):
         player = self.get_player(ctx)
-
+        if not player.is_connected:
+            await player.connect(ctx)
+            
         if not re.match(URL_REGEX, query):
             query = f"ytsearch:{query}"  
         tracks = await self.wavelink.get_tracks(query)
+        if tracks is None:
+            raise NoTracksFound
         
         track = await player.choose_track(ctx, tracks)
-        if not player.is_connected:
-            await player.connect(ctx)
+        
         await player.add_tracks(ctx, track)
+        
+        if not player.is_playing:
+            newTrack = await db.get_next_track(ctx.guild.id, 0)
+            newTrack = await self.wavelink.get_tracks(newTrack[0])
+            await player.advance(newTrack[0])
        
         
     @commands.command(name="stop", brief="Stops playback", description="Stops playback")
@@ -297,14 +305,23 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if isinstance(exc, AlreadyConnectedToChannel):
             await ctx.send("Already connected to a voice channel.")
         elif isinstance(exc, NoVoiceChannel):
-            await ctx.send("No Voice channel found")
+            await ctx.send("Please join a Voice Channel to use this command.")
     
     @play_command.error
     async def play_command_error(self, ctx, exc):
         if isinstance(exc, QueueIsEmpty):
             await ctx.send("No songs to play as the queue is empty.")
         elif isinstance(exc, NoVoiceChannel):
-            await ctx.send("No suitable voice channel was provided.")
+            await ctx.send("Please join a Voice Channel to use this command.")
+        elif isinstance(exc, NoTracksFound):
+            await ctx.send("No Tracks found. If you believe this is in error, please try again")
+            
+    @search_command.error
+    async def search_command_error(self, ctx, exc):
+        if isinstance(exc, NoTracksFound):
+            await ctx.send("No Tracks found. If you believe this is in error, please try again")
+        elif isinstance(exc, NoVoiceChannel):
+            await ctx.send("Please join a Voice Channel to use this command.")
             
     @skip_command.error
     async def skip_command_error(self, ctx, exc):
