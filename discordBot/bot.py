@@ -35,17 +35,17 @@ async def on_ready():                                                           
     print('Logged in')
     
     
-@bot.command(name="ping", aliases=["p"])                #Test command to check if bot is responding to commands
+@bot.command(name="ping", aliases=["p"], brief="Checks if bot is available")                #Test command to check if bot is responding to commands
 async def pingCommand(ctx):
     await ctx.send("Jolene")
 
-@bot.command(name="prefix")                                     #Command to allow changing the prefix
+@bot.command(name="prefix", brief="Changes prefix to specified prefix", description="Changes the current prefix to a new one, can be characters or even full words")                                     #Command to allow changing the prefix
 async def prefix_command(ctx, prefix):                          
     await db.update_prefix(ctx.guild.id, prefix)                    
     await db.update_prefix_dictionary(prefix_dictionary)
     await ctx.send(f"Prefix changed to '{prefix}'")
     
-@bot.command(name="purge")                                      #Deletes specified amount of messages from current discord channel (default 10)
+@bot.command(name="purge", brief="Deletes specified amount of messages, default 10", description="Deletes last x messages in the current channel, x defaults to 10")                                      #Deletes specified amount of messages from current discord channel (default 10)
 async def purge_command(ctx, amount=10):
     await ctx.channel.purge(limit=amount)
     

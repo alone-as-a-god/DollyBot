@@ -74,16 +74,16 @@ class Player(wavelink.Player):
             for track in tracks.tracks:
                 db.add_tracks_sync(ctx.guild.id, track, track.uri)
             await ctx.send("Added playlist to queue")
-            if not self.is_playing: 
-                await self.play(tracks.tracks[0])
+            # if not self.is_playing: 
+            #     await self.play(tracks.tracks[0])
                 
         else:                                               #If it is not a playlist it will add a single track to the database
             if isinstance(tracks, (str, list, tuple)):
                 tracks = tracks[0]
             db.add_tracks_sync(ctx.guild.id, tracks, tracks.uri)
             await ctx.send(f"Added {tracks.title} to Queue")
-            if not self.is_playing: 
-                await self.play(tracks)
+            # if not self.is_playing: 
+            #     await self.play(tracks)
 
     async def choose_track(self, ctx, tracks):                  #Function to choose out of 5 songs dispalyed in a discord-embed
         def _check(r, u):                                       #Checks if the added emote is one of the 5 specified in OPTIONS
@@ -178,7 +178,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         for node in nodes.values():
             await self.wavelink.initiate_node(**node)
 
-    @commands.command(name="connect", aliases=["join"], brief="Connects the bot to a channel", description="Connects the bot to the specified channel. If no channel is specified, the bot will join the invokers channel. Usage: 'join [channel]' where channel is optional")
+    @commands.command(name="connect", aliases=["join"], brief="Connects the bot to a channel", description="Connects the bot to the specified channel. If no channel is specified, the bot will join the invokers channel.")
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
         player = self.get_player(ctx)
         channel = await player.connect(ctx, channel)
@@ -186,7 +186,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             raise NoVoiceChannel
         await ctx.send(f"Joined {channel.name}")
 
-    @commands.command(name="play")
+    @commands.command(name="play", brief="Plays specified song", description="Adds the specified song to the queue. If the bot is not currently playing starts playback.")
     async def play_command(self, ctx, *, query: t.Optional[str]):
         player = self.get_player(ctx)
         if not player.is_connected:
@@ -202,11 +202,15 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
                 break
             if _ == 3:
                 await ctx.send("No matches found")
-        
-    
+
         await player.add_tracks(ctx, track)
+        if not player.is_playing:
+            newTrack = await db.get_next_track(ctx.guild.id, 0)
+            newTrack = await self.wavelink.get_tracks(newTrack[0])
+            await player.advance(newTrack[0])
+            
     
-    @commands.command(name="search", aliases=["s"])
+    @commands.command(name="search", aliases=["s"], brief="Lists youtube results for specified keyword", description="Upon invocation returns an embed with the first 5 youtube results for the specified keyword. A user may use the emotes to choose one of the 5 tracks.")
     async def search_command(self, ctx, *, query:t.Optional[str]):
         player = self.get_player(ctx)
 
@@ -220,14 +224,14 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await player.add_tracks(ctx, track)
        
         
-    @commands.command(name="stop")
+    @commands.command(name="stop", brief="Stops playback", description="Stops playback")
     async def stop_command(self, ctx):
         player = self.get_player(ctx)
         await db.clear_tracks(ctx.guild.id)
         await player.stop()
         await ctx.send("Playback stopped")
     
-    @commands.command(name="skip")
+    @commands.command(name="skip", brief="Skips current song", description="Skips the currently playing song, as long as there is another one in the queue")
     async def skip_command(self, ctx):
         player = self.get_player(ctx)
         track = await db.get_next_track(ctx.guild.id, player.queue_position)
@@ -236,14 +240,16 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await player.stop()
         await ctx.send("Skipping...")
         
-    @commands.command(name="shuffle")
+    @commands.command(name="shuffle", brief="Shuffles queue", description="Shuffles the queue. Includes songs already played in this session")
     async def shuffle_command(self, ctx):
         await db.shuffle_queue(ctx.guild.id)
         await ctx.send("Queue shuffled!")
 
     
-    @commands.command(name="queue", aliases=["q"])
+    @commands.command(name="queue", aliases=["q"], brief="Displays the Queue", description="Displays current and upcoming tracks in an embed (max 20)")
     async def queue_command(self, ctx, amount=10):
+        if amount > 20:
+            amount = 20
         embedVar = discord.Embed(title="Queue", color=ctx.author.color, timestamp=dt.datetime.utcnow())
         player = self.get_player(ctx)
         pos = player.queue_position
@@ -252,7 +258,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             raise QueueIsEmpty
         embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
         trackList = ""
-        for i in range(amount):
+        for i in range(int(amount)):
+            print(i)
             track = await db.get_track_name(ctx.guild.id, pos + i + 1)
             
             if track is not None:
@@ -261,21 +268,13 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if(trackList!=""):
             embedVar.add_field(name="Next Up:",value=trackList, inline=False)
         
+
         embedVar.set_author(name="Query Results")                                                                  #Embed formatting
         embedVar.set_footer(text=f"Invoked by {ctx.author.display_name}", icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embedVar)
-
-        
-        
-    @commands.command(name="clear")
-    async def clear_command(self, ctx):
-        await db.clear_tracks(ctx.guild.id)
-        player = self.get_player(ctx)
-        await player.stop()
-        await ctx.send("Queue cleared!")
         
     
-    @commands.command(name="jump")
+    @commands.command(name="jump", brief="Skips to specified timestamp", description="Skips to the specified timestamp, timestamp has to be in seconds")
     async def jump_command(self, ctx, timestamp):
         player = self.get_player(ctx)
         if not player.is_playing:
