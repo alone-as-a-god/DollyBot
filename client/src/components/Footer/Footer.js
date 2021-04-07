@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { AiOutlineBug } from "react-icons/ai";
+import { FaDiscord } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import { useStyles } from "./FooterStyle";
@@ -27,6 +28,9 @@ const Footer = () => {
 
         <IconButton href="https://github.com/alone-as-a-god/DollyBot/issues/new" target="_blank" className={classes.icon}>
           <AiOutlineBug></AiOutlineBug>
+        </IconButton>
+        <IconButton href="https://discord.gg/2HxgYJta3r" target="_blank" className={classes.icon}>
+          <FaDiscord></FaDiscord>
         </IconButton>
       </div>
       <div className={classes.linksContainer}>

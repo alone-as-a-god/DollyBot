@@ -16,4 +16,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "1rem",
     overflowY: "auto",
   },
+  currentSong: {
+    color: "#7C7FB2",
+    fontSize: "1em",
+  },
 }));

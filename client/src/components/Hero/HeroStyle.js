@@ -9,11 +9,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: {
     transform: "translateX(12%)",
-    margin: "2em 0",
+    margin: "1.5em 0",
     color: theme.palette.primary.contrastText,
     fontFamily: "Montserrat",
     textAlign: "center",
-    fontSize: "clamp(1.75em, 7vw, 6em)",
+    fontSize: "clamp(1.75em, 6vw, 6em)",
     textTransform: "uppercase",
     fontVariant: "small-caps",
     "& span": {

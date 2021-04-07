@@ -11,11 +11,23 @@ const YOUTUBE_REGEX = `^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.?be)\/.+$`;
 const QueueCard = ({ refresh, guildID }) => {
   const [songs, setSongs] = useState({ status: "loading", data: [] });
   const [songName, setSongName] = useState("");
+  const [currentSong, setCurrentSong] = useState("");
 
   const onDelete = (id) => {
     axios.post(`${REACT_APP_API_ENDPOINT}/music/delete`, { guildID: guildID, id: id }).then((response) => {
       setSongs({ data: songs.data.filter((s) => s.id !== id), status: "done" });
     });
+  };
+
+  const getCurrentSong = () => {
+    axios
+      .get(`${REACT_APP_API_ENDPOINT}/music/current/${guildID}`)
+      .then((response) => {
+        setCurrentSong({ status: "done", data: response.data });
+      })
+      .catch((err) => {
+        setCurrentSong({ status: "error" });
+      });
   };
 
   const addSong = (e) => {
@@ -37,8 +49,9 @@ const QueueCard = ({ refresh, guildID }) => {
           return axios.get(`${REACT_APP_API_ENDPOINT}/music/all/${guildID}`);
         })
         .then((response) => {
-          console.log(response.data);
           setSongs({ status: "done", data: response.data });
+          getCurrentSong();
+          setSongName("");
         });
     } else {
       axios
@@ -53,6 +66,7 @@ const QueueCard = ({ refresh, guildID }) => {
         })
         .then((response) => {
           setSongs({ status: "done", data: response.data });
+          getCurrentSong();
           setSongName("");
         });
     }
@@ -75,7 +89,7 @@ const QueueCard = ({ refresh, guildID }) => {
 
   useEffect(() => {
     getSongs();
-    console.log(songs.data);
+    getCurrentSong();
     setSongName("");
   }, [refresh]);
 
@@ -85,7 +99,9 @@ const QueueCard = ({ refresh, guildID }) => {
       <Typography variant="h3" className={classes.title}>
         Queue
       </Typography>
-      <Typography className={classes.text}>Submit a songname or Youtube-URL that will be added to queue. </Typography>
+      {currentSong.status === "done" && currentSong.data && (
+        <Typography className={classes.text}>Currently playing: {currentSong.data.songName}</Typography>
+      )}
       <InputForm label="Songname or URL" value={songName} defaultValue="" onChange={setSongName} onSubmit={addSong}></InputForm>
 
       {songs.status === "error" && <Typography className={classes.text}>Can't get songs from database</Typography>}
