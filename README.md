@@ -19,10 +19,10 @@ discordBot/.env:
 - BOT_TOKEN: The bot token that you can retrieve from the Discord Developer Portal.
 
 backend/env:  
-- API_ENDPOINT: 
+- API_ENDPOINT: Base URL of your API
 - CLIENT_ID: The ID of the bot that you can retrieve from the Discord Developer Portal.
 - CLIENT_SECRET: The secret that you can retrieve from the Discord Developer Portal.
-- REDIRECT_URI: 
+- REDIRECT_URI: URL that the Discord Login API redirects to
 - DB_PATH: The path where your sqlite database-file is located.
 - (Optional) BOT_ADDRESS: The address where your bot is running, if it is running on a different server.
 - (Optional) BOT_PORT: The port of the socket that is used to send notification to the bot, if you use a different port.
