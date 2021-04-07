@@ -89,22 +89,23 @@ router.post("/add", (req, res, next) => {
 router.post("/delete", (req, res, next) => {
   let guildID = req.body.guildID;
   let id = req.body.id;
-  if (id === null || id === undefined) {
-    return next(new APIError(400, "TrackID is null/undefined"));
-  }
+  if (id === null || id === undefined || id < 1) return next(new APIError(400, "TrackID is null/undefined or < 1 "));
+
   let db = new sqlite3.Database(dbPath);
-  let sql = `
-        DELETE FROM queue
-        WHERE guildID = ? AND id = ?`;
+  let sql = `DELETE FROM queue WHERE guildID = ? AND id = ?`;
 
+  //delete track from queue
   db.run(sql, [guildID, id], (err) => {
-    if (err) {
-      return next(new APIError(400, "Error deleting track from database"));
-    }
+    if (err) return next(new APIError(400, "Error deleting track from database 1"));
 
-    return res.sendStatus(200);
+    let decrementID = `UPDATE queue SET id = id - 1 WHERE guildID = ? AND id > ?`;
+
+    //decrement IDs by 1
+    db.run(decrementID, [guildID, id], (err) => {
+      if (err) return next(new APIError(400, "Error updating IDs in queue"));
+      res.sendStatus(200);
+    });
   });
-
   db.close();
 });
 
