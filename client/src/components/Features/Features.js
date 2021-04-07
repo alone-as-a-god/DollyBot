@@ -17,7 +17,7 @@ const Features = () => {
       <div>
         <div className={classes.grid}>
           <FeatureCard icon={<BsMusicNoteBeamed />} title="music" text="Listen to music together with your friends"></FeatureCard>
-          <FeatureCard icon={<Icon icon={dashboardIcon} />} title="dashboard" text="manage your bot from our Dashboard"></FeatureCard>
+          <FeatureCard icon={<Icon icon={dashboardIcon} />} title="dashboard" text="Manage your bot from our dashboard"></FeatureCard>
           <FeatureCard icon={<Icon icon={consoleIcon} />} title="commands" text="Improve your workflow with  commands"></FeatureCard>
           <FeatureCard icon={<Icon icon={serverIcon} />} title="support" text="24/7 servers + support over our discord"></FeatureCard>
         </div>

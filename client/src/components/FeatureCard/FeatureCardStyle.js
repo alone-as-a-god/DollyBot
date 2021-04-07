@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("lg")]: {
       height: "250px",
+      maxWidth: "800px",
     },
     [theme.breakpoints.down("md")]: {
       height: "clamp(175px,15vw,200px)",
@@ -36,7 +37,6 @@ export const useStyles = makeStyles((theme) => ({
   text: {
     fontSize: "1.25em",
     fontWeight: "500",
-    textTransform: "capitalize",
   },
   textContainer: {
     display: "flex",
