@@ -5,7 +5,7 @@ import Logo from "../Navbar/logo.svg";
 import { UserContext } from "../../UserContext";
 import { useContext } from "react";
 import MobileLink from "../MobileLink/MobileLink";
-const { REACT_APP_LOGIN_URL } = process.env;
+const { REACT_APP_LOGIN_URL, REACT_APP_INVITE_URL } = process.env;
 const MobileMenu = ({ open, setOpen }) => {
   const [user, dispatch] = useContext(UserContext);
   const classes = useStyles();
@@ -60,7 +60,15 @@ const MobileMenu = ({ open, setOpen }) => {
         )}
         {!user && <MobileLink title="Login" href={REACT_APP_LOGIN_URL} includes onClick={() => setOpen(false)}></MobileLink>}
 
-        <Button variant="contained" disableElevation color="primary" className={classes.button} onClick={() => setOpen(false)}>
+        <Button
+          variant="contained"
+          target="_blank"
+          href={REACT_APP_INVITE_URL}
+          disableElevation
+          color="primary"
+          className={classes.button}
+          onClick={() => setOpen(false)}
+        >
           invite
         </Button>
       </div>
