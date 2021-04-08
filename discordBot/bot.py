@@ -48,10 +48,13 @@ async def prefix_command(ctx, prefix):
 @bot.command(name="purge", brief="Deletes specified amount of messages, default 10", description="Deletes last x messages in the current channel, x defaults to 10")                                      #Deletes specified amount of messages from current discord channel (default 10)
 async def purge_command(ctx, amount=10):
     await ctx.channel.purge(limit=amount)
-    
+
+@bot.command(name="debugRestart", hidden=True)              
+async def restart_command(ctx):
+    os.execv(sys.executable,[sys.executable.split("/")[-1]]+sys.argv)
 
 if __name__ == "__main__":
     for extension in extensions:
         bot.load_extension(extension)
 
-bot.run(os.getenv("BOT_TOKEN")) 
+bot.run("NzgzNDIwNDE0Njc5ODQyODI5.X8afHg._ivNUFs_6POptffvhcngv0Eg2K8") 

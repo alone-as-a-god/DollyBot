@@ -62,6 +62,12 @@ class Player(wavelink.Player):
         
         await super().connect(channel.id)               #otherwise connects super(the bot) to the channel
         return channel
+    
+    async def teardown(self):                  ##Disconnect function
+        try:
+            await self.destroy()
+        except KeyError:
+            pass
 
         
     async def advance(self, track):           #Advances to the next track unless queue is empty
@@ -186,6 +192,12 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             raise NoVoiceChannel
         await ctx.send(f"Joined {channel.name}")
 
+    @commands.command(name="disconnect", aliases=["leave","dc","kys"], brief="Disconnects the bot from its current channel", description="Disconnects the bot from its current channel, if it is in a voice channel already. Usage: 'disconnect'")
+    async def disconnect_command(self, ctx):
+        player = self.get_player(ctx)
+        await player.teardown()
+        await ctx.send("Disconnected.")
+    
     @commands.command(name="play", brief="Plays specified song", description="Adds the specified song to the queue. If the bot is not currently playing starts playback.")
     async def play_command(self, ctx, *, query):
         player = self.get_player(ctx)
@@ -237,7 +249,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         player = self.get_player(ctx)
         await db.clear_tracks(ctx.guild.id)
         await player.stop()
+        await player.disconnect()
         await ctx.send("Playback stopped")
+        
     
     @commands.command(name="skip", brief="Skips current song", description="Skips the currently playing song, as long as there is another one in the queue")
     async def skip_command(self, ctx):
@@ -267,7 +281,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
         trackList = ""
         for i in range(int(amount)):
-            print(i)
             track = await db.get_track_name(ctx.guild.id, pos + i + 1)
             
             if track is not None:
