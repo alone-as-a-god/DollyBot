@@ -267,7 +267,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         embedVar.add_field(name="Currently Playing:",value=currentTrack[0], inline=False)
         trackList = ""
         for i in range(int(amount)):
-            print(i)
             track = await db.get_track_name(ctx.guild.id, pos + i + 1)
             
             if track is not None:
