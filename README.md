@@ -11,21 +11,60 @@ To host Dollybot, you need to have the following programs installed:
 - AdoptOpenJDK 13.02
 
 ### Evniroment variables
-It is importand that you create .env files inside the discordBot and the backend directory.  
-You need to write the variables in this format: `VARIABLE_NAME=value`.  
-Here are the variables that you need:  
+To make the bot run as intended you have to create certain .env files. These contain keys and similar which are not supposed to be shared online, therefore you have to create them yourself.
+The files as needed are as follows:
 
-discordBot/.env:  
-- BOT_TOKEN: The bot token that you can retrieve from the Discord Developer Portal.
+#### discordBot/.env:
 
-backend/env:  
-- API_ENDPOINT: Base URL of your API
-- CLIENT_ID: The ID of the bot that you can retrieve from the Discord Developer Portal.
-- CLIENT_SECRET: The secret that you can retrieve from the Discord Developer Portal.
-- REDIRECT_URI: URL that the Discord Login API redirects to
-- DB_PATH: The path where your sqlite database-file is located.
-- (Optional) BOT_ADDRESS: The address where your bot is running, if it is running on a different server.
-- (Optional) BOT_PORT: The port of the socket that is used to send notification to the bot, if you use a different port.
+`BOT_TOKEN= `
+
+#### backend/.env:  
+
+`API_ENDPOINT=https://discord.com/api/oauth2/token`
+
+`CLIENT_ID=`
+
+`CLIENT_SECRET=`
+
+`REDIRECT_URI=http://localhost:3000/`
+
+`DB_PATH="../database/database.db"`
+
+
+#### client/.env:
+
+`REACT_APP_API_ENDPOINT=http://localhost:4000/api`
+
+`REACT_APP_LOGIN_URL=""`
+
+`REACT_APP_INVITE_URL=""`
+
+`REACT_APP_YOUTUBE_API_KEY=`
+
+
+Some of these entries are empty as you can see, the following section will describe how you can obtain the necessary keys etc.
+
+### Getting the API Keys
+First of all, go to the [Discord Developer Portal](https://discord.com/developers/applications/) and create a new Application. If you do not have a discord account yet, you can create one [here](https://discord.com/). When you successfully created your application go to the Bot panel on the left and click `Add Bot`. Note: This may fail if you have a common username for your bot like "test". Now you can begin to get the required keys.
+Note: If there are Quotation marks (") next to an entry in the .env file, the corresponding key needs to be in quotation marks. Otherwise do not add quotation marks.
+
+- discordBot:
+BOT_TOKEN = On the Bot panel, click on `Copy` Right under the bots name
+
+- backend:
+CLIENT_ID = On the Oauth2 panel, copy the Client ID
+ClIENT_SECRET = Right next to the Client ID, copy the Client Secret
+
+- client:
+REACT_APP_LOGIN_URL = Go to the Oauth2 Panel, and in the `Redirects` Category add a new Redirect. This should be your landing page, so if you kept the standard values it is `http://localhost:3000/`. Below that, you will find a `Oauth2 URL Generator`. First choose your recently added Redirect URL and then make checkmarks on the following fields:
+`identify`
+`email`
+`connections`
+`guilds`
+Click on `Save Changes` at the bottom of the page and copy the url it generated and paste it in the .env file
+REACT_APP_INVITE_URL = Again on the Oauth2 Panel, remove all the ckeckmarks and click on "bot" instead. Below this menu a new one will popup, where you have to make a checkmark on `Administrator`. Then copy the link above.
+- REACT_APP_YOUTUBE_API_KEY = 
+
 
 
 ### Discord bot with Python
