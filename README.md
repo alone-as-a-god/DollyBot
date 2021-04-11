@@ -51,21 +51,27 @@ First of all, go to the [Discord Developer Portal](https://discord.com/developer
 Note: If there are Quotation marks (") next to an entry in the .env file, the corresponding key needs to be in quotation marks. Otherwise do not add quotation marks.
 
 - discordBot:
+
 BOT_TOKEN = On the Bot panel, click on `Copy` Right under the bots name
 
 - backend:
+
 CLIENT_ID = On the Oauth2 panel, copy the Client ID
+
 ClIENT_SECRET = Right next to the Client ID, copy the Client Secret
 
 - client:
+
 REACT_APP_LOGIN_URL = Go to the Oauth2 Panel, and in the `Redirects` Category add a new Redirect. This should be your landing page, so if you kept the standard values it is `http://localhost:3000/`. Below that, you will find a `Oauth2 URL Generator`. First choose your recently added Redirect URL and then make checkmarks on the following fields:
 `identify`
 `email`
 `connections`
 `guilds`
 Click on `Save Changes` at the bottom of the page and copy the url it generated and paste it in the .env file
+
 REACT_APP_INVITE_URL = Again on the Oauth2 Panel, remove all the ckeckmarks and click on "bot" instead. Below this menu a new one will popup, where you have to make a checkmark on `Administrator`. Then copy the link above.
-- REACT_APP_YOUTUBE_API_KEY = 
+
+EACT_APP_YOUTUBE_API_KEY = 
 
 
 
