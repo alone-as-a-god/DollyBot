@@ -71,8 +71,7 @@ Click on `Save Changes` at the bottom of the page and copy the url it generated 
 
 REACT_APP_INVITE_URL = Again on the Oauth2 Panel, remove all the ckeckmarks and click on "bot" instead. Below this menu a new one will popup, where you have to make a checkmark on `Administrator`. Then copy the link above.
 
-REACT_APP_YOUTUBE_API_KEY = 
-To create your YouTube API-Key go on the page: https://console.cloud.google.com/home/dashboard and login with your google account. Then you need to create a new project. When your project has been created go to https://console.cloud.google.com/apis/library, make sure you're on the right project and activate "YouTube Data API v3". Lastly go to https://console.cloud.google.com/apis/credentials and click "Create credentials" > "API Key"
+REACT_APP_YOUTUBE_API_KEY = To create your YouTube API-Key go to https://console.cloud.google.com/home/dashboard and login with your google account. Then you need to create a new project. When your project has been created go to https://console.cloud.google.com/apis/library, make sure you're on the right project and activate "YouTube Data API v3". Lastly go to https://console.cloud.google.com/apis/credentials and click "Create credentials" > "API Key"
 
 
 
