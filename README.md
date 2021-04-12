@@ -1,5 +1,5 @@
 # DollyBot
-DollyBot is a Discord Bot with music functions. The bot is manageable via a [WebDashboard](dollybot.tk). To invite the bot, go to the aforementioned link or just host the bot yourself! Look below for installation instructions.
+DollyBot is a Discord Bot with music functions. The bot is manageable via a [WebDashboard](https://dollybot.tk). To invite the bot, go to the aforementioned link or just host the bot yourself! Look below for installation instructions.
 
 
 ## Installation 
